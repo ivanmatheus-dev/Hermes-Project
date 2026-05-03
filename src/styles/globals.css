@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), Inter, sans-serif;
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", serif;
+}
+
+:root {
+  --mineral: #DDD8CD;
+  --bone: #E7E3D8;
+  --charcoal: #1A1D26;
+  --stone: #5C5C56;
+  --mist: #7E7E76;
+  --champagne: #C9A96E;
+  --border: rgba(26, 29, 38, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--mineral);
+  color: var(--charcoal);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 92%, rgba(231, 227, 216, 0.68), transparent 28rem),
+    linear-gradient(135deg, var(--mineral), var(--bone));
+  color: var(--charcoal);
+  font-family: var(--font-inter), Inter, sans-serif;
+  line-height: 1.7;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(201, 169, 110, 0.32);
+  color: var(--charcoal);
+}
+
+.mineral-paper {
+  background:
+    linear-gradient(rgba(231, 227, 216, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(231, 227, 216, 0.26) 1px, transparent 1px),
+    radial-gradient(circle at 50% 12%, rgba(231, 227, 216, 0.62), transparent 32rem),
+    var(--mineral);
+  background-size: 46px 46px, 46px 46px, auto, auto;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.templates-carousel {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 169, 110, 0.58) rgba(26, 29, 38, 0.08);
+  scroll-padding-inline: 1.25rem;
+}
+
+.templates-carousel::-webkit-scrollbar {
+  height: 0.45rem;
+}
+
+.templates-carousel::-webkit-scrollbar-track {
+  background: rgba(26, 29, 38, 0.08);
+}
+
+.templates-carousel::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 110, 0.58);
+}
+
+.template-card-iframe {
+  position: absolute;
+  inset: 0;
+  width: calc(100% / 0.34);
+  height: calc(100% / 0.34);
+  transform: scale(0.34);
+  transform-origin: top left;
+}
+
+.template-modal-panel {
+  animation: template-panel-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center;
+}
+
+.template-modal-panel-reduced {
+  animation: template-panel-fade 160ms ease-out both;
+}
+
+@keyframes template-panel-enter {
+  from {
+    opacity: 0.52;
+    transform:
+      translate(var(--origin-left, 0), var(--origin-top, 0))
+      scale(var(--origin-scale-x, 0.22), var(--origin-scale-y, 0.22));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes template-panel-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

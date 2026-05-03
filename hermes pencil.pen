@@ -1,0 +1,3588 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "d7UVay",
+      "x": 0,
+      "y": 0,
+      "name": "Frame 1 - Capa editorial inicial",
+      "clip": true,
+      "width": 1440,
+      "height": 900,
+      "fill": "#D8D0C2",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Nagoj",
+          "x": 0,
+          "y": 0,
+          "name": "mineral texture field",
+          "width": 1440,
+          "height": 900,
+          "fill": "#D8D0C200",
+          "layout": "none",
+          "children": [
+            {
+              "type": "path",
+              "id": "L6V0Fq",
+              "x": 80,
+              "y": 150,
+              "name": "fine mineral vein 1",
+              "geometry": "M2 98c86-63 152 36 230-44 68-70 116-2 196-40",
+              "viewBox": [
+                0,
+                0,
+                430,
+                130
+              ],
+              "fill": "#00000000",
+              "width": 430,
+              "height": 130,
+              "stroke": {
+                "align": "center",
+                "thickness": 1,
+                "fill": "#A9966D55"
+              }
+            },
+            {
+              "type": "path",
+              "id": "I4hWGT",
+              "x": 960,
+              "y": 70,
+              "name": "fine mineral vein 2",
+              "geometry": "M6 176c66-64 114-26 178-86 54-52 98-26 200-82",
+              "viewBox": [
+                0,
+                0,
+                390,
+                190
+              ],
+              "fill": "#00000000",
+              "width": 390,
+              "height": 190,
+              "stroke": {
+                "align": "center",
+                "thickness": 1,
+                "fill": "#F0DCA766"
+              }
+            },
+            {
+              "type": "path",
+              "id": "O2mSJ",
+              "x": 190,
+              "y": 660,
+              "name": "fine mineral vein 3",
+              "geometry": "M0 84c86-50 168 18 252-36 74-48 144 4 248-30",
+              "viewBox": [
+                0,
+                0,
+                500,
+                120
+              ],
+              "fill": "#00000000",
+              "width": 500,
+              "height": 120,
+              "stroke": {
+                "align": "center",
+                "thickness": 1,
+                "fill": "#8F806144"
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Uy6C7",
+          "x": 630,
+          "y": 256,
+          "name": "Hermes winged boot emblem",
+          "width": 180,
+          "height": 128,
+          "fill": "#00000000",
+          "layout": "none",
+          "children": [
+            {
+              "type": "path",
+              "id": "tMy8T",
+              "x": 50,
+              "y": 54,
+              "name": "thin boot outline",
+              "geometry": "M18 4c4 16 2 27-8 38 18 7 43 8 68 2 10-2 12 8 0 8l-44 0c-14 0-26-4-30-12 10-12 13-23 10-36z",
+              "viewBox": [
+                0,
+                0,
+                92,
+                56
+              ],
+              "fill": "#00000000",
+              "width": 92,
+              "height": 54,
+              "stroke": {
+                "align": "center",
+                "thickness": 2,
+                "join": "round",
+                "cap": "round",
+                "fill": "#6E6251"
+              }
+            },
+            {
+              "type": "path",
+              "id": "NWNME",
+              "x": 20,
+              "y": 12,
+              "name": "left fine wing",
+              "geometry": "M76 52c-26-4-51-18-72-46m68 36c-25-3-42-14-60-30m54 18c-21-2-35-10-46-20",
+              "viewBox": [
+                0,
+                0,
+                78,
+                62
+              ],
+              "fill": "#00000000",
+              "width": 78,
+              "height": 62,
+              "stroke": {
+                "align": "center",
+                "thickness": 1.5,
+                "join": "round",
+                "cap": "round",
+                "fill": "#A9966D"
+              }
+            },
+            {
+              "type": "path",
+              "id": "khzp2",
+              "x": 84,
+              "y": 12,
+              "name": "right fine wing",
+              "geometry": "M4 52c26-4 51-18 72-46m-68 36c25-3 42-14 60-30m-54 18c21-2 35-10 44-20",
+              "viewBox": [
+                0,
+                0,
+                78,
+                62
+              ],
+              "fill": "#00000000",
+              "width": 78,
+              "height": 62,
+              "stroke": {
+                "align": "center",
+                "thickness": 1.5,
+                "join": "round",
+                "cap": "round",
+                "fill": "#A9966D"
+              }
+            },
+            {
+              "type": "line",
+              "id": "NKShz",
+              "x": 58,
+              "y": 113,
+              "name": "champagne sole hairline",
+              "width": 76,
+              "height": 0,
+              "stroke": {
+                "align": "center",
+                "thickness": 1,
+                "fill": "#D5C08A"
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "FOddU",
+          "x": 0,
+          "y": 408,
+          "name": "Hermes wordmark",
+          "fill": "#5C5146",
+          "textGrowth": "fixed-width",
+          "width": 1440,
+          "content": "Hermes",
+          "lineHeight": 1,
+          "textAlign": "center",
+          "fontFamily": "Playfair Display",
+          "fontSize": 96
+        },
+        {
+          "type": "text",
+          "id": "HOGSq",
+          "x": 0,
+          "y": 518,
+          "name": "Hermes subtitle",
+          "fill": "#76694F",
+          "textGrowth": "fixed-width",
+          "width": 1440,
+          "content": "ATELIER DIGITAL GRECO-MINERAL",
+          "lineHeight": 1.4,
+          "textAlign": "center",
+          "fontFamily": "Geist Mono",
+          "fontSize": 13,
+          "letterSpacing": 4
+        },
+        {
+          "type": "path",
+          "id": "r7kX9",
+          "x": 458,
+          "y": 487,
+          "name": "left logo-derived ornament",
+          "geometry": "M0 10h46c8 0 12-8 16-8 4 0 8 8 16 8h42",
+          "viewBox": [
+            0,
+            0,
+            120,
+            20
+          ],
+          "fill": "#00000000",
+          "width": 120,
+          "height": 20,
+          "stroke": {
+            "align": "center",
+            "thickness": 1,
+            "join": "round",
+            "cap": "round",
+            "fill": "#B9A474"
+          }
+        },
+        {
+          "type": "path",
+          "id": "jU1Vz",
+          "x": 862,
+          "y": 487,
+          "name": "right logo-derived ornament",
+          "geometry": "M0 10h42c8 0 12-8 16-8 4 0 8 8 16 8h46",
+          "viewBox": [
+            0,
+            0,
+            120,
+            20
+          ],
+          "fill": "#00000000",
+          "width": 120,
+          "height": 20,
+          "stroke": {
+            "align": "center",
+            "thickness": 1,
+            "join": "round",
+            "cap": "round",
+            "fill": "#B9A474"
+          }
+        },
+        {
+          "type": "frame",
+          "id": "q3jenm",
+          "x": 985,
+          "y": 572,
+          "name": "partial site mockup",
+          "clip": true,
+          "width": 610,
+          "height": 372,
+          "fill": "#E8E1D4",
+          "cornerRadius": 6,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#B9A474"
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "HYrPx",
+              "name": "mockup top chrome",
+              "width": "fill_container",
+              "height": 42,
+              "fill": "#D6CDBE",
+              "gap": 8,
+              "padding": [
+                0,
+                18
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "Wc7rQ",
+                  "name": "chrome dot muted",
+                  "fill": "#A9966D",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "ellipse",
+                  "id": "JV5S1",
+                  "name": "chrome dot warm",
+                  "fill": "#C8B783",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "ellipse",
+                  "id": "hctwk",
+                  "name": "chrome dot pale",
+                  "fill": "#EEE1B9",
+                  "width": 8,
+                  "height": 8
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "l4dfAr",
+              "name": "mockup page",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#E4DCCF",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": [
+                34,
+                38,
+                38,
+                38
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kcIVf",
+                  "name": "mockup nav",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "n7xyO",
+                      "name": "mockup nav brand",
+                      "fill": "#746852",
+                      "content": "HERMES",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 11,
+                      "letterSpacing": 3
+                    },
+                    {
+                      "type": "text",
+                      "id": "PXC5o",
+                      "name": "mockup nav meta",
+                      "fill": "#A08E65",
+                      "content": "MINERAL EDITIONS",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 10,
+                      "letterSpacing": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "f2Eeyt",
+                  "name": "mockup editorial area",
+                  "width": "fill_container",
+                  "height": 148,
+                  "gap": 28,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mniil",
+                      "name": "mockup text column",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "R3njI",
+                          "name": "mockup heading",
+                          "fill": "#5C5146",
+                          "content": "Stone made luminous",
+                          "lineHeight": 1.05,
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 34
+                        },
+                        {
+                          "type": "line",
+                          "id": "E7Nrfr",
+                          "name": "mockup champagne rule",
+                          "width": 154,
+                          "height": 0,
+                          "stroke": {
+                            "align": "center",
+                            "thickness": 1,
+                            "fill": "#B9A474"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "ljw7u",
+                          "name": "mockup copy",
+                          "fill": "#746852",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A restrained digital house for crafted templates, marble-light interfaces and quiet commerce.",
+                          "lineHeight": 1.45,
+                          "fontFamily": "Inter",
+                          "fontSize": 13
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "I81DPZ",
+                      "name": "mockup mineral image block",
+                      "width": 190,
+                      "height": 126,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#B9A47466"
+                      },
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "OJ5zy",
+                          "x": 16,
+                          "y": 18,
+                          "name": "mockup stone vein",
+                          "geometry": "M0 82c36-54 78-20 116-64 16-16 26-10 34-18",
+                          "viewBox": [
+                            0,
+                            0,
+                            150,
+                            90
+                          ],
+                          "fill": "#00000000",
+                          "width": 150,
+                          "height": 90,
+                          "stroke": {
+                            "align": "center",
+                            "thickness": 1,
+                            "fill": "#806F514D"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xI7vd",
+                  "name": "mockup template strip",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "r8q8bj",
+                      "name": "mockup template card a",
+                      "width": "fill_container",
+                      "height": 76,
+                      "fill": "#D6CDBE",
+                      "cornerRadius": 4,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#B9A47455"
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 14,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hkVBB",
+                          "name": "card a title",
+                          "fill": "#5C5146",
+                          "content": "Editorial",
+                          "fontFamily": "Inter",
+                          "fontSize": 12
+                        },
+                        {
+                          "type": "line",
+                          "id": "E0sSKG",
+                          "name": "card a line",
+                          "width": "fill_container",
+                          "height": 0,
+                          "stroke": {
+                            "align": "center",
+                            "thickness": 1,
+                            "fill": "#B9A474"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Nv1La",
+                      "name": "mockup template card b",
+                      "width": "fill_container",
+                      "height": 76,
+                      "fill": "#EFE6D5",
+                      "cornerRadius": 4,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#B9A47455"
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 14,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "WNX1q",
+                          "name": "card b title",
+                          "fill": "#5C5146",
+                          "content": "Objects",
+                          "fontFamily": "Inter",
+                          "fontSize": 12
+                        },
+                        {
+                          "type": "line",
+                          "id": "J2MGVj",
+                          "name": "card b line",
+                          "width": "fill_container",
+                          "height": 0,
+                          "stroke": {
+                            "align": "center",
+                            "thickness": 1,
+                            "fill": "#B9A474"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "T19x4",
+      "x": 1540,
+      "y": 0,
+      "name": "Frame 2 - Inicio do scroll",
+      "width": 1440,
+      "height": 900,
+      "fill": "#DDD8CD",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "iGMv3",
+          "x": 96,
+          "y": 34,
+          "name": "header emerging",
+          "width": 1248,
+          "height": 54,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Wxiud",
+              "name": "small brand lockup",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wdzUr",
+                  "name": "mini glyph",
+                  "width": 34,
+                  "height": 34,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "line",
+                      "id": "y4mCy",
+                      "x": 6,
+                      "y": 16,
+                      "name": "glyphLine1",
+                      "width": 22,
+                      "height": 0,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "fill": "#4F463A"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "id": "eMi6h",
+                      "x": 17,
+                      "y": 5,
+                      "name": "glyphLine2",
+                      "width": 0,
+                      "height": 24,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "fill": "#4F463A"
+                      }
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "k2IUM",
+                      "x": 8,
+                      "y": 8,
+                      "name": "glyphCircle",
+                      "fill": "#00000000",
+                      "width": 18,
+                      "height": 18,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "fill": "#4F463A"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "il3Il",
+                  "name": "brandWord",
+                  "fill": "#4F463A",
+                  "content": "HERMES",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 13,
+                  "fontWeight": "500",
+                  "letterSpacing": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "U4qJ6",
+              "name": "emerging navigation",
+              "gap": 34,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GDRb4",
+                  "name": "nav1",
+                  "opacity": 0.72,
+                  "fill": "#4F463A",
+                  "content": "ORIGEM",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "ihsfo",
+                  "name": "nav2",
+                  "opacity": 0.56,
+                  "fill": "#4F463A",
+                  "content": "TEMPLATES",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "text",
+                  "id": "nvoje",
+                  "name": "nav3",
+                  "opacity": 0.44,
+                  "fill": "#4F463A",
+                  "content": "ENTRAR",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.5
+                },
+                {
+                  "type": "frame",
+                  "id": "r3Bw5",
+                  "name": "cta outline",
+                  "fill": "#00000000",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#7E6E5A"
+                  },
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HSUrr",
+                      "name": "ctaText",
+                      "fill": "#4F463A",
+                      "content": "VER COLECAO",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "NXFgI",
+          "x": 118,
+          "y": 112,
+          "name": "large logo rising",
+          "width": 560,
+          "height": 390,
+          "layout": "none",
+          "children": [
+            {
+              "type": "line",
+              "id": "F6rpa",
+              "x": 280,
+              "y": 32,
+              "name": "logoStem",
+              "opacity": 0.58,
+              "width": 0,
+              "height": 250,
+              "stroke": {
+                "align": "center",
+                "thickness": 1.5,
+                "fill": "#3E382F"
+              }
+            },
+            {
+              "type": "line",
+              "id": "SVBEG",
+              "x": 176,
+              "y": 158,
+              "name": "logoCross",
+              "opacity": 0.58,
+              "width": 208,
+              "height": 0,
+              "stroke": {
+                "align": "center",
+                "thickness": 1.5,
+                "fill": "#3E382F"
+              }
+            },
+            {
+              "type": "ellipse",
+              "id": "arTEp",
+              "x": 190,
+              "y": 42,
+              "name": "logoArcTop",
+              "opacity": 0.38,
+              "innerRadius": 0.98,
+              "startAngle": 18,
+              "sweepAngle": 144,
+              "fill": "#3E382F",
+              "width": 180,
+              "height": 180
+            },
+            {
+              "type": "ellipse",
+              "id": "r9gVLH",
+              "x": 190,
+              "y": 136,
+              "name": "logoArcBottom",
+              "opacity": 0.3,
+              "innerRadius": 0.98,
+              "startAngle": 198,
+              "sweepAngle": 144,
+              "fill": "#3E382F",
+              "width": 180,
+              "height": 180
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "id": "V7kIiu",
+          "x": 395,
+          "y": 258,
+          "name": "guide1",
+          "opacity": 0.28,
+          "width": 730,
+          "height": -172,
+          "stroke": {
+            "align": "center",
+            "thickness": 1,
+            "fill": "#7E6E5A"
+          }
+        },
+        {
+          "type": "line",
+          "id": "vOOmO",
+          "x": 305,
+          "y": 412,
+          "name": "guide2",
+          "opacity": 0.18,
+          "width": 830,
+          "height": -238,
+          "stroke": {
+            "align": "center",
+            "thickness": 1,
+            "fill": "#7E6E5A"
+          }
+        },
+        {
+          "type": "text",
+          "id": "q073dz",
+          "x": 116,
+          "y": 382,
+          "name": "fading brand name",
+          "opacity": 0.16,
+          "fill": "#3E382F",
+          "content": "HERMES",
+          "fontFamily": "Playfair Display",
+          "fontSize": 118
+        },
+        {
+          "type": "text",
+          "id": "KTrH2",
+          "x": 124,
+          "y": 515,
+          "name": "fading subtitle",
+          "opacity": 0.2,
+          "fill": "#5E5448",
+          "textGrowth": "fixed-width",
+          "width": 420,
+          "content": "Identidade, templo e presenca digital em um sistema editorial de luxo mineral.",
+          "lineHeight": 1.35,
+          "fontFamily": "Geist",
+          "fontSize": 18,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "dIdB9",
+          "x": 98,
+          "y": 812,
+          "name": "scroll marker",
+          "opacity": 0.74,
+          "fill": "#6F6253",
+          "content": "02  /  INICIO DO SCROLL",
+          "fontFamily": "IBM Plex Mono",
+          "fontSize": 11,
+          "fontWeight": "normal",
+          "letterSpacing": 1.4
+        },
+        {
+          "type": "frame",
+          "id": "J7918",
+          "x": 735,
+          "y": 128,
+          "name": "site mockup entering",
+          "width": 820,
+          "height": 626,
+          "fill": "#F7F2E8",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#B4A48E"
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "t8fnqq",
+              "name": "mockup browser bar",
+              "width": "fill_container",
+              "height": 58,
+              "fill": "#E8DFD0",
+              "padding": [
+                0,
+                24
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IxFrx",
+                  "name": "mockBrand",
+                  "fill": "#4B4238",
+                  "content": "HERMES STUDIO",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.4
+                },
+                {
+                  "type": "frame",
+                  "id": "a07S37",
+                  "name": "mockup nav",
+                  "gap": 22,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "DSCoM",
+                      "name": "menuA",
+                      "fill": "#5F5448",
+                      "content": "ATELIER",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 10,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "text",
+                      "id": "xo2UW",
+                      "name": "menuB",
+                      "fill": "#5F5448",
+                      "content": "MATERIAL",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 10,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1.2
+                    },
+                    {
+                      "type": "text",
+                      "id": "kw9ik",
+                      "name": "menuC",
+                      "fill": "#5F5448",
+                      "content": "CONTATO",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 10,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UiSnN",
+              "name": "mockup editorial body",
+              "width": "fill_container",
+              "height": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "N1zdH",
+                  "name": "mockup left text",
+                  "width": 320,
+                  "height": "fill_container",
+                  "fill": "#F7F2E8",
+                  "layout": "vertical",
+                  "gap": 22,
+                  "padding": [
+                    56,
+                    34,
+                    40,
+                    42
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ycEl5",
+                      "name": "eyebrow",
+                      "fill": "#7A6A58",
+                      "content": "COLECAO MINERAL",
+                      "fontFamily": "IBM Plex Mono",
+                      "fontSize": 10,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1.6
+                    },
+                    {
+                      "type": "text",
+                      "id": "mKi6Q",
+                      "name": "mockTitle",
+                      "fill": "#2F2A24",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Templates com gravidade editorial.",
+                      "lineHeight": 1.02,
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 44,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BL8k9",
+                      "name": "mockBodyText",
+                      "fill": "#5E5448",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Sistemas visuais para marcas que precisam parecer antigas, precisas e inevitaveis.",
+                      "lineHeight": 1.42,
+                      "fontFamily": "Geist",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "line",
+                      "id": "p3Iq3",
+                      "name": "mockRule",
+                      "opacity": 0.85,
+                      "width": 210,
+                      "height": 0,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "fill": "#B4A48E"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MRVKW",
+                  "name": "mockup mineral image area",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#D8D0C1",
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "id": "e4Qzmm",
+                      "x": 54,
+                      "y": 68,
+                      "name": "stone1",
+                      "fill": "#C8BCA9",
+                      "width": 330,
+                      "height": 430,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#A8957C"
+                      }
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "jH9GC",
+                      "x": 176,
+                      "y": 132,
+                      "name": "stone2",
+                      "fill": "#ECE5D8",
+                      "width": 350,
+                      "height": 365,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#B4A48E"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "id": "U6H77r",
+                      "x": 214,
+                      "y": 194,
+                      "name": "stoneLine1",
+                      "opacity": 0.48,
+                      "width": 260,
+                      "height": 0,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "fill": "#8B7A66"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "id": "beHni",
+                      "x": 214,
+                      "y": 232,
+                      "name": "stoneLine2",
+                      "opacity": 0.36,
+                      "width": 190,
+                      "height": 0,
+                      "stroke": {
+                        "align": "center",
+                        "thickness": 1,
+                        "fill": "#8B7A66"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "N7RmDF",
+                      "x": 214,
+                      "y": 286,
+                      "name": "stoneCaption",
+                      "fill": "#4F463A",
+                      "textGrowth": "fixed-width",
+                      "width": 230,
+                      "content": "A pagina entra como uma placa lapidada, guiada pela geometria do simbolo.",
+                      "lineHeight": 1.35,
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "xx40l",
+      "x": 3080,
+      "y": 0,
+      "name": "Frame 3 - Hero final revelada",
+      "width": 1440,
+      "height": 900,
+      "fill": "#DDD8CD",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "zbEV5",
+          "x": 88,
+          "y": 42,
+          "name": "Header Hermes",
+          "width": 1264,
+          "height": 54,
+          "fill": "#DDD8CD",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "UtMrp",
+              "name": "Logo",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "s0Yki",
+                  "name": "mark",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "#2A2118",
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nHC9V",
+                      "name": "markText",
+                      "fill": "#DDD8CD",
+                      "content": "H",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 17,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "n7zJat",
+                  "name": "brandText",
+                  "fill": "#2A2118",
+                  "content": "HERMES",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "letterSpacing": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "r8PRV7",
+              "name": "Navigation",
+              "gap": 34,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CQgJX",
+                  "name": "nav1",
+                  "fill": "#2A2118",
+                  "content": "Templates",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "BisNd",
+                  "name": "nav2",
+                  "fill": "#2A2118",
+                  "content": "Como funciona",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "CjMFi",
+                  "name": "nav3",
+                  "fill": "#2A2118",
+                  "content": "Sob medida",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "pMBdo",
+                  "name": "nav4",
+                  "fill": "#2A2118",
+                  "content": "FAQ",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v86jD",
+              "name": "Header CTA",
+              "fill": "#2A2118",
+              "cornerRadius": 4,
+              "padding": [
+                12,
+                18
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GKvsh",
+                  "name": "navBtnText",
+                  "fill": "#F7F0E4",
+                  "content": "Ver templates",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Gw7f5",
+          "x": 88,
+          "y": 190,
+          "name": "Hero copy",
+          "width": 610,
+          "fill": "#DDD8CD",
+          "layout": "vertical",
+          "gap": 28,
+          "children": [
+            {
+              "type": "text",
+              "id": "QG0YI",
+              "name": "eyebrow",
+              "fill": "#6C5D4A",
+              "content": "HERMES / LANDINGS EDITORIAIS",
+              "fontFamily": "Geist Mono",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "letterSpacing": 1.6
+            },
+            {
+              "type": "frame",
+              "id": "dnneO",
+              "name": "Headline",
+              "width": "fill_container",
+              "fill": "#DDD8CD",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "T8v3P",
+                  "name": "hl1",
+                  "fill": "#1E1912",
+                  "content": "Sites prontos para",
+                  "lineHeight": 0.96,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 68,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "dHJMr",
+                  "name": "hl2",
+                  "fill": "#1E1912",
+                  "content": "vender, com",
+                  "lineHeight": 0.96,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 68,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "Gi1RO",
+                  "name": "hl3row",
+                  "width": "fill_container",
+                  "fill": "#DDD8CD",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Q61PZB",
+                      "name": "hl3a",
+                      "fill": "#1E1912",
+                      "content": "acabamento",
+                      "lineHeight": 0.96,
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 68,
+                      "fontWeight": "500",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "text",
+                      "id": "U1MA1V",
+                      "name": "hl3b",
+                      "fill": "#1E1912",
+                      "content": "sob medida.",
+                      "lineHeight": 0.96,
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 68,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "b2jnh",
+              "name": "sub",
+              "fill": "#4F4639",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Landing pages premium para lançar ofertas, capturar leads e vender serviços sem começar do zero — com direção visual, copy comercial e ajustes finos para a sua marca.",
+              "lineHeight": 1.48,
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "My05c",
+              "name": "CTA row",
+              "fill": "#DDD8CD",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WR8iR",
+                  "name": "primary",
+                  "fill": "#2A2118",
+                  "cornerRadius": 4,
+                  "padding": [
+                    16,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Whq2x",
+                      "name": "primaryText",
+                      "fill": "#F7F0E4",
+                      "content": "Explorar templates",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "joqyo",
+                  "name": "secondary",
+                  "fill": "#DDD8CD",
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#8C7B63"
+                  },
+                  "padding": [
+                    15,
+                    22
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "a5jLR",
+                      "name": "secondaryText",
+                      "fill": "#2A2118",
+                      "content": "Pedir sob medida",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "apVlQ",
+              "name": "Proof row",
+              "width": "fill_container",
+              "fill": "#DDD8CD",
+              "gap": 18,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "NNvEj",
+                  "name": "proof1",
+                  "fill": "#6C5D4A",
+                  "content": "12 templates premium",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal",
+                  "letterSpacing": 0.8
+                },
+                {
+                  "type": "rectangle",
+                  "id": "EdCrr",
+                  "name": "div1",
+                  "fill": "#A79B88",
+                  "width": 1,
+                  "height": 22
+                },
+                {
+                  "type": "text",
+                  "id": "GV4KQ",
+                  "name": "proof2",
+                  "fill": "#6C5D4A",
+                  "content": "copy + design incluidos",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal",
+                  "letterSpacing": 0.8
+                },
+                {
+                  "type": "rectangle",
+                  "id": "AdGh6",
+                  "name": "div2",
+                  "fill": "#A79B88",
+                  "width": 1,
+                  "height": 22
+                },
+                {
+                  "type": "text",
+                  "id": "pY9RT",
+                  "name": "proof3",
+                  "fill": "#6C5D4A",
+                  "content": "ajustes sob medida",
+                  "fontFamily": "Geist Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal",
+                  "letterSpacing": 0.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "v1yCk",
+          "x": 742,
+          "y": 158,
+          "name": "Premium browser mockup",
+          "clip": true,
+          "width": 610,
+          "height": 590,
+          "fill": "#F8F3EA",
+          "cornerRadius": 6,
+          "stroke": {
+            "thickness": 1,
+            "fill": "#7E6B50"
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ZEj4M",
+              "name": "Browser chrome",
+              "width": "fill_container",
+              "height": 44,
+              "fill": "#2A2118",
+              "gap": 10,
+              "padding": [
+                14,
+                18
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "eLYPX",
+                  "name": "dot1",
+                  "fill": "#D8C49A",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "ellipse",
+                  "id": "YMEWq",
+                  "name": "dot2",
+                  "fill": "#A98B5C",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "ellipse",
+                  "id": "N5wWK",
+                  "name": "dot3",
+                  "fill": "#6C5D4A",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "frame",
+                  "id": "mnekf",
+                  "name": "url",
+                  "width": "fill_container",
+                  "height": 20,
+                  "fill": "#3A3025",
+                  "cornerRadius": 4,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JElmF",
+                      "name": "urlText",
+                      "fill": "#DCD4C4",
+                      "content": "hermes.site/template-atelier",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NBtEn",
+              "name": "Designed website interior",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FCFAF7",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eUB2B",
+                  "name": "siteHeader",
+                  "width": "fill_container",
+                  "height": 68,
+                  "fill": "#FCFAF7",
+                  "padding": [
+                    0,
+                    34
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "I5Xxy",
+                      "name": "miniBrand",
+                      "fill": "#241D16",
+                      "content": "MAISON ALBA",
+                      "fontFamily": "Playfair Display",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EdYtw",
+                      "name": "miniNav",
+                      "fill": "#706452",
+                      "content": "COLECAO  ATELIER  CONTATO",
+                      "fontFamily": "Geist Mono",
+                      "fontSize": 9,
+                      "fontWeight": "normal",
+                      "letterSpacing": 1.2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZMCzM",
+                  "name": "siteHero",
+                  "width": "fill_container",
+                  "height": 318,
+                  "fill": "#E7E0D2",
+                  "gap": 26,
+                  "padding": [
+                    26,
+                    34
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "I44c0",
+                      "name": "siteHeroText",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#E7E0D2",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "B3Hsy",
+                          "name": "miniEyebrow",
+                          "fill": "#7A6546",
+                          "content": "NOVA COLECAO",
+                          "fontFamily": "Geist Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "mH19G",
+                          "name": "miniTitle",
+                          "fill": "#241D16",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Ceramicas feitas para casas solares.",
+                          "lineHeight": 1.02,
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 38,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CdAdg",
+                          "name": "miniCopy",
+                          "fill": "#5C5145",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Pecas de pedra clara, esmaltes naturais e acabamento manual para interiores atemporais.",
+                          "lineHeight": 1.35,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Gl8Fu",
+                          "name": "miniCta",
+                          "fill": "#241D16",
+                          "cornerRadius": 3,
+                          "padding": [
+                            10,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "gOCpL",
+                              "name": "miniCtaText",
+                              "fill": "#FCFAF7",
+                              "content": "Ver colecao",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "L79a6",
+                      "name": "Interior site illustration",
+                      "width": 220,
+                      "height": "fill_container",
+                      "fill": "#F8F3EA",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#B8A98F"
+                      },
+                      "layout": "none",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "YNpFz",
+                          "x": 44,
+                          "y": 38,
+                          "name": "arch",
+                          "geometry": "M20 180l0-108c0-38 30-64 66-64 36 0 66 26 66 64l0 108m-110 0l0-102c0-26 20-46 44-46 24 0 44 20 44 46l0 102m-62 0l0-74 36 0 0 74m-74-34l112 0m-94-26l76 0",
+                          "viewBox": [
+                            0,
+                            0,
+                            172,
+                            190
+                          ],
+                          "fill": "#00000000",
+                          "width": 132,
+                          "height": 180,
+                          "stroke": {
+                            "thickness": 2,
+                            "join": "round",
+                            "cap": "round",
+                            "fill": "#6C5D4A"
+                          }
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "Lg5nl",
+                          "x": 155,
+                          "y": 28,
+                          "name": "sun",
+                          "fill": "#C99B57",
+                          "width": 28,
+                          "height": 28
+                        },
+                        {
+                          "type": "rectangle",
+                          "id": "AQ7Fb",
+                          "x": 24,
+                          "y": 244,
+                          "name": "stone1",
+                          "fill": "#D9CDBA",
+                          "width": 70,
+                          "height": 16
+                        },
+                        {
+                          "type": "rectangle",
+                          "id": "n35tx",
+                          "x": 104,
+                          "y": 244,
+                          "name": "stone2",
+                          "fill": "#BCA984",
+                          "width": 82,
+                          "height": 16
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wAJnX",
+                  "name": "Interior lower section",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#FCFAF7",
+                  "gap": 22,
+                  "padding": [
+                    24,
+                    34
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mEVqz",
+                      "name": "card1",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FCFAF7",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "iPFlp",
+                          "name": "thumb1",
+                          "width": "fill_container",
+                          "height": 58,
+                          "fill": "#D8CBB7"
+                        },
+                        {
+                          "type": "text",
+                          "id": "U2z2A",
+                          "name": "card1Title",
+                          "fill": "#241D16",
+                          "content": "Colecao mineral",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 18,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Uminr",
+                          "name": "card1Copy",
+                          "fill": "#6C5D4A",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Grid comercial, narrativa e CTA com tom premium.",
+                          "lineHeight": 1.25,
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "x18m3I",
+                      "name": "card2",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FCFAF7",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "tplZe",
+                          "name": "thumb2",
+                          "width": "fill_container",
+                          "height": 58,
+                          "fill": "#2A2118",
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "rectangle",
+                              "id": "jONuf",
+                              "x": 0,
+                              "y": 18,
+                              "name": "lineA",
+                              "fill": "#D8C49A",
+                              "width": 110,
+                              "height": 2
+                            },
+                            {
+                              "type": "rectangle",
+                              "id": "SaHlh",
+                              "x": 110,
+                              "y": 32,
+                              "name": "lineB",
+                              "fill": "#D8C49A",
+                              "width": 78,
+                              "height": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "L7rFw5",
+                          "name": "card2Title",
+                          "fill": "#241D16",
+                          "content": "Oferta pronta",
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 18,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "U5lGE",
+                          "name": "card2Copy",
+                          "fill": "#6C5D4A",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Seções de prova, desejo e conversão ajustáveis.",
+                          "lineHeight": 1.25,
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "XqUcB",
+          "x": 1180,
+          "y": 770,
+          "name": "orn",
+          "geometry": "M2 23c22-21 66-21 88 0-22 21-66 21-88 0z m22 0l44 0m-22-17l0 34",
+          "viewBox": [
+            0,
+            0,
+            92,
+            46
+          ],
+          "fill": "#00000000",
+          "width": 92,
+          "height": 46,
+          "stroke": {
+            "thickness": 1,
+            "join": "round",
+            "cap": "round",
+            "fill": "#8C7B63"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "k14Vz",
+      "x": 4620,
+      "y": 0,
+      "name": "Frame 4 - Templates em destaque",
+      "width": 1440,
+      "height": 900,
+      "fill": "#DDD8CD",
+      "layout": "vertical",
+      "gap": 36,
+      "padding": [
+        64,
+        96,
+        56,
+        96
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "faXCM",
+          "name": "Frame 4 / editorial metadata",
+          "width": "fill_container",
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "rebb8",
+              "name": "metaLeft",
+              "fill": "#514A3F",
+              "content": "HERMES TEMPLATE GALLERY",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "letterSpacing": 1.6
+            },
+            {
+              "type": "text",
+              "id": "Vd9D6",
+              "name": "metaRight",
+              "fill": "#8C7A5C",
+              "content": "04 / TEMPLATES EM DESTAQUE",
+              "fontFamily": "IBM Plex Mono",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "letterSpacing": 1.4
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xv3ap",
+          "name": "Frame 4 / headline and copy",
+          "width": "fill_container",
+          "justifyContent": "space_between",
+          "alignItems": "end",
+          "children": [
+            {
+              "type": "frame",
+              "id": "q6hbkg",
+              "name": "Title column",
+              "width": 760,
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "l6Wln",
+                  "name": "title",
+                  "fill": "#17130F",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Escolha o ponto de partida do seu próximo site.",
+                  "lineHeight": 0.98,
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 64
+                },
+                {
+                  "type": "rectangle",
+                  "id": "RRvgE",
+                  "name": "Champagne detail rule",
+                  "fill": "#B89B62",
+                  "width": 186,
+                  "height": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "K97TLL",
+              "name": "Intro copy column",
+              "width": 410,
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zdKT3",
+                  "name": "copy",
+                  "fill": "#4D473E",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Templates editoriais para marcas que precisam nascer com presença: páginas essenciais, ritmo visual e acabamento Hermes para adaptar sem começar do zero.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Inter",
+                  "fontSize": 18,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "XWlMx",
+                  "name": "Carousel indicators",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "id": "jnYSe",
+                      "name": "dot1",
+                      "fill": "#17130F",
+                      "width": 34,
+                      "height": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "N8TuwH",
+                      "name": "dot2",
+                      "fill": "#A79B88",
+                      "width": 34,
+                      "height": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "I3biML",
+                      "name": "dot3",
+                      "fill": "#A79B88",
+                      "width": 34,
+                      "height": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "ZbPLs",
+                      "name": "dot4",
+                      "fill": "#A79B88",
+                      "width": 34,
+                      "height": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "z8KJ9",
+          "name": "Horizontal carousel / four featured templates",
+          "width": "fill_container",
+          "height": 500,
+          "gap": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "t3uEAU",
+              "name": "Template card / Aurea Clinic",
+              "width": "fill_container",
+              "height": 500,
+              "fill": "#F6F1E7",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#B9AA8D"
+              },
+              "layout": "vertical",
+              "gap": 13,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "j8Zb2s",
+                  "name": "Browser preview / Aurea Clinic",
+                  "width": "fill_container",
+                  "height": 238,
+                  "fill": "#FCFAF7",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#CFC4AF"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MYUXY",
+                      "name": "bar1",
+                      "width": "fill_container",
+                      "height": 30,
+                      "fill": "#E7DFD1",
+                      "gap": 6,
+                      "padding": [
+                        10,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "hJYgI",
+                          "name": "b1dot1",
+                          "fill": "#8E806B",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "EQzxb",
+                          "name": "b1dot2",
+                          "fill": "#B89B62",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "text",
+                          "id": "oTrCU",
+                          "name": "b1url",
+                          "fill": "#6F6658",
+                          "content": "aurea.clinic",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KpAjv",
+                      "name": "scene1",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FDFBF8",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "padding": [
+                        22,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "QfDDS",
+                          "name": "seal1",
+                          "fill": "#EEE4D1",
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#B89B62"
+                          },
+                          "gap": 6,
+                          "padding": [
+                            8,
+                            5
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vQYn6",
+                              "name": "sealMark1",
+                              "fill": "#6A5428",
+                              "content": "H",
+                              "fontFamily": "Playfair Display",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "hv8Pf",
+                              "name": "sealText1",
+                              "fill": "#6A5428",
+                              "content": "HERMES",
+                              "fontFamily": "IBM Plex Mono",
+                              "fontSize": 8,
+                              "fontWeight": "normal",
+                              "letterSpacing": 1.2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "g4ihIu",
+                          "name": "heroLine1",
+                          "fill": "#17130F",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Clínica luminosa, agenda precisa.",
+                          "lineHeight": 1.02,
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 28,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "rectangle",
+                          "id": "p9iyQX",
+                          "name": "previewRule1",
+                          "fill": "#D9CCB6",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "I8Ttn",
+                          "name": "previewBlocks1",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "sB9VF",
+                              "name": "block1a",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#DED6C9"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n57Ne",
+                              "name": "block1b",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#E9E2D7"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "qYMR0",
+                  "name": "niche1",
+                  "fill": "#8C7A5C",
+                  "content": "SAÚDE E BEM-ESTAR",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 10,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.3
+                },
+                {
+                  "type": "text",
+                  "id": "S4oTkq",
+                  "name": "name1",
+                  "fill": "#17130F",
+                  "content": "Aurea Clinic",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 30,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Hnw2H",
+                  "name": "tags1",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JCZii",
+                      "name": "tag1a",
+                      "fill": "#5E574C",
+                      "content": "booking",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SF0GV",
+                      "name": "tag1b",
+                      "fill": "#5E574C",
+                      "content": "serviços",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Stc4B",
+                      "name": "tag1c",
+                      "fill": "#5E574C",
+                      "content": "editorial",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "z52gVn",
+                  "name": "actions1",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "l2ZxO",
+                      "name": "detail1",
+                      "width": "fill_container",
+                      "height": 42,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#978A74"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Xrdrn",
+                          "name": "detail1t",
+                          "fill": "#17130F",
+                          "content": "Ver detalhes",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ODAju",
+                      "name": "buy1",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#17130F",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "cHI7E",
+                          "name": "buy1t",
+                          "fill": "#FCFAF7",
+                          "content": "Comprar modelo",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wVwu8",
+              "name": "Template card / Atlas B2B",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#F3EDE2",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#B9AA8D"
+              },
+              "layout": "vertical",
+              "gap": 13,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NSVKW",
+                  "name": "Browser preview / Atlas B2B",
+                  "width": "fill_container",
+                  "height": 238,
+                  "fill": "#FBF8F1",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#CFC4AF"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "J8NCKh",
+                      "name": "bar2",
+                      "width": "fill_container",
+                      "height": 30,
+                      "fill": "#E7DFD1",
+                      "gap": 6,
+                      "padding": [
+                        10,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "mEzrt",
+                          "name": "b2dot1",
+                          "fill": "#8E806B",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "F8KwS",
+                          "name": "b2dot2",
+                          "fill": "#B89B62",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "text",
+                          "id": "sTvA1",
+                          "name": "b2url",
+                          "fill": "#6F6658",
+                          "content": "atlas.b2b",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WAEMc",
+                      "name": "scene2",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FCFAF7",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        22,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "w2FOC",
+                          "name": "heroLine2",
+                          "fill": "#17130F",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Autoridade para vender soluções complexas.",
+                          "lineHeight": 1.04,
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 26,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ve6PN",
+                          "name": "metricRow2",
+                          "width": "fill_container",
+                          "height": 70,
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "mgt0h",
+                              "name": "metric2a",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#E7DDCA"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "LDLBR",
+                              "name": "metric2b",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#D8D0C2"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "s0vE4",
+                              "name": "metric2c",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#ECE5DA"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "rectangle",
+                          "id": "qBBAg",
+                          "name": "line2",
+                          "fill": "#D9CCB6",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "text",
+                          "id": "Q4ZFD",
+                          "name": "body2",
+                          "fill": "#5E574C",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Prova, cases e proposta em uma cadência sóbria.",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "LoPPB",
+                  "name": "niche2",
+                  "fill": "#8C7A5C",
+                  "content": "CONSULTORIA B2B",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 10,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.3
+                },
+                {
+                  "type": "text",
+                  "id": "jkOMi",
+                  "name": "name2",
+                  "fill": "#17130F",
+                  "content": "Atlas B2B",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 30,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "h8hjn",
+                  "name": "tags2",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wxgAB",
+                      "name": "tag2a",
+                      "fill": "#5E574C",
+                      "content": "cases",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "A3N2rU",
+                      "name": "tag2b",
+                      "fill": "#5E574C",
+                      "content": "prova",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AeGzQ",
+                      "name": "tag2c",
+                      "fill": "#5E574C",
+                      "content": "lead",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M0iRZc",
+                  "name": "actions2",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "w8gMJ",
+                      "name": "detail2",
+                      "width": "fill_container",
+                      "height": 42,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#978A74"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EV2kF",
+                          "name": "detail2t",
+                          "fill": "#17130F",
+                          "content": "Ver detalhes",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MsOIp",
+                      "name": "buy2",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#17130F",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wfwGX",
+                          "name": "buy2t",
+                          "fill": "#FCFAF7",
+                          "content": "Comprar modelo",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WN94V",
+              "name": "Template card / Forma Studio",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#F6F1E7",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#B9AA8D"
+              },
+              "layout": "vertical",
+              "gap": 13,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "utVZz",
+                  "name": "Browser preview / Forma Studio",
+                  "width": "fill_container",
+                  "height": 238,
+                  "fill": "#FCFAF7",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#CFC4AF"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "d8g7s1",
+                      "name": "bar3",
+                      "width": "fill_container",
+                      "height": 30,
+                      "fill": "#E7DFD1",
+                      "gap": 6,
+                      "padding": [
+                        10,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "CUlYe",
+                          "name": "b3dot1",
+                          "fill": "#8E806B",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "lGY7F",
+                          "name": "b3dot2",
+                          "fill": "#B89B62",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "text",
+                          "id": "B6kJp",
+                          "name": "b3url",
+                          "fill": "#6F6658",
+                          "content": "forma.studio",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GyKZ7",
+                      "name": "scene3",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FBF8F1",
+                      "gap": 16,
+                      "padding": 18,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "i2HUp",
+                          "name": "art3",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "yrH7s",
+                              "name": "art3a",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#D9D1C3"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "igz81",
+                              "name": "art3b",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "fill": "#ECE3D4"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tvEdx",
+                          "name": "copy3",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "s1o4vi",
+                              "name": "heroLine3",
+                              "fill": "#17130F",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Portfólio com silêncio, textura e critério.",
+                              "lineHeight": 1.04,
+                              "fontFamily": "Playfair Display",
+                              "fontSize": 25,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "rectangle",
+                              "id": "qSxsj",
+                              "name": "line3",
+                              "fill": "#D2C4AB",
+                              "width": "fill_container",
+                              "height": 1
+                            },
+                            {
+                              "type": "text",
+                              "id": "zk3ad",
+                              "name": "body3",
+                              "fill": "#5E574C",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Projetos, manifesto e contato para estúdios autorais.",
+                              "lineHeight": 1.4,
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "zzXL9",
+                  "name": "niche3",
+                  "fill": "#8C7A5C",
+                  "content": "ESTÚDIO CRIATIVO",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 10,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.3
+                },
+                {
+                  "type": "text",
+                  "id": "A7CdR",
+                  "name": "name3",
+                  "fill": "#17130F",
+                  "content": "Forma Studio",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 30,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Ndpr2",
+                  "name": "tags3",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "P7E49",
+                      "name": "tag3a",
+                      "fill": "#5E574C",
+                      "content": "portfolio",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "i1OcxT",
+                      "name": "tag3b",
+                      "fill": "#5E574C",
+                      "content": "manifesto",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "M3YP5K",
+                      "name": "tag3c",
+                      "fill": "#5E574C",
+                      "content": "contato",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "b6SdgJ",
+                  "name": "actions3",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "CaYbp",
+                      "name": "detail3",
+                      "width": "fill_container",
+                      "height": 42,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#978A74"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "py32R",
+                          "name": "detail3t",
+                          "fill": "#17130F",
+                          "content": "Ver detalhes",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FeUt9",
+                      "name": "buy3",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#17130F",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "r9Q86",
+                          "name": "buy3t",
+                          "fill": "#FCFAF7",
+                          "content": "Comprar modelo",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gpWDB",
+              "name": "Template card / Lumen Course",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#F3EDE2",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#B9AA8D"
+              },
+              "layout": "vertical",
+              "gap": 13,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QsQ6h",
+                  "name": "Browser preview / Lumen Course",
+                  "width": "fill_container",
+                  "height": 238,
+                  "fill": "#FCFAF7",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#CFC4AF"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "vJ6KK",
+                      "name": "bar4",
+                      "width": "fill_container",
+                      "height": 30,
+                      "fill": "#E7DFD1",
+                      "gap": 6,
+                      "padding": [
+                        10,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "Hs7TM",
+                          "name": "b4dot1",
+                          "fill": "#8E806B",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "ellipse",
+                          "id": "ulbtI",
+                          "name": "b4dot2",
+                          "fill": "#B89B62",
+                          "width": 6,
+                          "height": 6
+                        },
+                        {
+                          "type": "text",
+                          "id": "mHE3Y",
+                          "name": "b4url",
+                          "fill": "#6F6658",
+                          "content": "lumen.course",
+                          "fontFamily": "IBM Plex Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "whB0e",
+                      "name": "scene4",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FDFBF8",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        22,
+                        18
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qm7QI",
+                          "name": "heroLine4",
+                          "fill": "#17130F",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Curso com presença de atelier.",
+                          "lineHeight": 1.02,
+                          "fontFamily": "Playfair Display",
+                          "fontSize": 28,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "bMbG3",
+                          "name": "courseRows4",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 9,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "rHdUN",
+                              "name": "row4a",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "M8kvs",
+                                  "name": "tile4a",
+                                  "width": "fill_container",
+                                  "height": "fill_container",
+                                  "fill": "#E6DDCF"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "canXb",
+                                  "name": "tile4b",
+                                  "width": "fill_container",
+                                  "height": "fill_container",
+                                  "fill": "#D7CEC0"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "AeuZm",
+                              "name": "row4b",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "KmQay",
+                                  "name": "tile4c",
+                                  "width": "fill_container",
+                                  "height": "fill_container",
+                                  "fill": "#EFE7DA"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "OnJRV",
+                                  "name": "tile4d",
+                                  "width": "fill_container",
+                                  "height": "fill_container",
+                                  "fill": "#DED4C4"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "g6waEY",
+                  "name": "niche4",
+                  "fill": "#8C7A5C",
+                  "content": "EDUCAÇÃO DIGITAL",
+                  "fontFamily": "IBM Plex Mono",
+                  "fontSize": 10,
+                  "fontWeight": "normal",
+                  "letterSpacing": 1.3
+                },
+                {
+                  "type": "text",
+                  "id": "wc27H",
+                  "name": "name4",
+                  "fill": "#17130F",
+                  "content": "Lumen Course",
+                  "fontFamily": "Playfair Display",
+                  "fontSize": 30,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "v9TOO",
+                  "name": "tags4",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QOwBU",
+                      "name": "tag4a",
+                      "fill": "#5E574C",
+                      "content": "aulas",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pnHMW",
+                      "name": "tag4b",
+                      "fill": "#5E574C",
+                      "content": "checkout",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "b7ifuI",
+                      "name": "tag4c",
+                      "fill": "#5E574C",
+                      "content": "comunidade",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "g9Q1FB",
+                  "name": "actions4",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SZBjI",
+                      "name": "detail4",
+                      "width": "fill_container",
+                      "height": 42,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#978A74"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "p4df8",
+                          "name": "detail4t",
+                          "fill": "#17130F",
+                          "content": "Ver detalhes",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "bXIGn",
+                      "name": "buy4",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#17130F",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "HXI2l",
+                          "name": "buy4t",
+                          "fill": "#FCFAF7",
+                          "content": "Comprar modelo",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "TChi0",
+      "x": 6160,
+      "y": 0,
+      "name": "Frame 5 - CTA final editorial",
+      "width": 1440,
+      "height": 900,
+      "fill": "#E7E3D8",
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "H2fK1T",
+          "x": 677,
+          "y": 118,
+          "name": "Hermes assinatura simbolo",
+          "geometry": "M146 34c-26 40-55 60-93 75 26 8 50 19 71 39m-66-73c27 27 54 38 85 64m-72-2c26 4 48 16 68 40m-2-1c-12 18 2 31 32 33 22 2 36 13 49 23m-127-33c26-1 48 7 73 29m-4-172l44 33m-19-46l43 32",
+          "viewBox": [
+            0,
+            0,
+            240,
+            240
+          ],
+          "fill": "#1A1D2600",
+          "width": 86,
+          "height": 86,
+          "stroke": {
+            "thickness": 3,
+            "join": "round",
+            "cap": "round",
+            "fill": "#1A1D26"
+          }
+        },
+        {
+          "type": "text",
+          "id": "y1UFF",
+          "x": 661,
+          "y": 216,
+          "name": "Hermes assinatura texto",
+          "fill": "#1A1D26",
+          "content": "Hermes",
+          "fontFamily": "Cormorant Garamond",
+          "fontSize": 34,
+          "fontWeight": "500"
+        },
+        {
+          "type": "text",
+          "id": "dFtZs",
+          "x": 611,
+          "y": 308,
+          "name": "Kicker final",
+          "fill": "#7E7E76",
+          "content": "FECHAMENTO EDITORIAL",
+          "fontFamily": "Inter",
+          "fontSize": 12,
+          "fontWeight": "500",
+          "letterSpacing": 3.2
+        },
+        {
+          "type": "text",
+          "id": "r6Vdi",
+          "x": 235,
+          "y": 354,
+          "name": "Headline CTA final",
+          "fill": "#1A1D26",
+          "textGrowth": "fixed-width",
+          "width": 970,
+          "content": "Escolha o site que seu negócio deveria ter lançado antes.",
+          "lineHeight": 1.04,
+          "textAlign": "center",
+          "fontFamily": "Cormorant Garamond",
+          "fontSize": 72,
+          "fontWeight": "500"
+        },
+        {
+          "type": "text",
+          "id": "vvzyl",
+          "x": 389,
+          "y": 548,
+          "name": "Subtexto CTA final",
+          "fill": "#5C5C56",
+          "textGrowth": "fixed-width",
+          "width": 662,
+          "content": "Comece por um template premium ou peça uma versão sob medida. O importante é sair do improviso e colocar uma página clara, bonita e pronta para captar no ar.",
+          "lineHeight": 1.7,
+          "textAlign": "center",
+          "fontFamily": "Inter",
+          "fontSize": 18
+        },
+        {
+          "type": "frame",
+          "id": "C9svGe",
+          "x": 486,
+          "y": 678,
+          "name": "Botoes CTA final",
+          "gap": 14,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "J6BEYW",
+              "name": "Botao primario",
+              "height": 48,
+              "fill": "#1A1D26",
+              "cornerRadius": 4,
+              "padding": [
+                22,
+                15
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fqzqq",
+                  "name": "Label primario",
+                  "fill": "#E7E3D8",
+                  "content": "VER TEMPLATES DISPONIVEIS",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "letterSpacing": 1.6
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TqfK8",
+              "name": "Botao secundario",
+              "height": 48,
+              "fill": "#E7E3D8",
+              "cornerRadius": 4,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#1A1D261F"
+              },
+              "padding": [
+                22,
+                15
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "sJLGg",
+                  "name": "Label secundario",
+                  "fill": "#1A1D26",
+                  "content": "RECEBER AUDITORIA DO MEU SITE",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "letterSpacing": 1.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "kbU6a",
+          "x": 704,
+          "y": 770,
+          "name": "Estrela discreta",
+          "opacity": 0.45,
+          "geometry": "M16 0c1.8 10.2 5.8 14.2 16 16-10.2 1.8-14.2 5.8-16 16-1.8-10.2-5.8-14.2-16-16 10.2-1.8 14.2-5.8 16-16z",
+          "viewBox": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "fill": "#C9A96E",
+          "width": 32,
+          "height": 32
+        },
+        {
+          "type": "path",
+          "id": "SzwmE",
+          "x": 341,
+          "y": 694,
+          "name": "Detalhe champagne direcionador",
+          "opacity": 0.85,
+          "geometry": "M2 20c34-15 68-16 110-8m-11-7l13 7-13 8",
+          "viewBox": [
+            0,
+            0,
+            118,
+            24
+          ],
+          "fill": "#C9A96E00",
+          "width": 118,
+          "height": 24,
+          "stroke": {
+            "thickness": 1.2,
+            "join": "round",
+            "cap": "round",
+            "fill": "#C9A96E"
+          }
+        },
+        {
+          "type": "path",
+          "id": "FIlpG",
+          "x": 102,
+          "y": 200,
+          "name": "Ornamento linha alada esquerda",
+          "opacity": 0.12,
+          "geometry": "M222 6c-61 50-122 76-200 90m187-25c-56 40-107 59-171 64m151 5c-55 25-98 34-181 36",
+          "viewBox": [
+            0,
+            0,
+            236,
+            210
+          ],
+          "fill": "#1A1D2600",
+          "width": 236,
+          "height": 210,
+          "stroke": {
+            "thickness": 1.1,
+            "join": "round",
+            "cap": "round",
+            "fill": "#1A1D26"
+          }
+        },
+        {
+          "type": "path",
+          "id": "aKchk",
+          "x": 1094,
+          "y": 190,
+          "name": "Ornamento linhas direita",
+          "opacity": 0.14,
+          "geometry": "M8 18l84 66m-45-84l105 82m-68-30l104 82",
+          "viewBox": [
+            0,
+            0,
+            196,
+            178
+          ],
+          "fill": "#1A1D2600",
+          "width": 196,
+          "height": 178,
+          "stroke": {
+            "thickness": 1.4,
+            "join": "round",
+            "cap": "round",
+            "fill": "#1A1D26"
+          }
+        },
+        {
+          "type": "path",
+          "id": "dxJ3e",
+          "x": 300,
+          "y": 828,
+          "name": "Regua inferior fina",
+          "opacity": 0.12,
+          "geometry": "M0 0.5l840 0",
+          "viewBox": [
+            0,
+            0,
+            840,
+            1
+          ],
+          "fill": "#1A1D2600",
+          "width": 840,
+          "height": 1,
+          "stroke": {
+            "thickness": 1,
+            "cap": "round",
+            "fill": "#1A1D26"
+          }
+        },
+        {
+          "type": "path",
+          "id": "p0jn8",
+          "x": 72,
+          "y": 84,
+          "name": "Textura papel 1",
+          "opacity": 0.035,
+          "geometry": "M0 40c180-22 310 18 482-5 168-23 300 7 488-15 120-13 220-2 280-9m-1235 204c175 23 293-17 458 7 167 24 339-17 518 8 121 17 199-2 259 8m-1250 180c156-24 332 18 518-9 186-27 329 17 504-12 102-17 176-6 228-13m-1228 262c188-24 358 16 544-10 185-26 374 14 684-20",
+          "viewBox": [
+            0,
+            0,
+            1250,
+            720
+          ],
+          "fill": "#1A1D2600",
+          "width": 1250,
+          "height": 720,
+          "stroke": {
+            "thickness": 1,
+            "cap": "round",
+            "fill": "#1A1D26"
+          }
+        },
+        {
+          "type": "path",
+          "id": "QWsZt",
+          "x": 112,
+          "y": 62,
+          "name": "Textura papel 2",
+          "opacity": 0.025,
+          "geometry": "M75 0c-27 120 16 224-15 351-32 127 14 259-19 413m315-764c28 116-17 240 13 364 30 124-19 260 16 400m301-764c-32 152 19 273-15 418-34 145 17 240-9 346m366-764c31 120-14 253 12 381 26 128-18 245 12 383",
+          "viewBox": [
+            0,
+            0,
+            1180,
+            764
+          ],
+          "fill": "#1A1D2600",
+          "width": 1180,
+          "height": 764,
+          "stroke": {
+            "thickness": 1,
+            "cap": "round",
+            "fill": "#1A1D26"
+          }
+        },
+        {
+          "type": "path",
+          "id": "fPaME",
+          "x": 248,
+          "y": 598,
+          "name": "Estrela lateral esquerda",
+          "opacity": 0.14,
+          "geometry": "M9 0c1 5.8 3.2 8 9 9-5.8 1-8 3.2-9 9-1-5.8-3.2-8-9-9 5.8-1 8-3.2 9-9z",
+          "viewBox": [
+            0,
+            0,
+            18,
+            18
+          ],
+          "fill": "#1A1D26",
+          "width": 18,
+          "height": 18
+        },
+        {
+          "type": "path",
+          "id": "l1Nixc",
+          "x": 1168,
+          "y": 535,
+          "name": "Estrela lateral direita",
+          "opacity": 0.36,
+          "geometry": "M11 0c1.2 7 4 9.8 11 11-7 1.2-9.8 4-11 11-1.2-7-4-9.8-11-11 7-1.2 9.8-4 11-11z",
+          "viewBox": [
+            0,
+            0,
+            22,
+            22
+          ],
+          "fill": "#C9A96E",
+          "width": 22,
+          "height": 22
+        }
+      ]
+    }
+  ]
+}
