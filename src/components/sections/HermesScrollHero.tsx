@@ -1,39 +1,201 @@
 "use client";
 
-import { useRef, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-import { AnimatedHermesLogo } from "@/components/brand/AnimatedHermesLogo";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { FAQSection } from "@/components/sections/FAQSection";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { TemplateShowcase } from "@/components/sections/TemplateShowcase";
-import { BrowserMockup } from "@/components/ui/BrowserMockup";
+import { type ThemeMode } from "@/components/sections/hermesContent";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(useGSAP);
 
-const navItems = ["Templates", "Como funciona", "Sob medida", "FAQ"];
+const mediaMatches = (query: string) =>
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia(query).matches;
+
+const getStoredTheme = () => {
+  if (
+    typeof window === "undefined" ||
+    typeof window.localStorage?.getItem !== "function"
+  ) {
+    return null;
+  }
+
+  try {
+    return window.localStorage.getItem("hermes-theme");
+  } catch {
+    return null;
+  }
+};
+
+const setStoredTheme = (themeMode: ThemeMode) => {
+  if (
+    typeof window === "undefined" ||
+    typeof window.localStorage?.setItem !== "function"
+  ) {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem("hermes-theme", themeMode);
+  } catch {
+    // Some embedded previews and test environments disable storage.
+  }
+};
 
 export function HermesScrollHero() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const pageRef = useRef<HTMLDivElement | null>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
   const templatesRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
-  const logoMarkRef = useRef<HTMLDivElement | null>(null);
   const wingRef = useRef<SVGGElement | null>(null);
-  const introTextRef = useRef<HTMLDivElement | null>(null);
-  const headlineRef = useRef<HTMLDivElement | null>(null);
+  const entryOverlayRef = useRef<HTMLDivElement | null>(null);
+  const entryLogoRef = useRef<HTMLDivElement | null>(null);
+  const entryLineRef = useRef<HTMLSpanElement | null>(null);
+  const heroCopyRef = useRef<HTMLDivElement | null>(null);
   const subheadlineRef = useRef<HTMLParagraphElement | null>(null);
   const ctasRef = useRef<HTMLDivElement | null>(null);
   const mockupRef = useRef<HTMLDivElement | null>(null);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const cursorDotRef = useRef<HTMLDivElement | null>(null);
+  const [themeMode, setThemeMode] = useState<ThemeMode>("light");
 
-  const scrollToTemplates = (event: MouseEvent<HTMLAnchorElement>) => {
+  const scrollToSection = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (!href.startsWith("#")) {
+      return;
+    }
+
     event.preventDefault();
-    templatesRef.current?.scrollIntoView({
-      behavior: "smooth",
+    const target =
+      href === "#templates"
+        ? templatesRef.current
+        : document.querySelector<HTMLElement>(href);
+
+    target?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
       block: "start",
     });
   };
+
+  useEffect(() => {
+    const storedTheme = getStoredTheme();
+    const prefersDark = mediaMatches("(prefers-color-scheme: dark)");
+    const nextTheme =
+      storedTheme === "dark" || storedTheme === "light"
+        ? storedTheme
+        : prefersDark
+          ? "dark"
+          : "light";
+
+    setThemeMode(nextTheme);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = themeMode;
+    setStoredTheme(themeMode);
+  }, [themeMode]);
+
+  useEffect(() => {
+    const shouldReduceMotion =
+      prefersReducedMotion || mediaMatches("(prefers-reduced-motion: reduce)");
+    const root = pageRef.current;
+
+    if (!root) {
+      return;
+    }
+
+    const revealElements = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+
+    if (shouldReduceMotion || !("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -14% 0px", threshold: 0.12 },
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const shouldReduceMotion =
+      prefersReducedMotion || mediaMatches("(prefers-reduced-motion: reduce)");
+    const pointerIsFine = mediaMatches("(pointer: fine)");
+
+    if (shouldReduceMotion || !pointerIsFine) {
+      return;
+    }
+
+    const cursor = cursorRef.current;
+    const cursorDot = cursorDotRef.current;
+
+    if (!cursor || !cursorDot) {
+      return;
+    }
+
+    document.body.classList.add("has-hermes-cursor");
+
+    const moveCursor = (event: PointerEvent) => {
+      const { clientX, clientY } = event;
+      gsap.to(cursor, {
+        x: clientX,
+        y: clientY,
+        duration: 0.32,
+        ease: "power3.out",
+      });
+      gsap.set(cursorDot, { x: clientX, y: clientY });
+    };
+
+    const toggleInteractiveCursor = (event: PointerEvent) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) {
+        return;
+      }
+
+      cursor.classList.toggle(
+        "is-active",
+        Boolean(target.closest("a, button, iframe, [role='button']")),
+      );
+    };
+
+    window.addEventListener("pointermove", moveCursor);
+    window.addEventListener("pointerover", toggleInteractiveCursor);
+    window.addEventListener("pointerout", toggleInteractiveCursor);
+
+    return () => {
+      document.body.classList.remove("has-hermes-cursor");
+      window.removeEventListener("pointermove", moveCursor);
+      window.removeEventListener("pointerover", toggleInteractiveCursor);
+      window.removeEventListener("pointerout", toggleInteractiveCursor);
+    };
+  }, [prefersReducedMotion]);
 
   useGSAP(
     () => {
@@ -42,406 +204,181 @@ export function HermesScrollHero() {
         (typeof window !== "undefined" &&
           window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
-      if (shouldReduceMotion || !sectionRef.current) {
+      if (shouldReduceMotion) {
+        gsap.set(entryOverlayRef.current, { autoAlpha: 0, display: "none" });
+        gsap.set(
+          [
+            headerRef.current,
+            heroCopyRef.current,
+            subheadlineRef.current,
+            ctasRef.current,
+            mockupRef.current,
+          ],
+          { opacity: 1, y: 0, x: 0, scale: 1, rotation: 0 },
+        );
         return;
       }
 
-      const section = sectionRef.current;
       const navElements = headerRef.current?.querySelectorAll("[data-nav-item]");
       let wingTween: gsap.core.Tween | null = null;
-      let wingIsFlapping = false;
 
       const startWingFlap = () => {
-        if (wingIsFlapping || !wingRef.current) {
+        if (!wingRef.current) {
           return;
         }
 
-        wingIsFlapping = true;
         wingTween = gsap.to(wingRef.current, {
           rotation: -8,
           yoyo: true,
           repeat: -1,
-          duration: 0.22,
+          duration: 0.2,
           ease: "sine.inOut",
           transformOrigin: "28% 70%",
         });
       };
 
-      const stopWingFlap = () => {
-        if (!wingIsFlapping) {
-          return;
-        }
+      gsap.set(entryOverlayRef.current, { autoAlpha: 1, display: "grid" });
+      gsap.set(entryLogoRef.current, {
+        scale: 0.78,
+        y: 34,
+        opacity: 0,
+        transformOrigin: "50% 50%",
+      });
+      gsap.set(entryLineRef.current, { scaleX: 0, transformOrigin: "50% 50%" });
+      gsap.set(headerRef.current, { opacity: 0, y: -18 });
+      gsap.set(navElements ?? [], { opacity: 0, y: -8 });
+      gsap.set(heroCopyRef.current, { opacity: 0, y: 34 });
+      gsap.set(subheadlineRef.current, { opacity: 0, y: 24 });
+      gsap.set(ctasRef.current, { opacity: 0, y: 18 });
+      gsap.set(mockupRef.current, {
+        opacity: 0,
+        x: 120,
+        y: 22,
+        rotation: 4,
+        scale: 0.96,
+      });
 
-        wingIsFlapping = false;
-        wingTween?.kill();
-        wingTween = null;
+      const timeline = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        onStart: startWingFlap,
+        onComplete: () => {
+          wingTween?.kill();
+          if (wingRef.current) {
+            gsap.set(wingRef.current, { rotation: 0 });
+          }
+          gsap.set(entryOverlayRef.current, { display: "none" });
+        },
+      });
 
-        if (wingRef.current) {
-          gsap.to(wingRef.current, {
-            rotation: 0,
-            duration: 0.18,
-            ease: "sine.out",
-            transformOrigin: "28% 70%",
-          });
-        }
-      };
-
-      const setSharedInitialState = () => {
-        gsap.set(logoMarkRef.current, {
-          x: 0,
+      timeline
+        .to(entryLogoRef.current, {
+          opacity: 1,
           y: 0,
           scale: 1,
-          transformOrigin: "50% 50%",
-          willChange: "transform",
-        });
-        gsap.set(headerRef.current, { opacity: 0, y: -12 });
-        gsap.set(navElements ?? [], { opacity: 0, y: -8 });
-        gsap.set([headlineRef.current, subheadlineRef.current, ctasRef.current], {
-          opacity: 0,
-          y: 24,
-        });
-        gsap.set(introTextRef.current, { opacity: 1, y: 0 });
-      };
-
-      const media = gsap.matchMedia();
-
-      media.add("(min-width: 768px)", () => {
-        setSharedInitialState();
-        gsap.set(mockupRef.current, {
-          x: 220,
-          rotation: 7,
-          scale: 0.9,
-          opacity: 0.55,
-          transformOrigin: "50% 50%",
-          willChange: "transform, opacity",
-        });
-
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-            onUpdate: (self) => {
-              if (self.progress > 0.85 || self.progress < 0.03) {
-                stopWingFlap();
-              } else {
-                startWingFlap();
-              }
-            },
+          duration: 0.76,
+        })
+        .to(
+          entryLineRef.current,
+          {
+            scaleX: 1,
+            duration: 0.58,
+            ease: "power2.inOut",
           },
-        });
-
-        timeline
-          .to(
-            logoMarkRef.current,
-            {
-              x: () => -window.innerWidth / 2 + 96,
-              y: () => -window.innerHeight * 0.42 + 60,
-              scale: 0.22,
-              ease: "power2.inOut",
-              duration: 0.54,
-            },
-            0,
-          )
-          .to(
-            introTextRef.current,
-            { opacity: 0, y: -12, ease: "power1.out", duration: 0.22 },
-            0.04,
-          )
-          .to(
-            headerRef.current,
-            { opacity: 1, y: 0, ease: "power2.out", duration: 0.28 },
-            0.28,
-          )
-          .to(
-            navElements ?? [],
-            {
-              opacity: 1,
-              y: 0,
-              stagger: 0.035,
-              ease: "power2.out",
-              duration: 0.22,
-            },
-            0.34,
-          )
-          .to(
-            mockupRef.current,
-            {
-              x: 0,
-              rotation: 0,
-              scale: 1,
-              opacity: 1,
-              ease: "power2.out",
-              duration: 0.58,
-            },
-            0.16,
-          )
-          .to(
-            headlineRef.current,
-            { opacity: 1, y: 0, ease: "power2.out", duration: 0.28 },
-            0.36,
-          )
-          .to(
-            subheadlineRef.current,
-            { opacity: 1, y: 0, ease: "power2.out", duration: 0.24 },
-            0.46,
-          )
-          .to(
-            ctasRef.current,
-            { opacity: 1, y: 0, ease: "power2.out", duration: 0.2 },
-            0.54,
-          );
-
-        return () => {
-          stopWingFlap();
-        };
-      });
-
-      media.add("(max-width: 767px)", () => {
-        setSharedInitialState();
-        gsap.set(mockupRef.current, {
-          x: 0,
-          y: 72,
-          rotation: 0,
-          scale: 0.94,
-          opacity: 0.5,
-          transformOrigin: "50% 50%",
-          willChange: "transform, opacity",
-        });
-
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-            onUpdate: (self) => {
-              if (self.progress > 0.82 || self.progress < 0.05) {
-                stopWingFlap();
-              } else {
-                startWingFlap();
-              }
-            },
+          "-=0.28",
+        )
+        .to(entryLogoRef.current, {
+          scale: 0.34,
+          y: -120,
+          duration: 0.72,
+          ease: "power3.inOut",
+        })
+        .to(
+          entryOverlayRef.current,
+          {
+            autoAlpha: 0,
+            duration: 0.54,
+            ease: "power2.inOut",
           },
-        });
-
-        timeline
-          .to(
-            logoMarkRef.current,
-            {
-              x: () => -window.innerWidth / 2 + 62,
-              y: () => -window.innerHeight * 0.42 + 58,
-              scale: 0.24,
-              ease: "power2.inOut",
-              duration: 0.5,
-            },
-            0,
-          )
-          .to(
-            introTextRef.current,
-            { opacity: 0, y: -10, ease: "power1.out", duration: 0.2 },
-            0.04,
-          )
-          .to(
-            headerRef.current,
-            { opacity: 1, y: 0, ease: "power2.out", duration: 0.26 },
-            0.24,
-          )
-          .to(
-            [headlineRef.current, subheadlineRef.current, ctasRef.current],
-            {
-              opacity: 1,
-              y: 0,
-              stagger: 0.06,
-              ease: "power2.out",
-              duration: 0.28,
-            },
-            0.32,
-          )
-          .to(
-            mockupRef.current,
-            {
-              y: 0,
-              scale: 1,
-              opacity: 1,
-              ease: "power2.out",
-              duration: 0.36,
-            },
-            0.48,
-          );
-
-        return () => {
-          stopWingFlap();
-        };
-      });
+          "-=0.34",
+        )
+        .to(
+          headerRef.current,
+          { opacity: 1, y: 0, duration: 0.46 },
+          "-=0.18",
+        )
+        .to(
+          navElements ?? [],
+          { opacity: 1, y: 0, stagger: 0.045, duration: 0.32 },
+          "-=0.28",
+        )
+        .to(
+          mockupRef.current,
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 0.72,
+          },
+          "-=0.32",
+        )
+        .to(
+          heroCopyRef.current,
+          { opacity: 1, y: 0, duration: 0.52 },
+          "-=0.58",
+        )
+        .to(
+          subheadlineRef.current,
+          { opacity: 1, y: 0, duration: 0.42 },
+          "-=0.34",
+        )
+        .to(
+          ctasRef.current,
+          { opacity: 1, y: 0, duration: 0.38 },
+          "-=0.24",
+        );
 
       return () => {
-        stopWingFlap();
-        media.revert();
+        wingTween?.kill();
+        timeline.kill();
       };
     },
-    { scope: sectionRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
+    { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
   );
 
-  const finalState = prefersReducedMotion;
+  const toggleTheme = () => {
+    setThemeMode((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  };
 
   return (
-    <>
-      <section
-        ref={sectionRef}
-        className={[
-          "mineral-paper relative bg-[var(--mineral)] text-[var(--charcoal)]",
-          finalState ? "min-h-screen" : "min-h-[220vh]",
-        ].join(" ")}
-      >
-        <div className="sticky top-0 h-screen overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -left-24 top-[42%] h-[34rem] w-[34rem] rounded-full border border-[rgba(201,169,110,0.22)]"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-[-15rem] left-[-10rem] h-[30rem] w-[30rem] rounded-full bg-[rgba(231,227,216,0.46)]"
-          />
+    <div ref={pageRef} className="relative bg-[var(--mineral)] text-[var(--charcoal)]">
+      <div ref={cursorRef} className="hermes-cursor" aria-hidden="true" />
+      <div ref={cursorDotRef} className="hermes-cursor-dot" aria-hidden="true" />
 
-          <header
-            ref={headerRef}
-            className={[
-              "absolute left-0 right-0 top-0 z-30 flex items-center justify-between px-5 py-5 md:px-10 md:py-7",
-              finalState ? "opacity-100" : "opacity-0",
-            ].join(" ")}
-          >
-            <div className="flex items-center gap-3 pl-24">
-              <span className="font-serif text-2xl leading-none text-[var(--charcoal)]">
-                Hermes
-              </span>
-            </div>
-            <nav className="hidden items-center gap-8 text-sm text-[var(--stone)] md:flex">
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={item === "Templates" ? "#templates" : "#"}
-                  data-nav-item
-                  onClick={item === "Templates" ? scrollToTemplates : undefined}
-                  className="transition-colors duration-300 hover:text-[var(--charcoal)]"
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-            <a
-              href="#templates"
-              data-nav-item
-              onClick={scrollToTemplates}
-              className="hidden border border-[var(--border)] px-4 py-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,color,transform] duration-300 hover:-translate-y-0.5 hover:bg-[var(--charcoal)] hover:text-[var(--bone)] md:block"
-            >
-              Ver templates
-            </a>
-          </header>
-
-          <div
-            ref={logoMarkRef}
-            className={[
-              "absolute z-40 text-[var(--charcoal)] will-change-transform",
-              finalState
-                ? "left-6 top-5 scale-[0.24] md:left-10 md:top-7 md:scale-[0.22]"
-                : "left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2",
-            ].join(" ")}
-          >
-            <AnimatedHermesLogo
-              wingRef={wingRef}
-              className="h-[45vw] max-h-64 min-h-40 w-auto md:h-72"
-            />
-          </div>
-
-          <div
-            ref={introTextRef}
-            className={[
-              "absolute left-1/2 top-[58%] z-20 w-full max-w-xl -translate-x-1/2 px-6 text-center",
-              finalState ? "opacity-0" : "opacity-100",
-            ].join(" ")}
-          >
-            <h1 className="font-sans text-5xl font-normal leading-none text-[var(--charcoal)] md:text-7xl">
-              Hermes
-            </h1>
-            <span className="mx-auto mt-10 block h-px w-16 bg-[var(--champagne)]" />
-            <p className="mx-auto mt-8 max-w-sm font-serif text-3xl leading-tight tracking-[0.18em] text-[var(--charcoal)] md:text-4xl">
-              Sites prontos para vender
-            </p>
-          </div>
-
-          <main className="relative z-10 grid h-full items-end gap-8 px-5 pb-8 pt-28 md:grid-cols-[0.95fr_1.05fr] md:items-center md:px-10 md:pb-0 md:pt-24 lg:px-16">
-            <div
-              ref={headlineRef}
-              className={[
-                "order-1 max-w-3xl md:order-none md:pt-12",
-                finalState ? "opacity-100" : "opacity-0",
-              ].join(" ")}
-            >
-              <p className="mb-5 text-xs uppercase tracking-[0.32em] text-[var(--mist)]">
-                Templates premium
-              </p>
-              <h2 className="text-balance font-serif text-[clamp(2.8rem,5.7vw,5.3rem)] font-medium leading-[0.96] text-[var(--charcoal)]">
-                Sites prontos para vender, com{" "}
-                <em className="font-normal italic">acabamento</em> sob medida.
-              </h2>
-            </div>
-
-            <div className="order-3 md:order-none md:row-span-2 md:self-center">
-              <div
-                ref={mockupRef}
-                className={[
-                  "ml-auto w-full max-w-[47rem] will-change-transform",
-                  finalState ? "opacity-100" : "opacity-55",
-                ].join(" ")}
-              >
-                <BrowserMockup />
-              </div>
-            </div>
-
-            <div className="order-2 max-w-2xl self-start md:order-none md:col-start-1">
-              <p
-                ref={subheadlineRef}
-                className={[
-                  "text-base leading-8 text-[var(--stone)] md:text-lg",
-                  finalState ? "opacity-100" : "opacity-0",
-                ].join(" ")}
-              >
-                Escolha um template premium, personalize para o seu nicho e
-                coloque sua presença digital no ar com velocidade, clareza e foco
-                em conversão.
-              </p>
-              <div
-                ref={ctasRef}
-                className={[
-                  "mt-8 flex flex-col gap-3 sm:flex-row",
-                  finalState ? "opacity-100" : "opacity-0",
-                ].join(" ")}
-              >
-                <a
-                  href="#templates"
-                  onClick={scrollToTemplates}
-                  className="border border-[var(--charcoal)] bg-[var(--charcoal)] px-5 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] text-[var(--bone)] transition-[background,color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:bg-[rgba(26,29,38,0.92)] hover:shadow-[0_16px_40px_rgba(26,29,38,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
-                >
-                  Ver templates disponíveis
-                </a>
-                <a
-                  href="#auditoria"
-                  className="border border-[var(--border)] px-5 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-y-1 hover:bg-[rgba(231,227,216,0.52)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
-                >
-                  Receber auditoria do meu site
-                </a>
-              </div>
-            </div>
-          </main>
-        </div>
-      </section>
-
+      <HeroSection
+        themeMode={themeMode}
+        heroRef={heroRef}
+        headerRef={headerRef}
+        wingRef={wingRef}
+        entryOverlayRef={entryOverlayRef}
+        entryLogoRef={entryLogoRef}
+        entryLineRef={entryLineRef}
+        heroCopyRef={heroCopyRef}
+        subheadlineRef={subheadlineRef}
+        ctasRef={ctasRef}
+        mockupRef={mockupRef}
+        onThemeToggle={toggleTheme}
+        onSectionLinkClick={scrollToSection}
+      />
+      <AboutSection />
+      <HowItWorksSection />
       <TemplateShowcase
         sectionRef={templatesRef}
         prefersReducedMotion={prefersReducedMotion}
       />
-    </>
+      <FAQSection />
+      <ContactSection onSectionLinkClick={scrollToSection} />
+    </div>
   );
 }

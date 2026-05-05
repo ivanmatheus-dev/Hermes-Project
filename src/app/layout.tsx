@@ -16,9 +16,32 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Hermes | Sites prontos para vender",
+  title: {
+    default: "Hermes | Sites prontos para vender",
+    template: "%s | Hermes",
+  },
   description:
-    "Templates premium e sites sob medida para marcas que precisam vender com clareza.",
+    "Templates premium, landing pages e sites sob medida para marcas que precisam vender com clareza, velocidade e acabamento visual.",
+  keywords: [
+    "sites premium",
+    "templates premium",
+    "landing page",
+    "desenvolvimento de sites",
+    "site para negócios",
+    "sites de alta conversão",
+  ],
+  openGraph: {
+    title: "Hermes | Sites prontos para vender",
+    description:
+      "Templates premium e sites sob medida para negócios que querem uma presença digital profissional no ar com rapidez.",
+    locale: "pt_BR",
+    type: "website",
+    siteName: "Hermes",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

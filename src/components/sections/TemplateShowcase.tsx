@@ -35,14 +35,36 @@ const templates: TemplatePreview[] = [
   {
     id: "clinica-sorriso-integral",
     title: "Clínica Sorriso Integral",
-    category: "Saúde premium",
+    category: "Landing page premium",
     description:
-      "Landing page para clínicas que precisam transmitir autoridade, acolhimento e agendamento rápido.",
+      "Um site pronto para apresentar uma clínica com calma, autoridade e caminho direto para agendamento.",
     href: "/templates/template 3/dist/index.html",
     accent: "rgba(201, 169, 110, 0.42)",
     status: "available",
   },
+  {
+    id: "institucional-editorial",
+    title: "Institucional Editorial",
+    category: "Institucional",
+    description:
+      "Estrutura para marcas de serviço que precisam explicar valor com presença visual mais sofisticada.",
+    href: "#",
+    accent: "rgba(26, 29, 38, 0.18)",
+    status: "soon",
+  },
+  {
+    id: "servico-local",
+    title: "Serviço Local",
+    category: "Captação local",
+    description:
+      "Página enxuta para negócios locais transformarem buscas e indicações em conversas comerciais.",
+    href: "#",
+    accent: "rgba(201, 169, 110, 0.3)",
+    status: "soon",
+  },
 ];
+
+const activeTemplate = templates[0];
 
 export function TemplateShowcase({
   prefersReducedMotion,
@@ -122,101 +144,134 @@ export function TemplateShowcase({
       <section
         id="templates"
         ref={sectionRef}
-        className="mineral-paper relative overflow-hidden bg-[var(--mineral)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-32 lg:px-16"
+        className="mineral-paper relative overflow-hidden bg-[var(--mineral)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-[8%] top-20 h-px w-[84%] bg-[rgba(26,29,38,0.12)]"
+          className="pointer-events-none absolute left-[56%] top-0 h-[61rem] w-[26rem] rounded-[50%] border-l-[2.125rem] border-[rgba(201,169,110,0.14)]"
         />
-        <div className="mx-auto max-w-[92rem]">
-          <div className="mb-10 flex flex-col justify-between gap-8 md:mb-14 md:flex-row md:items-end">
-            <div className="max-w-3xl">
-              <p className="mb-5 text-xs uppercase tracking-[0.32em] text-[var(--mist)]">
-                Templates disponíveis
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-[4%] top-[11rem] h-[41rem] w-[22.5rem] rounded-[50%] border-l-[1.25rem] border-[rgba(126,126,118,0.08)]"
+        />
+
+        <div className="relative mx-auto max-w-[78rem] border-t border-[rgba(201,169,110,0.4)] pt-12">
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+            <div data-reveal className="max-w-[51.25rem]">
+              <p className="mb-5 text-xs font-medium uppercase tracking-[0.32em] text-[var(--mist)]">
+                Projetos em destaque
               </p>
-              <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] font-medium leading-[0.98] text-[var(--charcoal)]">
-                Escolha o ponto de partida do seu próximo site.
+              <h2 className="font-serif text-[clamp(3rem,4.8vw,4rem)] font-medium leading-[0.96] text-[var(--charcoal)]">
+                Uma vitrine em carrossel para os sites que a Hermes coloca no ar.
               </h2>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4 md:pt-28">
+              <span className="text-xs font-semibold tracking-[0.12em] text-[var(--mist)]">
+                01 / 04
+              </span>
               <button
                 type="button"
-                aria-label="Ver template anterior"
+                aria-label="Ver projeto anterior"
                 onClick={() => scrollCarousel(-1)}
-                className="grid h-12 w-12 place-items-center border border-[var(--border)] text-2xl leading-none text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-x-1 hover:bg-[rgba(231,227,216,0.62)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
+                className="grid h-12 w-12 place-items-center rounded-full border border-[var(--border)] bg-[var(--bone)] text-2xl leading-none text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-x-1 hover:bg-[rgba(231,227,216,0.72)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
               >
-                <span aria-hidden="true">{"<"}</span>
+                <span aria-hidden="true">‹</span>
               </button>
               <button
                 type="button"
-                aria-label="Ver proximo template"
+                aria-label="Ver proximo projeto"
                 onClick={() => scrollCarousel(1)}
-                className="grid h-12 w-12 place-items-center border border-[var(--border)] bg-[var(--charcoal)] text-2xl leading-none text-[var(--bone)] transition-[background,transform] duration-300 hover:translate-x-1 hover:bg-[rgba(26,29,38,0.9)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
+                className="grid h-12 w-12 place-items-center rounded-full border border-[var(--charcoal)] bg-[var(--charcoal)] text-2xl leading-none text-[var(--bone)] transition-[background,transform] duration-300 hover:translate-x-1 hover:bg-[rgba(26,29,38,0.9)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
               >
-                <span aria-hidden="true">{">"}</span>
+                <span aria-hidden="true">›</span>
               </button>
             </div>
           </div>
 
           <div
+            data-reveal
+            className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,47.5rem)_26rem] lg:items-center"
+          >
+            <div className="rounded-[2.625rem] border border-[var(--border)] bg-[var(--bone)] p-6 shadow-[0_24px_70px_rgba(26,29,38,0.08)]">
+              <div className="relative h-[26rem] overflow-hidden rounded-[2.125rem] border border-[var(--border)] bg-[#F1EEE7] p-5">
+                <iframe
+                  title={`Miniatura do template ${activeTemplate.title}`}
+                  src={activeTemplate.href}
+                  loading="lazy"
+                  tabIndex={-1}
+                  className="template-featured-iframe pointer-events-none border-0 bg-white"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(221,216,205,0.18))]"
+                />
+              </div>
+            </div>
+
+            <article className="lg:py-7">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[var(--charcoal)] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--bone)]">
+                <span className="h-1.5 w-1.5 rounded-sm bg-[var(--champagne)]" />
+                Slide 01 / disponível
+              </span>
+              <h3 className="mt-5 font-serif text-[clamp(2.35rem,4vw,2.5rem)] font-medium leading-[1.03]">
+                {activeTemplate.title}
+              </h3>
+              <p className="mt-5 text-sm leading-[1.65] text-[var(--stone)]">
+                {activeTemplate.description}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--mist)]">
+                <span>{activeTemplate.category}</span>
+                <span aria-hidden="true">/</span>
+                <span>Serviço premium</span>
+              </div>
+              <button
+                type="button"
+                aria-label={`Abrir template ${activeTemplate.title}`}
+                onClick={(event) => openTemplatePreview(activeTemplate, event)}
+                className="mt-6 inline-flex items-center gap-3 rounded-full border border-[var(--champagne)] px-5 py-3 text-xs font-semibold tracking-[0.08em] text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-y-0.5 hover:bg-[rgba(201,169,110,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
+              >
+                Abrir preview
+                <span aria-hidden="true" className="text-[var(--champagne)]">
+                  →
+                </span>
+              </button>
+            </article>
+          </div>
+
+          <div className="mt-8 flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] text-[var(--mist)]">
+            <span className="h-2 w-2 rounded-sm bg-[var(--champagne)]" aria-hidden="true" />
+            linha vertical desenhada pelo scroll
+          </div>
+
+          <div
             ref={carouselRef}
-            className="templates-carousel flex snap-x gap-5 overflow-x-auto pb-6 md:gap-7"
+            className="templates-carousel mt-12 flex snap-x gap-4 overflow-x-auto pb-4"
             aria-label="Carrossel de templates disponíveis"
           >
             {templates.map((template) => (
               <article
                 key={template.id}
-                className="group relative min-h-[34rem] w-[82vw] shrink-0 snap-center overflow-hidden border border-[var(--border)] bg-[rgba(231,227,216,0.68)] text-left shadow-[0_24px_70px_rgba(26,29,38,0.08)] transition-[border-color,box-shadow,transform] duration-500 hover:-translate-y-2 hover:border-[rgba(201,169,110,0.62)] hover:shadow-[0_34px_90px_rgba(26,29,38,0.15)] sm:w-[28rem] lg:w-[34rem]"
+                className={[
+                  "flex h-24 w-[min(25.25rem,82vw)] shrink-0 snap-center items-center gap-4 rounded-[1.75rem] border p-3",
+                  template.id === activeTemplate.id
+                    ? "border-[var(--champagne)] bg-[var(--bone)]"
+                    : "border-[var(--border)] bg-[rgba(231,227,216,0.56)]",
+                ].join(" ")}
               >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-1"
+                <div
+                  className="relative h-[3.625rem] w-[5.75rem] shrink-0 overflow-hidden rounded-[1.125rem] border border-[var(--border)] bg-[var(--mineral)]"
                   style={{ background: template.accent }}
-                />
-                <span className="block p-5 md:p-6">
-                  <span className="flex h-9 items-center justify-between border-b border-[var(--border)] pb-4">
-                    <span className="flex gap-2" aria-hidden="true">
-                      <span className="h-2 w-2 rounded-full bg-[rgba(26,29,38,0.18)]" />
-                      <span className="h-2 w-2 rounded-full bg-[rgba(26,29,38,0.14)]" />
-                      <span className="h-2 w-2 rounded-full bg-[rgba(201,169,110,0.68)]" />
-                    </span>
-                    <span className="text-[10px] uppercase tracking-[0.26em] text-[var(--mist)]">
-                      {template.status === "available" ? "Disponível" : "Em breve"}
-                    </span>
-                  </span>
-
-                  <span className="mt-8 block text-xs uppercase tracking-[0.28em] text-[var(--mist)]">
-                    {template.category}
-                  </span>
-                  <span className="mt-4 block font-serif text-4xl leading-none text-[var(--charcoal)] md:text-5xl">
+                >
+                  <span className="absolute left-4 top-5 h-1.5 w-14 rounded-full bg-[var(--charcoal)]" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="truncate text-sm font-bold text-[var(--charcoal)]">
                     {template.title}
-                  </span>
-                  <span className="mt-5 block max-w-[26rem] text-sm leading-7 text-[var(--stone)]">
-                    {template.description}
-                  </span>
-                </span>
-
-                <span className="absolute bottom-6 left-5 right-5 h-56 overflow-hidden border border-[var(--border)] bg-white md:left-6 md:right-6">
-                  <iframe
-                    title={`Miniatura do template ${template.title}`}
-                    src={template.href}
-                    loading="lazy"
-                    tabIndex={-1}
-                    className="template-card-iframe pointer-events-none border-0 bg-white"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(221,216,205,0.2))]"
-                  />
-                </span>
-
-                <button
-                  type="button"
-                  aria-label={`Abrir template ${template.title}`}
-                  disabled={template.status !== "available"}
-                  onClick={(event) => openTemplatePreview(template, event)}
-                  className="absolute inset-0 z-10 cursor-pointer bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-6px] focus-visible:outline-[var(--champagne)] disabled:cursor-not-allowed"
-                />
+                  </h4>
+                  <p className="mt-1 text-xs font-medium text-[var(--mist)]">
+                    {template.category}
+                  </p>
+                </div>
               </article>
             ))}
           </div>

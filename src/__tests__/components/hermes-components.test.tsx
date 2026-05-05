@@ -44,8 +44,8 @@ describe("BrowserMockup", () => {
     render(<BrowserMockup />);
 
     expect(screen.getByLabelText("Preview de site Hermes")).toBeInTheDocument();
-    expect(screen.getByText("Estrutura")).toBeInTheDocument();
-    expect(screen.getByText("Ver projetos")).toBeInTheDocument();
+    expect(screen.getByText("hermes.design/templates")).toBeInTheDocument();
+    expect(screen.getByText(/Design que gera resultado/i)).toBeInTheDocument();
   });
 });
 
@@ -55,14 +55,40 @@ describe("HermesScrollHero", () => {
 
     expect(screen.getAllByText("Hermes").length).toBeGreaterThan(0);
     expect(screen.getByText("Sites prontos para vender")).toBeInTheDocument();
-    expect(screen.getByText("Templates")).toBeInTheDocument();
-    expect(screen.getByText("Como funciona")).toBeInTheDocument();
-    expect(screen.getByText(/Ver templates dispon/i)).toBeInTheDocument();
+    expect(screen.getAllByText("Projetos").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Como funciona").length).toBeGreaterThan(0);
+    expect(screen.getByText(/Ver projetos dispon/i)).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
         name: /Sites prontos para vender, com acabamento sob medida/i,
       }),
     ).toBeInTheDocument();
+  });
+
+  it("renders the new service sections with workflow, FAQ, and final CTA", () => {
+    render(<HermesScrollHero />);
+
+    expect(screen.getByText("Presença digital que vende")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /A Hermes coloca sua empresa na internet/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Escolha guiada")).toBeInTheDocument();
+    expect(screen.getByText(/Um ritmo claro para publicar/i)).toBeInTheDocument();
+    expect(screen.getByText("Perguntas antes de começar.")).toBeInTheDocument();
+    expect(screen.getByText(/Seu site pode parecer pronto para vender/i)).toBeInTheDocument();
+  });
+
+  it("toggles the document theme between light and dark mode", () => {
+    render(<HermesScrollHero />);
+
+    const themeToggle = screen.getByRole("button", { name: /ativar modo escuro/i });
+
+    fireEvent.click(themeToggle);
+
+    expect(document.documentElement).toHaveAttribute("data-theme", "dark");
+    expect(themeToggle).toHaveAttribute("aria-pressed", "true");
   });
 
   it("renders a reusable templates carousel section with a live iframe thumbnail", () => {
@@ -72,11 +98,11 @@ describe("HermesScrollHero", () => {
 
     expect(templatesSection).toBeInTheDocument();
     expect(
-      within(templatesSection as HTMLElement).getByText(/Templates dispon/i),
+      within(templatesSection as HTMLElement).getByText(/Projetos em destaque/i),
     ).toBeInTheDocument();
     expect(
-      within(templatesSection as HTMLElement).getByText(/Sorriso Integral/i),
-    ).toBeInTheDocument();
+      within(templatesSection as HTMLElement).getAllByText(/Sorriso Integral/i).length,
+    ).toBeGreaterThan(0);
     expect(
       within(templatesSection as HTMLElement).getByRole("button", {
         name: /abrir template .*sorriso integral/i,
@@ -95,7 +121,7 @@ describe("HermesScrollHero", () => {
 
     render(<HermesScrollHero />);
 
-    fireEvent.click(screen.getByText(/Ver templates dispon/i));
+    fireEvent.click(screen.getByText(/Ver projetos dispon/i));
 
     expect(scrollIntoView).toHaveBeenCalledWith({
       behavior: "smooth",
