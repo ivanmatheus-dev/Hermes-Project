@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -13,7 +14,7 @@ import { TemplateShowcase } from "@/components/sections/TemplateShowcase";
 import { type ThemeMode } from "@/components/sections/hermesContent";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const mediaMatches = (query: string) =>
   typeof window !== "undefined" &&
@@ -267,6 +268,7 @@ export function HermesScrollHero() {
             gsap.set(wingRef.current, { rotation: 0 });
           }
           gsap.set(entryOverlayRef.current, { display: "none" });
+          ScrollTrigger.refresh();
         },
       });
 
@@ -342,6 +344,169 @@ export function HermesScrollHero() {
       return () => {
         wingTween?.kill();
         timeline.kill();
+      };
+    },
+    { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
+  );
+
+  useGSAP(
+    () => {
+      const shouldReduceMotion =
+        prefersReducedMotion ||
+        (typeof window !== "undefined" &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      const hero = heroRef.current;
+      const mockup = mockupRef.current;
+
+      if (shouldReduceMotion || !hero || !mockup) {
+        return;
+      }
+
+      const browserMask = mockup.querySelector<HTMLElement>(".hero-browser-mask");
+      const browserChrome = mockup.querySelector<HTMLElement>(".hero-browser-chrome");
+      const browserBody = mockup.querySelector<HTMLElement>(".hero-browser-body");
+      const browserStage = mockup.querySelector<HTMLElement>(".hero-browser-stage");
+      const browserViewport =
+        mockup.querySelector<HTMLElement>(".hero-browser-viewport");
+      const browserDepth = mockup.querySelector<HTMLElement>(".hero-browser-depth");
+      const continuityLabel =
+        mockup.querySelector<HTMLElement>(".hero-browser-continuity");
+
+      if (
+        !browserMask ||
+        !browserChrome ||
+        !browserBody ||
+        !browserStage ||
+        !browserViewport
+      ) {
+        return;
+      }
+
+      const heroTextElements = [
+        headerRef.current,
+        heroCopyRef.current,
+        subheadlineRef.current,
+        ctasRef.current,
+      ].filter(Boolean);
+
+      const getPortalTransform = () => {
+        const rect = mockup.getBoundingClientRect();
+        const viewportWidth = Math.max(window.innerWidth, 1);
+        const viewportHeight = Math.max(window.innerHeight, 1);
+        const scaleToCover =
+          Math.max(
+            viewportWidth / Math.max(rect.width, 1),
+            viewportHeight / Math.max(rect.height, 1),
+          ) * 1.18;
+
+        return {
+          x: viewportWidth / 2 - (rect.left + rect.width / 2),
+          y: viewportHeight / 2 - (rect.top + rect.height / 2),
+          scale: Math.min(Math.max(scaleToCover, 1.85), 4.8),
+        };
+      };
+
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: () => `+=${Math.max(window.innerHeight * 1.35, 820)}`,
+          scrub: 0.85,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          toggleClass: {
+            targets: hero,
+            className: "is-hero-mask-active",
+          },
+        },
+      });
+
+      timeline
+        .to(
+          heroTextElements,
+          {
+            autoAlpha: 0,
+            y: -48,
+            stagger: 0.018,
+            duration: 0.2,
+            ease: "power2.out",
+          },
+          0,
+        )
+        .to(
+          mockup,
+          {
+            x: () => getPortalTransform().x,
+            y: () => getPortalTransform().y,
+            scale: () => getPortalTransform().scale,
+            duration: 0.82,
+            ease: "power2.inOut",
+          },
+          0,
+        )
+        .to(
+          browserChrome,
+          {
+            autoAlpha: 0,
+            yPercent: -110,
+            duration: 0.18,
+            ease: "power2.out",
+          },
+          0.08,
+        )
+        .to(
+          continuityLabel,
+          {
+            autoAlpha: 0,
+            y: 12,
+            duration: 0.16,
+            ease: "power2.out",
+          },
+          0.08,
+        )
+        .to(
+          browserMask,
+          {
+            borderRadius: 0,
+            duration: 0.44,
+            ease: "power2.inOut",
+          },
+          0.12,
+        )
+        .to(
+          [browserBody, browserStage],
+          {
+            padding: 0,
+            duration: 0.38,
+            ease: "power2.inOut",
+          },
+          0.16,
+        )
+        .to(
+          [browserStage, browserViewport],
+          {
+            borderRadius: 0,
+            duration: 0.38,
+            ease: "power2.inOut",
+          },
+          0.16,
+        )
+        .to(
+          browserDepth,
+          {
+            autoAlpha: 0.22,
+            duration: 0.32,
+            ease: "power2.inOut",
+          },
+          0.4,
+        );
+
+      return () => {
+        timeline.scrollTrigger?.kill();
+        timeline.kill();
+        hero.classList.remove("is-hero-mask-active");
       };
     },
     { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },

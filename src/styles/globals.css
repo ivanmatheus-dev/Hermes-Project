@@ -71,6 +71,33 @@ a {
   background-size: 46px 46px, 46px 46px, auto, auto;
 }
 
+.hero-scroll-stage {
+  isolation: isolate;
+}
+
+.hero-mockup-shell {
+  position: relative;
+  z-index: 2;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.hero-browser-mask {
+  transform-origin: center center;
+  will-change: border-radius, box-shadow;
+  transition:
+    border-radius 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.hero-browser-depth {
+  opacity: 0;
+}
+
+.hero-scroll-stage.is-hero-mask-active .hero-browser-mask {
+  box-shadow: 0 44px 130px rgba(26, 29, 38, 0.24);
+}
+
 [data-theme="dark"] .mineral-paper {
   background:
     linear-gradient(rgba(231, 227, 216, 0.055) 1px, transparent 1px),
@@ -248,6 +275,10 @@ a {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+
+  .hero-mockup-shell {
+    transform: none;
   }
 }
 

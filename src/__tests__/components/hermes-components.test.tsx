@@ -40,12 +40,16 @@ describe("AnimatedHermesLogo", () => {
 });
 
 describe("BrowserMockup", () => {
-  it("renders a premium browser frame with mock navigation and CTA", () => {
+  it("renders a premium browser frame with a preview of the next section", () => {
     render(<BrowserMockup />);
 
-    expect(screen.getByLabelText("Preview de site Hermes")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Preview da próxima seção Hermes"),
+    ).toBeInTheDocument();
     expect(screen.getByText("hermes.design/templates")).toBeInTheDocument();
-    expect(screen.getByText(/Design que gera resultado/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Presença digital com aparência de marca confiável/i),
+    ).toBeInTheDocument();
   });
 });
 
@@ -127,6 +131,17 @@ describe("HermesScrollHero", () => {
       behavior: "smooth",
       block: "start",
     });
+  });
+
+  it("renders the hero as a scroll-triggered browser mask stage", () => {
+    render(<HermesScrollHero />);
+
+    const hero = document.querySelector<HTMLElement>(".hero-scroll-stage");
+
+    expect(hero).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-mockup-shell")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-mask")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-viewport")).toBeInTheDocument();
   });
 
   it("opens the selected template in an iframe modal and closes it with the X button", () => {
