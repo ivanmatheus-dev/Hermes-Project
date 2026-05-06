@@ -72,7 +72,7 @@ describe("HermesScrollHero", () => {
   it("renders the new service sections with workflow, FAQ, and final CTA", () => {
     render(<HermesScrollHero />);
 
-    expect(screen.getByText("Presença digital que vende")).toBeInTheDocument();
+    expect(screen.getAllByText("Presença digital que vende").length).toBeGreaterThan(0);
     expect(
       screen.getByRole("heading", {
         name: /A Hermes coloca sua empresa na internet/i,
@@ -190,6 +190,7 @@ describe("HermesScrollHero", () => {
     expect(heroSource).toContain(".fromTo(");
     expect(heroSource).toContain("{ autoAlpha: 1, y: 0 }");
     expect(heroSource).toContain("immediateRender: false");
+    expect(heroSource).toContain("visibleHeroElements");
   });
 
   it("scrolls smoothly to the templates section from the primary CTA", () => {
@@ -215,6 +216,29 @@ describe("HermesScrollHero", () => {
     expect(hero?.querySelector(".hero-mockup-shell")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-mask")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-viewport")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-left")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-right")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-next")).not.toBeInTheDocument();
+  });
+
+  it("uses the real about section behind the hero mask instead of duplicating it", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+
+    render(<HermesScrollHero />);
+
+    const hero = document.querySelector<HTMLElement>(".hero-scroll-stage");
+    const aboutSection = document.querySelector("#sobre") as HTMLElement;
+
+    expect(hero?.querySelector(".hero-browser-next")).not.toBeInTheDocument();
+    expect(aboutSection).toBeInTheDocument();
+    expect(aboutSection.className).toContain("about-mask-reveal");
+    expect(heroSource).toContain("getRevealDistance");
+    expect(heroSource).toContain("Math.max(window.innerHeight, 1)");
+    expect(heroSource).not.toContain("pinSpacing: false");
+    expect(heroSource).toContain('"--hero-paper-opacity": 0');
   });
 
   it("opens the selected template in an iframe modal and closes it with the X button", () => {
