@@ -50,7 +50,7 @@ export function BrowserMockup({ className }: BrowserMockupProps) {
               className="absolute left-1/2 top-6 h-[34rem] w-[18rem] -translate-x-[18%] rounded-[50%] border-l-[0.875rem] border-[rgba(201,169,110,0.14)]"
             />
             <div className="relative grid min-h-[17.625rem] gap-5 p-7 pb-16 md:grid-cols-[1.05fr_0.95fr]">
-              <div className="flex flex-col justify-center">
+              <div className="hero-browser-left flex flex-col justify-center">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--champagne)]">
                   Próxima seção / sobre
                 </p>
@@ -63,7 +63,7 @@ export function BrowserMockup({ className }: BrowserMockupProps) {
                 </p>
               </div>
 
-              <div className="flex flex-col justify-center gap-3">
+              <div className="hero-browser-right flex flex-col justify-center gap-3">
                 {aboutMetrics.map((metric, index) => (
                   <div
                     key={metric.value}
@@ -94,10 +94,11 @@ export function BrowserMockup({ className }: BrowserMockupProps) {
               </div>
             </div>
 
-            <div className="absolute bottom-5 left-7 right-7 flex items-center justify-between border-t border-[rgba(201,169,110,0.32)] pt-3 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--mist)]">
+            <div className="hero-browser-footnote absolute bottom-5 left-7 right-7 flex items-center justify-between border-t border-[rgba(201,169,110,0.32)] pt-3 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--mist)]">
               <span>Zoom narrativo</span>
               <span>Seção #sobre</span>
             </div>
+
           </div>
           <div className="hero-browser-continuity mt-4 flex items-center justify-center gap-3 text-[10px] font-medium text-[var(--mist)]">
             <span className="h-px w-14 bg-[rgba(201,169,110,0.6)]" aria-hidden="true" />

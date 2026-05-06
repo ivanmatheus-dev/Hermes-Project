@@ -7,7 +7,7 @@ export function AboutSection() {
   return (
     <section
       id="sobre"
-      className="relative overflow-hidden bg-[var(--bone)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
+      className="about-mask-reveal relative z-0 overflow-hidden bg-[var(--bone)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
     >
       <div
         aria-hidden="true"
