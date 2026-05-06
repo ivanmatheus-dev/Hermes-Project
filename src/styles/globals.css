@@ -201,33 +201,6 @@ a {
   border-color: rgba(201, 169, 110, 0.95);
 }
 
-.templates-carousel {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(201, 169, 110, 0.58) rgba(26, 29, 38, 0.08);
-  scroll-padding-inline: 1.25rem;
-}
-
-.templates-carousel::-webkit-scrollbar {
-  height: 0.45rem;
-}
-
-.templates-carousel::-webkit-scrollbar-track {
-  background: rgba(26, 29, 38, 0.08);
-}
-
-.templates-carousel::-webkit-scrollbar-thumb {
-  background: rgba(201, 169, 110, 0.58);
-}
-
-.template-card-iframe {
-  position: absolute;
-  inset: 0;
-  width: calc(100% / 0.34);
-  height: calc(100% / 0.34);
-  transform: scale(0.34);
-  transform-origin: top left;
-}
-
 .template-featured-iframe {
   position: absolute;
   inset: 1.25rem;

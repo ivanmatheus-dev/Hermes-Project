@@ -87,22 +87,12 @@ export function AboutSection() {
           {aboutMetrics.map((metric) => (
             <article
               key={metric.value}
-              className={[
-                "rounded-[1.75rem] border p-7",
-                metric.featured
-                  ? "border-[var(--charcoal)] bg-[var(--charcoal)] text-[var(--bone)]"
-                  : "border-[var(--border)] bg-[rgba(221,216,205,0.78)] text-[var(--charcoal)]",
-              ].join(" ")}
+              className="group rounded-[1.75rem] border border-[var(--border)] bg-[var(--bone)] p-7 text-[var(--charcoal)] shadow-[0_18px_50px_rgba(26,29,38,0.06)] transition-[background,color,border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--charcoal)] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] hover:shadow-[0_24px_64px_rgba(26,29,38,0.14)]"
             >
               <p className="font-serif text-[2.625rem] font-medium leading-none">
                 {metric.value}
               </p>
-              <p
-                className={[
-                  "mt-4 text-sm leading-[1.55]",
-                  metric.featured ? "text-[rgba(231,227,216,0.8)]" : "text-[var(--stone)]",
-                ].join(" ")}
-              >
+              <p className="mt-4 text-sm font-medium leading-[1.6] text-[var(--charcoal)] transition-colors duration-300 group-hover:text-[var(--bone)]">
                 {metric.label}
               </p>
             </article>

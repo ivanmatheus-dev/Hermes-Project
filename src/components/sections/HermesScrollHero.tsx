@@ -424,14 +424,16 @@ export function HermesScrollHero() {
       });
 
       timeline
-        .to(
+        .fromTo(
           heroTextElements,
+          { autoAlpha: 1, y: 0 },
           {
             autoAlpha: 0,
             y: -48,
             stagger: 0.018,
             duration: 0.2,
             ease: "power2.out",
+            immediateRender: false,
           },
           0,
         )

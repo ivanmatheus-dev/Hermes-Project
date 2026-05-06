@@ -56,15 +56,15 @@ Estrutura principal:
 - `src/components/sections/HeroSection.tsx`: primeiro viewport, navegacao, overlay de entrada, toggle de tema, CTAs e mockup principal usado como mascara visual para a proxima secao.
 - `src/components/sections/AboutSection.tsx`: secao `#sobre`; comunica valor comercial, confianca e metricas editoriais.
 - `src/components/sections/HowItWorksSection.tsx`: secao `#como-funciona`; explica fluxo de escolha, briefing, ajuste visual e publicacao.
-- `src/components/sections/TemplateShowcase.tsx`: secao `#templates`; destaque com iframe real, carrossel horizontal, cards de projetos e modal com preview em iframe.
+- `src/components/sections/TemplateShowcase.tsx`: secao `#templates`; destaque com iframe real do template principal, copy comercial do projeto e modal com preview em iframe.
 - `src/components/sections/FAQSection.tsx`: secao `#faq`; perguntas em `details/summary`.
 - `src/components/sections/ContactSection.tsx`: secao `#contato`; CTA final para WhatsApp e retorno aos projetos.
 - `src/components/sections/hermesContent.ts`: conteudo estruturado compartilhado por navegacao, sobre, fluxo e FAQ.
 - `src/components/brand/AnimatedHermesLogo.tsx`: logotipo SVG animavel.
 - `src/components/ui/BrowserMockup.tsx`: mockup visual usado no hero; seu conteudo antecipa a secao `#sobre` para sustentar a transicao por zoom.
 - `src/hooks/usePrefersReducedMotion.ts`: hook client-side para respeitar `prefers-reduced-motion`.
-- `src/styles/globals.css`: tokens de cor, tema escuro via `[data-theme="dark"]`, estilos globais, textura mineral, classes do zoom/mask do hero, reveal, cursor Hermes, scroll do carrossel, escala de iframes e animacoes do modal.
-- `src/__tests__/components/hermes-components.test.tsx`: testes de comportamento dos componentes da home, tema, secoes comerciais, modal, iframe e bundle estatico do template.
+- `src/styles/globals.css`: tokens de cor, tema escuro via `[data-theme="dark"]`, estilos globais, textura mineral, classes do zoom/mask do hero, reveal, cursor Hermes, escala de iframes e animacoes do modal.
+- `src/__tests__/components/hermes-components.test.tsx`: testes de comportamento dos componentes da home, tema, secoes comerciais, contraste dos cards, dimensao do CTA final, modal, iframe e bundle estatico do template.
 - `public/templates/template 3`: template vendido/exibido no carrossel.
 - `hermes pencil.pen`: arquivo de apoio visual/prototipo do projeto.
 - `images/generated-1778003525614.png`: asset gerado de apoio visual. Antes de trocar/remover, confirme onde ele e usado.
@@ -231,7 +231,7 @@ Interacao:
 - Animacoes devem ser suaves e elegantes, sem excesso.
 - Sempre respeite `prefers-reduced-motion`.
 - Botoes devem ter hover/focus perceptivel, mas discreto.
-- Carrosseis e modais devem funcionar por mouse, touch e teclado quando aplicavel.
+- Modais devem funcionar por mouse, touch e teclado quando aplicavel.
 - O site atual tem modo claro/escuro. Novas superficies devem usar tokens CSS, nao cores fixas, salvo detalhes pontuais e justificados.
 - O cursor customizado so deve aparecer em ponteiro fino e fora de reduced motion; nao force cursor especial em mobile.
 - Reveals de scroll devem ser discretos, com conteudo totalmente visivel quando reduced motion estiver ativo.
@@ -240,6 +240,7 @@ Interacao:
 
 ## Registro Vivo
 
+- 2026-05-06, comparacao `HEAD..worktree`: cards das secoes `#sobre` e `#como-funciona` voltaram a seguir os tokens do tema no estado normal e so invertem cores no hover; textos internos ganharam contraste, o CTA final foi compactado para caber em um viewport, a vitrine removeu o carrossel secundario e a timeline do zoom agora usa `fromTo` com estado inicial explicito para restaurar textos ao scrollar para cima.
 - 2026-05-06, comparacao `HEAD..worktree`: o hero ganhou zoom narrativo do `BrowserMockup` com `ScrollTrigger` pinado/scrubado, fazendo o usuario entrar na div antes da secao `#sobre`; o browser agora esconde a barra, remove paddings/raios durante a entrada, e os testes cobrem a estrutura da mascara.
 - 2026-05-05, comparacao `903dfe2..3472df5`: a home deixou de ser uma experiencia centrada apenas no hero com ScrollTrigger e virou uma landing completa. Entraram secoes `HeroSection`, `AboutSection`, `HowItWorksSection`, `FAQSection`, `ContactSection`, conteudo centralizado em `hermesContent`, tema claro/escuro persistido em `localStorage`, reveal por `IntersectionObserver`, cursor Hermes para ponteiro fino, metadata SEO/Open Graph mais completa, mockup visual refinado e vitrine de projetos com iframe destacado e modal.
 - Ao fazer a proxima entrega grande, acrescente uma linha acima desta com data, faixa de commits comparada e mudancas que afetam manutencao futura.

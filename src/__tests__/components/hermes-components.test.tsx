@@ -93,9 +93,17 @@ describe("HermesScrollHero", () => {
 
     expect(document.documentElement).toHaveAttribute("data-theme", "dark");
     expect(themeToggle).toHaveAttribute("aria-pressed", "true");
+
+    fireEvent.click(screen.getByRole("button", { name: /ativar modo claro/i }));
+
+    expect(document.documentElement).toHaveAttribute("data-theme", "light");
+    expect(screen.getByRole("button", { name: /ativar modo escuro/i })).toHaveAttribute(
+      "aria-pressed",
+      "false",
+    );
   });
 
-  it("renders a reusable templates carousel section with a live iframe thumbnail", () => {
+  it("renders the featured template preview without the secondary carousel", () => {
     render(<HermesScrollHero />);
 
     const templatesSection = document.querySelector("#templates");
@@ -108,6 +116,16 @@ describe("HermesScrollHero", () => {
       within(templatesSection as HTMLElement).getAllByText(/Sorriso Integral/i).length,
     ).toBeGreaterThan(0);
     expect(
+      within(templatesSection as HTMLElement).queryByLabelText(
+        /carrossel de templates dispon/i,
+      ),
+    ).not.toBeInTheDocument();
+    expect(
+      within(templatesSection as HTMLElement).queryByText(
+        /linha vertical desenhada pelo scroll/i,
+      ),
+    ).not.toBeInTheDocument();
+    expect(
       within(templatesSection as HTMLElement).getByRole("button", {
         name: /abrir template .*sorriso integral/i,
       }),
@@ -119,7 +137,62 @@ describe("HermesScrollHero", () => {
     ).toHaveAttribute("src", "/templates/template 3/dist/index.html");
   });
 
-  it("scrolls smoothly to the templates carousel from the primary CTA", () => {
+  it("keeps about and workflow cards theme-neutral until hover", () => {
+    render(<HermesScrollHero />);
+
+    const aboutSection = document.querySelector("#sobre") as HTMLElement;
+    const workflowSection = document.querySelector("#como-funciona") as HTMLElement;
+    const clientesCard = within(aboutSection)
+      .getByText("Clientes")
+      .closest("article") as HTMLElement;
+    const publicacaoCard = within(workflowSection)
+      .getByText("Publicação guiada")
+      .closest("article") as HTMLElement;
+    const clientesText = within(clientesCard).getByText(/caminhos claros para contato/i);
+    const publicacaoText = within(publicacaoCard).getByText(/Entregamos o site revisado/i);
+    const clientesClasses = clientesCard.className.split(" ");
+    const publicacaoClasses = publicacaoCard.className.split(" ");
+
+    expect(clientesCard.className).toContain("bg-[var(--bone)]");
+    expect(clientesClasses).not.toContain("bg-[var(--charcoal)]");
+    expect(clientesCard.className).toContain("hover:bg-[var(--charcoal)]");
+    expect(clientesText.className).toContain("text-[var(--charcoal)]");
+    expect(clientesText.className).toContain("group-hover:text-[var(--bone)]");
+
+    expect(publicacaoCard.className).toContain("bg-[var(--bone)]");
+    expect(publicacaoClasses).not.toContain("bg-[var(--charcoal)]");
+    expect(publicacaoCard.className).toContain("hover:bg-[var(--charcoal)]");
+    expect(publicacaoText.className).toContain("text-[var(--charcoal)]");
+    expect(publicacaoText.className).toContain("group-hover:text-[var(--bone)]");
+  });
+
+  it("keeps the final contact panel compact enough to occupy one viewport", () => {
+    render(<HermesScrollHero />);
+
+    const contactSection = document.querySelector("#contato") as HTMLElement;
+    const contactHeading = within(contactSection).getByRole("heading", {
+      name: /Seu site pode parecer pronto para vender/i,
+    });
+
+    expect(contactSection.className).toContain("min-h-screen");
+    expect(contactSection.className).toContain("items-center");
+    expect(contactSection.className).toContain("py-14");
+    expect(contactHeading.className).toContain("5rem");
+    expect(contactHeading.className).not.toContain("6.8rem");
+  });
+
+  it("defines explicit hero text start values so scroll reversal restores the copy", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+
+    expect(heroSource).toContain(".fromTo(");
+    expect(heroSource).toContain("{ autoAlpha: 1, y: 0 }");
+    expect(heroSource).toContain("immediateRender: false");
+  });
+
+  it("scrolls smoothly to the templates section from the primary CTA", () => {
     const scrollIntoView = vi.fn();
     window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
 

@@ -2,7 +2,6 @@
 
 import {
   useEffect,
-  useRef,
   useState,
   type CSSProperties,
   type MouseEvent,
@@ -15,7 +14,6 @@ type TemplatePreview = {
   category: string;
   description: string;
   href: string;
-  accent: string;
   status: "available" | "soon";
 };
 
@@ -39,7 +37,6 @@ const templates: TemplatePreview[] = [
     description:
       "Um site pronto para apresentar uma clínica com calma, autoridade e caminho direto para agendamento.",
     href: "/templates/template 3/dist/index.html",
-    accent: "rgba(201, 169, 110, 0.42)",
     status: "available",
   },
   {
@@ -49,7 +46,6 @@ const templates: TemplatePreview[] = [
     description:
       "Estrutura para marcas de serviço que precisam explicar valor com presença visual mais sofisticada.",
     href: "#",
-    accent: "rgba(26, 29, 38, 0.18)",
     status: "soon",
   },
   {
@@ -59,7 +55,6 @@ const templates: TemplatePreview[] = [
     description:
       "Página enxuta para negócios locais transformarem buscas e indicações em conversas comerciais.",
     href: "#",
-    accent: "rgba(201, 169, 110, 0.3)",
     status: "soon",
   },
 ];
@@ -70,7 +65,6 @@ export function TemplateShowcase({
   prefersReducedMotion,
   sectionRef,
 }: TemplateShowcaseProps) {
-  const carouselRef = useRef<HTMLDivElement | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<TemplatePreview | null>(null);
   const [originRect, setOriginRect] = useState<DOMRect | null>(null);
 
@@ -95,13 +89,6 @@ export function TemplateShowcase({
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [selectedTemplate]);
-
-  const scrollCarousel = (direction: -1 | 1) => {
-    carouselRef.current?.scrollBy({
-      left: direction * 420,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-    });
-  };
 
   const openTemplatePreview = (
     template: TemplatePreview,
@@ -162,29 +149,8 @@ export function TemplateShowcase({
                 Projetos em destaque
               </p>
               <h2 className="font-serif text-[clamp(3rem,4.8vw,4rem)] font-medium leading-[0.96] text-[var(--charcoal)]">
-                Uma vitrine em carrossel para os sites que a Hermes coloca no ar.
+                Uma vitrine real para os sites que a Hermes coloca no ar.
               </h2>
-            </div>
-            <div className="flex items-center gap-4 md:pt-28">
-              <span className="text-xs font-semibold tracking-[0.12em] text-[var(--mist)]">
-                01 / 04
-              </span>
-              <button
-                type="button"
-                aria-label="Ver projeto anterior"
-                onClick={() => scrollCarousel(-1)}
-                className="grid h-12 w-12 place-items-center rounded-full border border-[var(--border)] bg-[var(--bone)] text-2xl leading-none text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-x-1 hover:bg-[rgba(231,227,216,0.72)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
-              >
-                <span aria-hidden="true">‹</span>
-              </button>
-              <button
-                type="button"
-                aria-label="Ver proximo projeto"
-                onClick={() => scrollCarousel(1)}
-                className="grid h-12 w-12 place-items-center rounded-full border border-[var(--charcoal)] bg-[var(--charcoal)] text-2xl leading-none text-[var(--bone)] transition-[background,transform] duration-300 hover:translate-x-1 hover:bg-[rgba(26,29,38,0.9)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
-              >
-                <span aria-hidden="true">›</span>
-              </button>
             </div>
           </div>
 
@@ -238,43 +204,6 @@ export function TemplateShowcase({
             </article>
           </div>
 
-          <div className="mt-8 flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] text-[var(--mist)]">
-            <span className="h-2 w-2 rounded-sm bg-[var(--champagne)]" aria-hidden="true" />
-            linha vertical desenhada pelo scroll
-          </div>
-
-          <div
-            ref={carouselRef}
-            className="templates-carousel mt-12 flex snap-x gap-4 overflow-x-auto pb-4"
-            aria-label="Carrossel de templates disponíveis"
-          >
-            {templates.map((template) => (
-              <article
-                key={template.id}
-                className={[
-                  "flex h-24 w-[min(25.25rem,82vw)] shrink-0 snap-center items-center gap-4 rounded-[1.75rem] border p-3",
-                  template.id === activeTemplate.id
-                    ? "border-[var(--champagne)] bg-[var(--bone)]"
-                    : "border-[var(--border)] bg-[rgba(231,227,216,0.56)]",
-                ].join(" ")}
-              >
-                <div
-                  className="relative h-[3.625rem] w-[5.75rem] shrink-0 overflow-hidden rounded-[1.125rem] border border-[var(--border)] bg-[var(--mineral)]"
-                  style={{ background: template.accent }}
-                >
-                  <span className="absolute left-4 top-5 h-1.5 w-14 rounded-full bg-[var(--charcoal)]" />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="truncate text-sm font-bold text-[var(--charcoal)]">
-                    {template.title}
-                  </h4>
-                  <p className="mt-1 text-xs font-medium text-[var(--mist)]">
-                    {template.category}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
 
