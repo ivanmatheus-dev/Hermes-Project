@@ -231,14 +231,26 @@ describe("HermesScrollHero", () => {
 
     const hero = document.querySelector<HTMLElement>(".hero-scroll-stage");
     const aboutSection = document.querySelector("#sobre") as HTMLElement;
+    const stylesSource = readFileSync("src/styles/globals.css", "utf8");
 
     expect(hero?.querySelector(".hero-browser-next")).not.toBeInTheDocument();
     expect(aboutSection).toBeInTheDocument();
     expect(aboutSection.className).toContain("about-mask-reveal");
+    expect(aboutSection.querySelector(".about-mask-reveal__content")).toBeInTheDocument();
     expect(heroSource).toContain("getRevealDistance");
-    expect(heroSource).toContain("Math.max(window.innerHeight, 1)");
-    expect(heroSource).not.toContain("pinSpacing: false");
+    expect(heroSource).toContain("Math.max(window.innerHeight * 0.78, 520)");
+    expect(heroSource).toContain("scrub: 0.55");
+    expect(heroSource).toContain("pinSpacing: false");
+    expect(heroSource).toContain("const about = aboutRef.current");
+    expect(heroSource).toContain("gsap.set(about, { autoAlpha: 0 })");
+    expect(heroSource).not.toContain("gsap.set(about, { autoAlpha: 0, y:");
+    expect(heroSource).toContain("gsap.set(aboutContent, { y: 28 })");
+    expect(heroSource).toContain("duration: 0.56");
+    expect(heroSource).toContain("0.26");
+    expect(heroSource).toContain("0.34");
     expect(heroSource).toContain('"--hero-paper-opacity": 0');
+    expect(stylesSource).toContain(".about-mask-reveal {\n  margin-top: 0;");
+    expect(stylesSource).not.toContain("margin-top: -100vh");
   });
 
   it("opens the selected template in an iframe modal and closes it with the X button", () => {

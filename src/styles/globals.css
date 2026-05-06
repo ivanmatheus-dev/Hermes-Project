@@ -71,7 +71,8 @@ a {
   background-size: 46px 46px, 46px 46px, auto, auto;
 }
 
-.hero-scroll-stage {
+.hero-scroll-stage,
+html .hero-scroll-stage.mineral-paper {
   --hero-paper-opacity: 1;
   background: transparent;
   isolation: isolate;
@@ -123,7 +124,8 @@ a {
 }
 
 .about-mask-reveal {
-  margin-top: -100vh;
+  margin-top: 0;
+  will-change: opacity, transform;
 }
 
 [data-theme="dark"] .hero-scroll-stage::before {
