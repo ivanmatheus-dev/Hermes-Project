@@ -7,7 +7,7 @@ export function HowItWorksSection() {
   return (
     <section
       id="como-funciona"
-      className="mineral-paper relative overflow-hidden bg-[var(--mineral)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
+      className="relative overflow-hidden bg-transparent px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
     >
       <div
         aria-hidden="true"

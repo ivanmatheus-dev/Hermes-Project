@@ -137,6 +137,38 @@ describe("HermesScrollHero", () => {
     ).toHaveAttribute("src", "/templates/template 3/dist/index.html");
   });
 
+  it("renders a decorative scroll ribbon spanning workflow and templates", () => {
+    render(<HermesScrollHero />);
+
+    const ribbonStage = document.querySelector<HTMLElement>(".scroll-ribbon-stage");
+    const workflowSection = document.querySelector("#como-funciona");
+    const templatesSection = document.querySelector("#templates");
+    const ribbonSvg = ribbonStage?.querySelector("svg.scroll-ribbon");
+    const ribbonPath = ribbonStage?.querySelector(".scroll-ribbon-path");
+
+    expect(ribbonStage).toBeInTheDocument();
+    expect(ribbonStage).toContainElement(workflowSection as HTMLElement);
+    expect(ribbonStage).toContainElement(templatesSection as HTMLElement);
+    expect(ribbonSvg).toHaveAttribute("aria-hidden", "true");
+    expect(ribbonSvg).toHaveAttribute("focusable", "false");
+    expect(ribbonSvg?.className.baseVal).toContain("pointer-events-none");
+    expect(ribbonPath).toBeInTheDocument();
+  });
+
+  it("renders an animatable template frame with a decorative wave layer", () => {
+    render(<HermesScrollHero />);
+
+    const templatesSection = document.querySelector("#templates") as HTMLElement;
+    const templateFrame = templatesSection.querySelector(".template-featured-frame");
+    const templateWave = templatesSection.querySelector(".template-featured-wave");
+
+    expect(templateFrame).toBeInTheDocument();
+    expect(templateFrame?.className).toContain("overflow-hidden");
+    expect(templateWave).toBeInTheDocument();
+    expect(templateWave).toHaveAttribute("aria-hidden", "true");
+    expect(templateWave?.className).toContain("pointer-events-none");
+  });
+
   it("keeps about and workflow cards theme-neutral until hover", () => {
     render(<HermesScrollHero />);
 
@@ -191,6 +223,44 @@ describe("HermesScrollHero", () => {
     expect(heroSource).toContain("{ autoAlpha: 1, y: 0 }");
     expect(heroSource).toContain("immediateRender: false");
     expect(heroSource).toContain("visibleHeroElements");
+  });
+
+  it("animates the scroll ribbon path length with ScrollTrigger", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+
+    expect(heroSource).toContain("getTotalLength");
+    expect(heroSource).toContain("strokeDasharray");
+    expect(heroSource).toContain("strokeDashoffset");
+    expect(heroSource).toContain("scrollRibbonPathRef");
+    expect(heroSource).toContain("scrollTrigger");
+  });
+
+  it("accelerates the scroll ribbon while the workflow cards leave the viewport", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+
+    expect(heroSource).toContain("ribbonCardsDrawnProgress");
+    expect(heroSource).toContain("ribbonCardsCatchUpDuration");
+    expect(heroSource).toContain("ribbonCardCatchUpOffset");
+  });
+
+  it("syncs the ribbon contact with the template frame wave fill", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+
+    expect(heroSource).toContain("templateTouch");
+    expect(heroSource).toContain("templateFrameRef");
+    expect(heroSource).toContain("templateWaveRef");
+    expect(heroSource).toContain("borderColor");
+    expect(heroSource).toContain("clipPath");
+    expect(heroSource).toContain("ribbonTemplateTouchProgress");
   });
 
   it("scrolls smoothly to the templates section from the primary CTA", () => {

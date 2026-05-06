@@ -27,6 +27,8 @@ type TemplateModalStyle = CSSProperties & {
 type TemplateShowcaseProps = {
   prefersReducedMotion: boolean;
   sectionRef: RefObject<HTMLElement | null>;
+  templateFrameRef: RefObject<HTMLDivElement | null>;
+  templateWaveRef: RefObject<HTMLDivElement | null>;
 };
 
 const templates: TemplatePreview[] = [
@@ -64,6 +66,8 @@ const activeTemplate = templates[0];
 export function TemplateShowcase({
   prefersReducedMotion,
   sectionRef,
+  templateFrameRef,
+  templateWaveRef,
 }: TemplateShowcaseProps) {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplatePreview | null>(null);
   const [originRect, setOriginRect] = useState<DOMRect | null>(null);
@@ -131,7 +135,7 @@ export function TemplateShowcase({
       <section
         id="templates"
         ref={sectionRef}
-        className="mineral-paper relative overflow-hidden bg-[var(--mineral)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
+        className="relative overflow-hidden bg-transparent px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
       >
         <div
           aria-hidden="true"
@@ -158,8 +162,16 @@ export function TemplateShowcase({
             data-reveal
             className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,47.5rem)_26rem] lg:items-center"
           >
-            <div className="rounded-[2.625rem] border border-[var(--border)] bg-[var(--bone)] p-6 shadow-[0_24px_70px_rgba(26,29,38,0.08)]">
-              <div className="relative h-[26rem] overflow-hidden rounded-[2.125rem] border border-[var(--border)] bg-[#F1EEE7] p-5">
+            <div
+              ref={templateFrameRef}
+              className="template-featured-frame relative overflow-hidden rounded-[2.625rem] border border-[var(--border)] bg-[var(--bone)] p-6 shadow-[0_24px_70px_rgba(26,29,38,0.08)]"
+            >
+              <div
+                ref={templateWaveRef}
+                aria-hidden="true"
+                className="template-featured-wave pointer-events-none absolute inset-0"
+              />
+              <div className="relative z-10 h-[26rem] overflow-hidden rounded-[2.125rem] border border-[var(--border)] bg-[#F1EEE7] p-5">
                 <iframe
                   title={`Miniatura do template ${activeTemplate.title}`}
                   src={activeTemplate.href}

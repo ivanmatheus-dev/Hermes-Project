@@ -10,6 +10,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+import { ScrollRibbon } from "@/components/sections/ScrollRibbon";
 import { TemplateShowcase } from "@/components/sections/TemplateShowcase";
 import { type ThemeMode } from "@/components/sections/hermesContent";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -56,6 +57,10 @@ export function HermesScrollHero() {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const heroRef = useRef<HTMLElement | null>(null);
   const templatesRef = useRef<HTMLElement | null>(null);
+  const scrollRibbonStageRef = useRef<HTMLDivElement | null>(null);
+  const scrollRibbonPathRef = useRef<SVGPathElement | null>(null);
+  const templateFrameRef = useRef<HTMLDivElement | null>(null);
+  const templateWaveRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
   const wingRef = useRef<SVGGElement | null>(null);
   const entryOverlayRef = useRef<HTMLDivElement | null>(null);
@@ -609,6 +614,123 @@ export function HermesScrollHero() {
     { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
   );
 
+  useGSAP(
+    () => {
+      const shouldReduceMotion =
+        prefersReducedMotion ||
+        (typeof window !== "undefined" &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      const stage = scrollRibbonStageRef.current;
+      const ribbonPath = scrollRibbonPathRef.current;
+      const templateFrame = templateFrameRef.current;
+      const templateWave = templateWaveRef.current;
+
+      if (!stage || !ribbonPath) {
+        return;
+      }
+
+      const pathLength = ribbonPath.getTotalLength();
+
+      gsap.set(ribbonPath, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: shouldReduceMotion ? 0 : pathLength,
+      });
+
+      if (templateFrame) {
+        gsap.set(templateFrame, {
+          borderColor: shouldReduceMotion ? "var(--ribbon-orange)" : "var(--border)",
+          boxShadow: shouldReduceMotion
+            ? "0 30px 78px rgba(200, 117, 0, 0.18)"
+            : "0 24px 70px rgba(26,29,38,0.08)",
+        });
+      }
+
+      if (templateWave) {
+        gsap.set(templateWave, {
+          autoAlpha: shouldReduceMotion ? 1 : 0,
+          clipPath: shouldReduceMotion
+            ? "circle(150% at 88% 74%)"
+            : "circle(0% at 88% 74%)",
+        });
+      }
+
+      if (shouldReduceMotion) {
+        return;
+      }
+
+      const ribbonCardsDrawnProgress = 0.68;
+      const ribbonCardsCatchUpDuration = 0.34;
+      const ribbonCardCatchUpOffset =
+        pathLength * (1 - ribbonCardsDrawnProgress);
+      const ribbonTemplateTouchProgress = 0.9;
+      const ribbonTemplateTouchDuration = 0.22;
+      const ribbonTemplateTouchOffset =
+        pathLength * (1 - ribbonTemplateTouchProgress);
+
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: stage,
+          start: "top 76%",
+          end: "bottom 48%",
+          scrub: 0.72,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      timeline
+        .to(ribbonPath, {
+          strokeDashoffset: ribbonCardCatchUpOffset,
+          duration: ribbonCardsCatchUpDuration,
+        })
+        .to(ribbonPath, {
+          strokeDashoffset: ribbonTemplateTouchOffset,
+          duration: ribbonTemplateTouchDuration,
+        })
+        .addLabel("templateTouch");
+
+      if (templateFrame) {
+        timeline.to(
+          templateFrame,
+          {
+            borderColor: "var(--ribbon-orange)",
+            boxShadow: "0 30px 84px rgba(200, 117, 0, 0.2)",
+            duration: 0.06,
+          },
+          "templateTouch",
+        );
+      }
+
+      if (templateWave) {
+        timeline.to(
+          templateWave,
+          {
+            autoAlpha: 1,
+            clipPath: "circle(150% at 88% 74%)",
+            duration: 0.16,
+            ease: "power2.out",
+          },
+          "templateTouch",
+        );
+      }
+
+      timeline.to(ribbonPath, {
+        strokeDashoffset: 0,
+        duration: 1 - ribbonCardsCatchUpDuration - ribbonTemplateTouchDuration,
+      });
+
+      return () => {
+        timeline.scrollTrigger?.kill();
+        timeline.kill();
+      };
+    },
+    {
+      scope: scrollRibbonStageRef,
+      dependencies: [prefersReducedMotion],
+      revertOnUpdate: true,
+    },
+  );
+
   const toggleTheme = () => {
     setThemeMode((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
   };
@@ -634,11 +756,18 @@ export function HermesScrollHero() {
         onSectionLinkClick={scrollToSection}
       />
       <AboutSection />
-      <HowItWorksSection />
-      <TemplateShowcase
-        sectionRef={templatesRef}
-        prefersReducedMotion={prefersReducedMotion}
-      />
+      <ScrollRibbon
+        stageRef={scrollRibbonStageRef}
+        pathRef={scrollRibbonPathRef}
+      >
+        <HowItWorksSection />
+        <TemplateShowcase
+          sectionRef={templatesRef}
+          templateFrameRef={templateFrameRef}
+          templateWaveRef={templateWaveRef}
+          prefersReducedMotion={prefersReducedMotion}
+        />
+      </ScrollRibbon>
       <FAQSection />
       <ContactSection onSectionLinkClick={scrollToSection} />
     </div>

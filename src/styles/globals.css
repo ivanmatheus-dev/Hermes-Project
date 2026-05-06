@@ -12,6 +12,7 @@
   --stone: #5C5C56;
   --mist: #7E7E76;
   --champagne: #C9A96E;
+  --ribbon-orange: #C87500;
   --border: rgba(26, 29, 38, 0.12);
 }
 
@@ -22,6 +23,7 @@
   --stone: #C8C1B5;
   --mist: #A9A195;
   --champagne: #C9A96E;
+  --ribbon-orange: #D07A00;
   --border: rgba(231, 227, 216, 0.14);
 }
 
@@ -124,6 +126,30 @@ a {
 
 .about-mask-reveal {
   margin-top: -100vh;
+}
+
+.scroll-ribbon-stage {
+  isolation: isolate;
+}
+
+.scroll-ribbon {
+  opacity: 0.92;
+}
+
+.scroll-ribbon-path {
+  fill: none;
+  stroke: var(--ribbon-orange);
+  stroke-width: clamp(0.75rem, 1.55vw, 1.45rem);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 18px 28px rgba(80, 42, 0, 0.1));
+  opacity: 0.96;
+  vector-effect: non-scaling-stroke;
+}
+
+[data-theme="dark"] .scroll-ribbon-path {
+  filter: drop-shadow(0 18px 34px rgba(201, 117, 0, 0.16));
+  opacity: 0.9;
 }
 
 [data-theme="dark"] .hero-scroll-stage::before {
@@ -247,6 +273,37 @@ a {
   transform-origin: top left;
 }
 
+.template-featured-frame {
+  isolation: isolate;
+  will-change: border-color, box-shadow;
+}
+
+.template-featured-wave {
+  z-index: 0;
+  background:
+    radial-gradient(
+      circle at 88% 74%,
+      rgba(200, 117, 0, 0.34) 0%,
+      rgba(200, 117, 0, 0.22) 32%,
+      rgba(201, 169, 110, 0.12) 58%,
+      transparent 74%
+    );
+  clip-path: circle(0% at 88% 74%);
+  opacity: 0;
+  will-change: clip-path, opacity;
+}
+
+[data-theme="dark"] .template-featured-wave {
+  background:
+    radial-gradient(
+      circle at 88% 74%,
+      rgba(208, 122, 0, 0.34) 0%,
+      rgba(208, 122, 0, 0.2) 34%,
+      rgba(201, 169, 110, 0.1) 58%,
+      transparent 74%
+    );
+}
+
 .template-modal-panel {
   animation: template-panel-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: center;
@@ -294,6 +351,20 @@ a {
   .about-mask-reveal {
     margin-top: 0;
   }
+
+  .scroll-ribbon {
+    opacity: 0.52;
+  }
+
+  .template-featured-frame {
+    border-color: var(--ribbon-orange);
+    box-shadow: 0 30px 78px rgba(200, 117, 0, 0.18);
+  }
+
+  .template-featured-wave {
+    clip-path: circle(150% at 88% 74%);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 767px) {
@@ -304,5 +375,15 @@ a {
 
   [data-reveal] {
     transform: translateY(18px);
+  }
+
+  .scroll-ribbon {
+    left: 46%;
+    width: 168vw;
+  }
+
+  .scroll-ribbon-path {
+    stroke-width: 0.8rem;
+    opacity: 0.58;
   }
 }
