@@ -1,17 +1,22 @@
-import type { MouseEvent } from "react";
+import type { MouseEvent, RefObject } from "react";
 
 import { AnimatedHermesLogo } from "@/components/brand/AnimatedHermesLogo";
 
 type ContactSectionProps = {
+  sectionRef: RefObject<HTMLElement | null>;
   onSectionLinkClick: (
     event: MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => void;
 };
 
-export function ContactSection({ onSectionLinkClick }: ContactSectionProps) {
+export function ContactSection({
+  sectionRef,
+  onSectionLinkClick,
+}: ContactSectionProps) {
   return (
     <section
+      ref={sectionRef}
       id="contato"
       className="relative flex min-h-screen items-center overflow-hidden bg-[var(--charcoal)] px-5 py-14 text-[var(--bone)] md:px-10 md:py-16 lg:px-24 lg:py-20"
     >
@@ -34,14 +39,14 @@ export function ContactSection({ onSectionLinkClick }: ContactSectionProps) {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <a
             href="https://wa.me/"
-            className="border border-[var(--champagne)] bg-[var(--champagne)] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_18px_46px_rgba(201,169,110,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bone)]"
+            className="border border-[var(--champagne)] bg-[rgba(201,169,110,0.12)] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bone)] transition-[background,color,transform,box-shadow] duration-300 hover:scale-[1.03] hover:bg-[var(--champagne)] hover:text-[var(--charcoal)] hover:shadow-[0_18px_46px_rgba(201,169,110,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bone)]"
           >
             Chamar no WhatsApp
           </a>
           <a
             href="#templates"
             onClick={(event) => onSectionLinkClick(event, "#templates")}
-            className="border border-[rgba(231,227,216,0.22)] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bone)] transition-[background,transform] duration-300 hover:-translate-y-1 hover:bg-[rgba(231,227,216,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bone)]"
+            className="border border-[rgba(231,227,216,0.22)] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bone)] transition-[background,color,transform,box-shadow] duration-300 hover:scale-[1.03] hover:bg-[var(--champagne)] hover:text-[var(--charcoal)] hover:shadow-[0_18px_46px_rgba(201,169,110,0.2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--bone)]"
           >
             Rever projetos
           </a>

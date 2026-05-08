@@ -194,7 +194,7 @@ export function TemplateShowcase({
                 type="button"
                 aria-label={`Abrir template ${activeTemplate.title}`}
                 onClick={(event) => openTemplatePreview(activeTemplate, event)}
-                className="mt-6 inline-flex items-center gap-3 rounded-full border border-[var(--champagne)] px-5 py-3 text-xs font-semibold tracking-[0.08em] text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-y-0.5 hover:bg-[rgba(201,169,110,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
+                className="mt-6 inline-flex items-center gap-3 rounded-full border border-[var(--champagne)] px-5 py-3 text-xs font-semibold tracking-[0.08em] text-[var(--charcoal)] transition-[background,color,transform] duration-300 hover:scale-[1.02] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
               >
                 Abrir preview
                 <span aria-hidden="true" className="text-[var(--champagne)]">

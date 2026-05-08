@@ -57,6 +57,7 @@ export function HermesScrollHero() {
   const heroRef = useRef<HTMLElement | null>(null);
   const aboutRef = useRef<HTMLElement | null>(null);
   const templatesRef = useRef<HTMLElement | null>(null);
+  const contactRef = useRef<HTMLElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
   const wingRef = useRef<SVGGElement | null>(null);
   const entryOverlayRef = useRef<HTMLDivElement | null>(null);
@@ -150,6 +151,44 @@ export function HermesScrollHero() {
     const shouldReduceMotion =
       prefersReducedMotion || mediaMatches("(prefers-reduced-motion: reduce)");
     const pointerIsFine = mediaMatches("(pointer: fine)");
+    const contact = contactRef.current;
+    const body = document.body;
+
+    if (
+      shouldReduceMotion ||
+      !pointerIsFine ||
+      !contact ||
+      !("IntersectionObserver" in window)
+    ) {
+      body.classList.remove("is-hermes-cursor-inverted");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        body.classList.toggle(
+          "is-hermes-cursor-inverted",
+          Boolean(entry?.isIntersecting && entry.intersectionRatio >= 0.35),
+        );
+      },
+      {
+        rootMargin: "-18% 0px -18% 0px",
+        threshold: [0, 0.35, 0.6],
+      },
+    );
+
+    observer.observe(contact);
+
+    return () => {
+      observer.disconnect();
+      body.classList.remove("is-hermes-cursor-inverted");
+    };
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const shouldReduceMotion =
+      prefersReducedMotion || mediaMatches("(prefers-reduced-motion: reduce)");
+    const pointerIsFine = mediaMatches("(pointer: fine)");
 
     if (shouldReduceMotion || !pointerIsFine) {
       return;
@@ -206,6 +245,19 @@ export function HermesScrollHero() {
         prefersReducedMotion ||
         (typeof window !== "undefined" &&
           window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      const heroTitleLines = heroCopyRef.current?.querySelectorAll("[data-hero-title-line]") as
+        | NodeListOf<HTMLElement>
+        | undefined;
+      const titleLineElements = Array.from(heroTitleLines ?? []);
+      const heroCopyEyebrow = heroCopyRef.current
+        ? (heroCopyRef.current.querySelector(
+            "[data-hero-copy-eyebrow]",
+          ) as HTMLElement | null)
+        : null;
+      const heroCopyEntryElements = [
+        heroCopyEyebrow,
+        ...titleLineElements,
+      ].filter((element): element is HTMLElement => Boolean(element));
 
       if (shouldReduceMotion) {
         gsap.set(entryOverlayRef.current, { autoAlpha: 0, display: "none" });
@@ -220,6 +272,11 @@ export function HermesScrollHero() {
           ],
           { opacity: 1, y: 0, x: 0, scale: 1, rotation: 0 },
         );
+        gsap.set(heroCopyEntryElements, {
+          autoAlpha: 1,
+          y: 0,
+          yPercent: 0,
+        });
         mockupEntryRef.current?.classList.remove("opacity-0");
         return;
       }
@@ -252,9 +309,11 @@ export function HermesScrollHero() {
       gsap.set(entryLineRef.current, { scaleX: 0, transformOrigin: "50% 50%" });
       gsap.set(headerRef.current, { opacity: 0, y: -18 });
       gsap.set(navElements ?? [], { opacity: 0, y: -8 });
-      gsap.set(heroCopyRef.current, { opacity: 0, y: 34 });
-      gsap.set(subheadlineRef.current, { opacity: 0, y: 24 });
-      gsap.set(ctasRef.current, { opacity: 0, y: 18 });
+      gsap.set(heroCopyRef.current, { opacity: 1, y: 0 });
+      gsap.set(heroCopyEyebrow ?? [], { autoAlpha: 0, y: -10 });
+      gsap.set(titleLineElements, { autoAlpha: 0, yPercent: -110 });
+      gsap.set(subheadlineRef.current, { autoAlpha: 0, x: -24, y: 0 });
+      gsap.set(ctasRef.current, { autoAlpha: 0 });
       gsap.set(mockupRef.current, {
         autoAlpha: 1,
         x: 0,
@@ -279,6 +338,7 @@ export function HermesScrollHero() {
           const visibleHeroElements = [
             headerRef.current,
             heroCopyRef.current,
+            ...heroCopyEntryElements,
             subheadlineRef.current,
             ctasRef.current,
             mockupRef.current,
@@ -357,19 +417,30 @@ export function HermesScrollHero() {
           "-=0.38",
         )
         .to(
-          heroCopyRef.current,
-          { opacity: 1, y: 0, duration: 0.48 },
+          heroCopyEyebrow ?? [],
+          { autoAlpha: 1, y: 0, duration: 0.28 },
           "-=0.5",
         )
         .to(
+          titleLineElements,
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            stagger: 0.075,
+            duration: 0.42,
+            ease: "power3.out",
+          },
+          "<",
+        )
+        .to(
           subheadlineRef.current,
-          { opacity: 1, y: 0, duration: 0.36 },
-          "-=0.3",
+          { autoAlpha: 1, x: 0, duration: 0.36 },
+          "-=0.26",
         )
         .to(
           ctasRef.current,
-          { opacity: 1, y: 0, duration: 0.34 },
-          "-=0.22",
+          { autoAlpha: 1, duration: 0.34 },
+          "-=0.2",
         );
 
       return () => {
@@ -734,7 +805,10 @@ export function HermesScrollHero() {
         prefersReducedMotion={prefersReducedMotion}
       />
       <FAQSection />
-      <ContactSection onSectionLinkClick={scrollToSection} />
+      <ContactSection
+        sectionRef={contactRef}
+        onSectionLinkClick={scrollToSection}
+      />
     </div>
   );
 }

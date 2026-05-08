@@ -108,6 +108,7 @@ html .hero-scroll-stage.mineral-paper {
 }
 
 .hero-browser-mask {
+  background: var(--bone);
   transform-origin: center center;
   will-change: background-color, border-color, border-radius, box-shadow, opacity;
   transition:
@@ -115,8 +116,31 @@ html .hero-scroll-stage.mineral-paper {
     box-shadow 220ms ease;
 }
 
+.hero-browser-chrome {
+  background: rgba(236, 231, 220, 0.72);
+}
+
+.hero-browser-address {
+  background: rgba(246, 242, 232, 0.9);
+}
+
+.hero-browser-stage {
+  background: rgba(241, 237, 227, 0.86);
+}
+
+.hero-browser-viewport {
+  background: var(--mineral);
+}
+
 .hero-browser-depth {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(201, 169, 110, 0.18), transparent 36rem),
+    linear-gradient(135deg, rgba(231, 227, 216, 0.08), rgba(26, 29, 38, 0.1));
   opacity: 0;
+}
+
+.hero-browser-glow {
+  background: radial-gradient(circle at 88% 16%, rgba(201, 169, 110, 0.22), transparent 18rem);
 }
 
 .hero-browser-stage,
@@ -138,6 +162,97 @@ html .hero-scroll-stage.mineral-paper {
 
 .hero-scroll-stage.is-hero-mask-active .hero-browser-mask {
   box-shadow: 0 44px 130px rgba(26, 29, 38, 0.24);
+}
+
+[data-theme="dark"] .hero-browser-mask {
+  background: #252832;
+  border-color: rgba(231, 227, 216, 0.2);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+}
+
+[data-theme="dark"] .hero-browser-chrome {
+  background: #252832;
+  border-color: rgba(231, 227, 216, 0.16);
+}
+
+[data-theme="dark"] .hero-browser-address {
+  border-color: rgba(231, 227, 216, 0.12);
+  background: #1A1D26;
+}
+
+[data-theme="dark"] .hero-browser-body {
+  background: #1A1D26;
+}
+
+[data-theme="dark"] .hero-browser-stage {
+  border-color: rgba(231, 227, 216, 0.12);
+  background: #252832;
+}
+
+[data-theme="dark"] .hero-browser-viewport {
+  border-color: rgba(231, 227, 216, 0.12);
+  background: #1A1D26;
+}
+
+[data-theme="dark"] .hero-browser-depth {
+  background:
+    radial-gradient(circle at 54% 48%, rgba(201, 169, 110, 0.1), transparent 30rem),
+    linear-gradient(135deg, rgba(37, 40, 50, 0.18), rgba(26, 29, 38, 0.82));
+}
+
+[data-theme="dark"] .hero-browser-glow {
+  background: radial-gradient(circle at 88% 16%, rgba(201, 169, 110, 0.1), transparent 17rem);
+}
+
+[data-theme="dark"] .hero-browser-arc {
+  border-color: rgba(201, 169, 110, 0.12);
+}
+
+[data-theme="dark"] .hero-browser-preview-grid {
+  color: var(--charcoal);
+}
+
+[data-theme="dark"] .hero-browser-preview-title {
+  color: rgba(231, 227, 216, 0.92);
+}
+
+[data-theme="dark"] .hero-browser-preview-copy {
+  color: rgba(200, 193, 181, 0.72);
+}
+
+[data-theme="dark"] .hero-browser-metric-card {
+  border-color: rgba(231, 227, 216, 0.14);
+  background: #252832;
+  color: rgba(231, 227, 216, 0.92);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+}
+
+[data-theme="dark"] .hero-browser-card-title {
+  color: rgba(231, 227, 216, 0.94);
+}
+
+[data-theme="dark"] .hero-browser-card-copy {
+  color: rgba(200, 193, 181, 0.72);
+}
+
+[data-theme="dark"] .hero-browser-metric-card:hover {
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--bone);
+}
+
+[data-theme="dark"] .hero-browser-metric-card:hover .hero-browser-card-title,
+[data-theme="dark"] .hero-browser-metric-card:hover .hero-browser-card-copy {
+  color: var(--bone);
+}
+
+[data-theme="dark"] .hero-browser-footnote {
+  border-color: rgba(201, 169, 110, 0.28);
+  color: var(--mist);
+}
+
+[data-theme="dark"] .hero-browser-continuity {
+  color: rgba(169, 161, 149, 0.82);
 }
 
 .about-mask-reveal {
@@ -227,7 +342,7 @@ html .hero-scroll-stage.mineral-paper {
 .hermes-cursor {
   width: 2.4rem;
   height: 2.4rem;
-  border: 1px solid rgba(201, 169, 110, 0.72);
+  border: 1px solid rgba(26, 29, 38, 0.78);
   border-radius: 999px;
   transition:
     width 220ms ease,
@@ -241,7 +356,7 @@ html .hero-scroll-stage.mineral-paper {
   width: 0.34rem;
   height: 0.34rem;
   border-radius: 999px;
-  background: var(--champagne);
+  background: var(--charcoal);
   transition: opacity 180ms ease;
 }
 
@@ -262,8 +377,37 @@ html .hero-scroll-stage.mineral-paper {
 .hermes-cursor.is-active {
   width: 3.2rem;
   height: 3.2rem;
-  background: rgba(201, 169, 110, 0.11);
-  border-color: rgba(201, 169, 110, 0.95);
+  background: rgba(26, 29, 38, 0.08);
+  border-color: rgba(26, 29, 38, 0.96);
+}
+
+.has-hermes-cursor.is-hermes-cursor-inverted .hermes-cursor {
+  background: transparent;
+  border-color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.has-hermes-cursor.is-hermes-cursor-inverted .hermes-cursor-dot {
+  background: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.has-hermes-cursor.is-hermes-cursor-inverted .hermes-cursor.is-active {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #ffffff;
+}
+
+[data-theme="dark"] .hermes-cursor {
+  border-color: rgba(231, 227, 216, 0.82);
+}
+
+[data-theme="dark"] .hermes-cursor-dot {
+  background: var(--charcoal);
+}
+
+[data-theme="dark"] .hermes-cursor.is-active {
+  background: rgba(231, 227, 216, 0.1);
+  border-color: rgba(231, 227, 216, 0.96);
 }
 
 .template-featured-iframe {
