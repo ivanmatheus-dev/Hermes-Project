@@ -16,6 +16,7 @@ type HeroSectionProps = {
   subheadlineRef: RefObject<HTMLParagraphElement | null>;
   ctasRef: RefObject<HTMLDivElement | null>;
   mockupRef: RefObject<HTMLDivElement | null>;
+  mockupEntryRef: RefObject<HTMLDivElement | null>;
   onThemeToggle: () => void;
   onSectionLinkClick: (
     event: MouseEvent<HTMLAnchorElement>,
@@ -35,6 +36,7 @@ export function HeroSection({
   subheadlineRef,
   ctasRef,
   mockupRef,
+  mockupEntryRef,
   onThemeToggle,
   onSectionLinkClick,
 }: HeroSectionProps) {
@@ -64,14 +66,17 @@ export function HeroSection({
 
       <div
         aria-hidden="true"
+        data-hero-decor
         className="pointer-events-none absolute left-0 top-1/2 h-px w-full bg-[rgba(231,227,216,0.3)]"
       />
       <div
         aria-hidden="true"
+        data-hero-decor
         className="pointer-events-none absolute left-1/2 top-0 h-full w-px bg-[rgba(231,227,216,0.3)]"
       />
       <div
         aria-hidden="true"
+        data-hero-decor
         className="pointer-events-none absolute -left-24 top-[40%] h-[30rem] w-[30rem] rounded-full border border-[rgba(201,169,110,0.22)]"
       />
 
@@ -116,7 +121,7 @@ export function HeroSection({
               href="#templates"
               data-nav-item
               onClick={(event) => onSectionLinkClick(event, "#templates")}
-              className="hidden border border-[var(--border)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,color,transform] duration-300 hover:-translate-y-0.5 hover:bg-[var(--charcoal)] hover:text-[var(--bone)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)] md:block"
+              className="hidden border border-[var(--border)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,color,transform] duration-300 hover:scale-[1.03] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)] md:block"
             >
               Ver projetos
             </a>
@@ -128,20 +133,39 @@ export function HeroSection({
           className="mx-auto grid min-h-screen max-w-[78rem] items-end gap-8 px-5 pb-8 pt-28 md:grid-cols-[minmax(0,38.125rem)_minmax(24rem,37.125rem)] md:items-center md:justify-between md:px-10 md:pb-0 md:pt-24 lg:px-0"
         >
           <div ref={heroCopyRef} className="order-1 max-w-[38.125rem] opacity-0 md:order-none">
-            <p className="mb-5 text-xs font-medium uppercase tracking-[0.32em] text-[var(--mist)]">
+            <p
+              data-hero-copy-eyebrow
+              className="mb-5 text-xs font-medium uppercase tracking-[0.32em] text-[var(--mist)]"
+            >
               Templates premium
             </p>
             <h1 className="text-balance font-serif text-[clamp(3.2rem,5vw,4.375rem)] font-medium leading-[0.96] text-[var(--charcoal)]">
-              Sites prontos para vender, com acabamento sob medida.
+              <span className="block overflow-hidden pb-1">
+                <span data-hero-title-line className="block">
+                  Sites prontos para vender,
+                </span>
+              </span>
+              <span className="block overflow-hidden pb-1">
+                <span data-hero-title-line className="block">
+                  com acabamento
+                </span>
+              </span>
+              <span className="block overflow-hidden pb-1">
+                <span data-hero-title-line className="block">
+                  sob medida.
+                </span>
+              </span>
             </h1>
           </div>
 
           <div className="order-3 md:order-none md:row-span-2 md:self-center">
             <div
               ref={mockupRef}
-              className="hero-mockup-shell ml-auto w-full max-w-[37.125rem] opacity-0"
+              className="hero-mockup-shell ml-auto w-full max-w-[37.125rem]"
             >
-              <BrowserMockup />
+              <div ref={mockupEntryRef} className="hero-mockup-entry opacity-0">
+                <BrowserMockup />
+              </div>
             </div>
           </div>
 
@@ -158,14 +182,14 @@ export function HeroSection({
               <a
                 href="#templates"
                 onClick={(event) => onSectionLinkClick(event, "#templates")}
-                className="border border-[var(--charcoal)] bg-[var(--charcoal)] px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--bone)] transition-[background,color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:bg-[rgba(26,29,38,0.92)] hover:shadow-[0_16px_40px_rgba(26,29,38,0.18)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
+                className="border border-[var(--border)] px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,color,transform] duration-300 hover:scale-[1.03] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
               >
                 Ver projetos disponíveis
               </a>
               <a
                 href="#contato"
                 onClick={(event) => onSectionLinkClick(event, "#contato")}
-                className="border border-[var(--border)] px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,transform] duration-300 hover:-translate-y-1 hover:bg-[rgba(231,227,216,0.52)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
+                className="border border-[var(--border)] px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--charcoal)] transition-[background,color,transform] duration-300 hover:scale-[1.03] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--champagne)]"
               >
                 Conversar sobre meu site
               </a>

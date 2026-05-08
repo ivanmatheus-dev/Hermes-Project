@@ -1,13 +1,20 @@
+import type { RefObject } from "react";
+
 import {
   aboutMetrics,
   methodLenses,
 } from "@/components/sections/hermesContent";
 
-export function AboutSection() {
+type AboutSectionProps = {
+  sectionRef?: RefObject<HTMLElement | null>;
+};
+
+export function AboutSection({ sectionRef }: AboutSectionProps) {
   return (
     <section
+      ref={sectionRef}
       id="sobre"
-      className="relative overflow-hidden bg-[var(--bone)] px-5 py-24 text-[var(--charcoal)] md:px-10 md:py-28 lg:px-24"
+      className="about-mask-reveal relative z-0 overflow-hidden bg-[var(--bone)] px-5 pb-24 pt-16 text-[var(--charcoal)] md:px-10 md:pb-28 md:pt-20 lg:px-24"
     >
       <div
         aria-hidden="true"
@@ -18,7 +25,7 @@ export function AboutSection() {
         className="absolute left-[17%] top-16 hidden h-[45rem] w-[70rem] rounded-[3.5rem] border border-[var(--border)] bg-[rgba(221,216,205,0.22)] opacity-60 lg:block"
       />
 
-      <div className="relative mx-auto max-w-[78rem] border-t border-[rgba(201,169,110,0.4)] pt-12">
+      <div className="about-mask-reveal__content relative mx-auto max-w-[78rem] border-t border-[rgba(201,169,110,0.4)] pt-12">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,42rem)_30.75rem] lg:items-start">
           <div data-reveal>
             <p className="mb-5 text-xs font-medium uppercase tracking-[0.32em] text-[var(--mist)]">

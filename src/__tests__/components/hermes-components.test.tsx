@@ -51,6 +51,41 @@ describe("BrowserMockup", () => {
       screen.getByText(/Presença digital com aparência de marca confiável/i),
     ).toBeInTheDocument();
   });
+
+  it("keeps semantic surfaces for theme-aware browser styling", () => {
+    render(<BrowserMockup />);
+
+    const mockup = screen.getByLabelText("Preview da próxima seção Hermes");
+
+    expect(mockup.querySelector(".hero-browser-address")).toBeInTheDocument();
+    expect(mockup.querySelectorAll(".hero-browser-metric-card")).toHaveLength(3);
+    expect(mockup.querySelector(".hero-browser-chrome")).toBeInTheDocument();
+    expect(mockup.querySelector(".hero-browser-stage")).toBeInTheDocument();
+    expect(mockup.querySelector(".hero-browser-viewport")).toBeInTheDocument();
+    expect(mockup.querySelector(".hero-browser-preview-eyebrow")).toBeInTheDocument();
+    expect(mockup.querySelector(".hero-browser-preview-title")).toBeInTheDocument();
+    expect(mockup.querySelector(".hero-browser-preview-copy")).toBeInTheDocument();
+    expect(mockup.querySelectorAll(".hero-browser-card-title")).toHaveLength(3);
+    expect(mockup.querySelectorAll(".hero-browser-card-copy")).toHaveLength(3);
+  });
+
+  it("keeps all preview metric cards visually uniform", () => {
+    render(<BrowserMockup />);
+
+    const cards = screen
+      .getAllByText(/Exposição|Confiança|Clientes/)
+      .map((label) => label.closest(".hero-browser-metric-card") as HTMLElement);
+    const [firstCardClassName] = cards.map((card) => card.className);
+
+    expect(cards).toHaveLength(3);
+    cards.forEach((card) => {
+      expect(card.className).toBe(firstCardClassName);
+      expect(card.className).toContain("bg-[var(--bone)]");
+      expect(card.className).not.toContain(
+        "border-[var(--charcoal)] bg-[var(--charcoal)] text-[var(--bone)]",
+      );
+    });
+  });
 });
 
 describe("HermesScrollHero", () => {
@@ -72,7 +107,7 @@ describe("HermesScrollHero", () => {
   it("renders the new service sections with workflow, FAQ, and final CTA", () => {
     render(<HermesScrollHero />);
 
-    expect(screen.getByText("Presença digital que vende")).toBeInTheDocument();
+    expect(screen.getAllByText("Presença digital que vende").length).toBeGreaterThan(0);
     expect(
       screen.getByRole("heading", {
         name: /A Hermes coloca sua empresa na internet/i,
@@ -190,6 +225,210 @@ describe("HermesScrollHero", () => {
     expect(heroSource).toContain(".fromTo(");
     expect(heroSource).toContain("{ autoAlpha: 1, y: 0 }");
     expect(heroSource).toContain("immediateRender: false");
+    expect(heroSource).toContain("visibleHeroElements");
+  });
+
+  it("keeps the initial mockup entry light enough to avoid first-load jank", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+    const heroSectionSource = readFileSync(
+      "src/components/sections/HeroSection.tsx",
+      "utf8",
+    );
+    const stylesSource = readFileSync("src/styles/globals.css", "utf8");
+
+    expect(heroSectionSource).toContain("mockupEntryRef");
+    expect(heroSectionSource).toContain("hero-mockup-entry opacity-0");
+    expect(heroSource).toContain("gsap.set(mockupRef.current");
+    expect(heroSource).toContain("autoAlpha: 1");
+    expect(heroSource).toContain("gsap.set(mockupEntryRef.current");
+    expect(heroSource).toContain("autoAlpha: 0");
+    expect(heroSource).toContain("y: 18");
+    expect(heroSource).toContain("scale: 1");
+    expect(heroSource).not.toContain("scale: 0.985");
+    expect(heroSource).not.toContain("x: 120");
+    expect(heroSource).not.toContain("rotation: 4");
+    expect(heroSource).toContain(".to(\n          mockupEntryRef.current");
+    expect(heroSource).toContain('clearProps: "opacity,visibility,transform"');
+    expect(heroSource).toContain("const mockup = mockupRef.current");
+    expect(heroSource).toContain(".to(\n          mockup,");
+    expect(heroSource).toContain('ease: "power2.out"');
+    expect(stylesSource).toContain(".hero-mockup-entry");
+    expect(stylesSource).toContain("will-change: transform, opacity;");
+    expect(stylesSource).toContain("backface-visibility: hidden;");
+  });
+
+  it("syncs hero copy entry with the mockup without changing the mockup tween", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+    const heroSectionSource = readFileSync(
+      "src/components/sections/HeroSection.tsx",
+      "utf8",
+    );
+
+    expect(heroSectionSource).toContain("data-hero-title-line");
+    expect(heroSectionSource).toContain("data-hero-copy-eyebrow");
+    expect(heroSource).toContain('querySelectorAll("[data-hero-title-line]")');
+    expect(heroSource).toContain("querySelector");
+    expect(heroSource).toContain("[data-hero-copy-eyebrow]");
+    expect(heroSource).toContain("yPercent: -110");
+    expect(heroSource).toContain("x: -24");
+    expect(heroSource).toContain("{ autoAlpha: 0 }");
+    expect(heroSource).toContain(".to(\n          mockupEntryRef.current");
+    expect(heroSource).toContain("duration: 0.56");
+  });
+
+  it("uses scale and color changes instead of lift on commercial CTAs", () => {
+    const heroSectionSource = readFileSync(
+      "src/components/sections/HeroSection.tsx",
+      "utf8",
+    );
+    const contactSource = readFileSync(
+      "src/components/sections/ContactSection.tsx",
+      "utf8",
+    );
+    const templateSource = readFileSync(
+      "src/components/sections/TemplateShowcase.tsx",
+      "utf8",
+    );
+    const browserSource = readFileSync(
+      "src/components/ui/BrowserMockup.tsx",
+      "utf8",
+    );
+
+    expect(heroSectionSource).toContain("hover:scale-[1.03]");
+    expect(contactSource).toContain("hover:scale-[1.03]");
+    expect(templateSource).toContain("hover:scale-[1.02]");
+    expect(browserSource).toContain("hover:scale-[1.02]");
+    render(<HermesScrollHero />);
+
+    expect(screen.getByText(/Ver projetos dispon/i).className).not.toContain(
+      "hover:-translate-y",
+    );
+    expect(screen.getByText(/Conversar sobre meu site/i).className).not.toContain(
+      "hover:-translate-y",
+    );
+    expect(screen.getByText(/Chamar no WhatsApp/i).className).not.toContain(
+      "hover:-translate-y",
+    );
+    expect(screen.getByText(/Rever projetos/i).className).not.toContain(
+      "hover:-translate-y",
+    );
+    expect(
+      screen.getByRole("button", {
+        name: /abrir template .*sorriso integral/i,
+      }).className,
+    ).not.toContain("hover:-translate-y");
+  });
+
+  it("uses the same visual treatment for the hero primary and secondary CTAs", () => {
+    render(<HermesScrollHero />);
+
+    const primaryCta = screen.getByText(/Ver projetos dispon/i);
+    const secondaryCta = screen.getByText(/Conversar sobre meu site/i);
+
+    expect(primaryCta.className).toBe(secondaryCta.className);
+    expect(primaryCta.className).toContain("border-[var(--border)]");
+    expect(primaryCta.className).toContain("text-[var(--charcoal)]");
+    expect(primaryCta.className).toContain("hover:bg-[var(--charcoal)]");
+    expect(primaryCta.className).toContain("hover:text-[var(--bone)]");
+  });
+
+  it("uses champagne hover treatment for both contact CTAs", () => {
+    render(<HermesScrollHero />);
+
+    const contactSection = document.querySelector("#contato") as HTMLElement;
+    const whatsappCta = within(contactSection).getByText(/Chamar no WhatsApp/i);
+    const projectsCta = within(contactSection).getByText(/Rever projetos/i);
+
+    expect(whatsappCta.className).toContain("hover:bg-[var(--champagne)]");
+    expect(projectsCta.className).toContain("hover:bg-[var(--champagne)]");
+    expect(projectsCta.className).toContain("hover:text-[var(--charcoal)]");
+    expect(projectsCta.className).toContain("hover:scale-[1.03]");
+  });
+
+  it("opens FAQ answers on hover and closes them on mouse leave", () => {
+    render(<HermesScrollHero />);
+
+    const faqButton = screen.getByRole("button", {
+      name: /A Hermes vende apenas templates prontos/i,
+    });
+    const faqAnswer = screen.getByText(/Os templates são o caminho mais rápido/i);
+
+    expect(faqButton).toHaveAttribute("aria-expanded", "false");
+    expect(faqAnswer).toHaveAttribute("data-state", "closed");
+
+    fireEvent.mouseEnter(faqButton.closest("[data-faq-item]") as HTMLElement);
+
+    expect(faqButton).toHaveAttribute("aria-expanded", "true");
+    expect(faqAnswer).toHaveAttribute("data-state", "open");
+
+    fireEvent.mouseLeave(faqButton.closest("[data-faq-item]") as HTMLElement);
+
+    expect(faqButton).toHaveAttribute("aria-expanded", "false");
+    expect(faqAnswer).toHaveAttribute("data-state", "closed");
+  });
+
+  it("defines dark browser surfaces and higher contrast cursor colors", () => {
+    const stylesSource = readFileSync("src/styles/globals.css", "utf8");
+    const browserSource = readFileSync("src/components/ui/BrowserMockup.tsx", "utf8");
+
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-mask");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-chrome");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-body");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-address");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-depth");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-glow");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-arc");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-metric-card");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-preview-grid");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-metric-card:hover");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-card-title");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-card-copy");
+    expect(stylesSource).toContain(
+      "[data-theme=\"dark\"] .hero-browser-metric-card:hover .hero-browser-card-copy",
+    );
+    expect(stylesSource).toContain(
+      "[data-theme=\"dark\"] .hero-browser-metric-card:hover {\n  border-color: var(--charcoal);\n  background: var(--charcoal);\n  color: var(--bone);",
+    );
+    expect(stylesSource).not.toContain(
+      "[data-theme=\"dark\"] .hero-browser-metric-card:hover {\n  border-color: var(--champagne);\n  background: var(--champagne);",
+    );
+    expect(stylesSource).not.toContain("[data-theme=\"dark\"] .hero-browser-metric-card p");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hero-browser-footnote");
+    expect(browserSource).not.toContain("bg-[rgba(241,237,227,0.86)]");
+    expect(browserSource).not.toContain("bg-[var(--mineral)]");
+    expect(browserSource).not.toContain("linear-gradient(135deg,rgba(231,227,216,0.08)");
+    expect(stylesSource).toContain("border: 1px solid rgba(26, 29, 38, 0.78);");
+    expect(stylesSource).toContain("background: var(--charcoal);");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hermes-cursor");
+    expect(stylesSource).toContain("[data-theme=\"dark\"] .hermes-cursor-dot");
+    expect(stylesSource).toContain("background: rgba(231, 227, 216, 0.1);");
+  });
+
+  it("activates a blend cursor mode only while the contact section is active", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+    const contactSource = readFileSync(
+      "src/components/sections/ContactSection.tsx",
+      "utf8",
+    );
+    const stylesSource = readFileSync("src/styles/globals.css", "utf8");
+
+    expect(heroSource).toContain("const contactRef = useRef<HTMLElement | null>(null)");
+    expect(heroSource).toContain("contactRef.current");
+    expect(heroSource).toContain("is-hermes-cursor-inverted");
+    expect(heroSource).toContain("body.classList.toggle");
+    expect(contactSource).toContain("sectionRef");
+    expect(contactSource).toContain("ref={sectionRef}");
+    expect(stylesSource).toContain(".has-hermes-cursor.is-hermes-cursor-inverted");
+    expect(stylesSource).toContain("mix-blend-mode: difference;");
   });
 
   it("scrolls smoothly to the templates section from the primary CTA", () => {
@@ -213,8 +452,86 @@ describe("HermesScrollHero", () => {
 
     expect(hero).toBeInTheDocument();
     expect(hero?.querySelector(".hero-mockup-shell")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-mockup-entry")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-mask")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-viewport")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-glow")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-arc")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-preview-grid")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-left")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-right")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-browser-next")).not.toBeInTheDocument();
+  });
+
+  it("uses the real about section behind the hero mask instead of duplicating it", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+    const mainAboutSource = readFileSync(
+      "src/components/sections/AboutSection.tsx",
+      "utf8",
+    );
+    const templateAboutSource = readFileSync(
+      "public/templates/template 3/src/components/sections/AboutSection.jsx",
+      "utf8",
+    );
+
+    render(<HermesScrollHero />);
+
+    const hero = document.querySelector<HTMLElement>(".hero-scroll-stage");
+    const aboutSection = document.querySelector("#sobre") as HTMLElement;
+    const workflowSection = document.querySelector("#como-funciona") as HTMLElement;
+    const stylesSource = readFileSync("src/styles/globals.css", "utf8");
+    const aboutLockStyles =
+      stylesSource.match(/\.about-mask-reveal\.is-about-locked\s*{[^}]+}/)?.[0] ??
+      "";
+
+    expect(hero?.querySelector(".hero-browser-next")).not.toBeInTheDocument();
+    expect(aboutSection).toBeInTheDocument();
+    expect(workflowSection).toBeInTheDocument();
+    expect(
+      aboutSection.compareDocumentPosition(workflowSection) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(aboutSection.className).toContain("about-mask-reveal");
+    expect(aboutSection.querySelector(".about-mask-reveal__content")).toBeInTheDocument();
+    expect(mainAboutSource).toContain('id="sobre"');
+    expect(mainAboutSource).toContain("about-mask-reveal");
+    expect(templateAboutSource).toContain('id="escuta"');
+    expect(heroSource).not.toContain("public/templates/template 3");
+    expect(heroSource).not.toContain('id="escuta"');
+    expect(heroSource).toContain("getRevealDistance");
+    expect(heroSource).toContain("Math.max(window.innerHeight, 1)");
+    expect(heroSource).not.toContain("window.innerHeight * 0.78");
+    expect(heroSource).toContain("pinSpacing: false");
+    expect(heroSource).toContain('classList.add("is-about-locked")');
+    expect(heroSource).toContain('classList.remove("is-about-locked")');
+    expect(heroSource).toContain("const about = aboutRef.current");
+    expect(heroSource).toContain("gsap.set(about, { autoAlpha: 0 })");
+    expect(heroSource).not.toContain("gsap.set(about, { autoAlpha: 0, y:");
+    expect(heroSource).toContain("gsap.set(aboutContent, { y: 10 })");
+    expect(heroSource).not.toContain('filter: "blur(8px)"');
+    expect(heroSource).not.toContain('filter: "blur(0px)"');
+    expect(heroSource).toContain("xPercent: -72");
+    expect(heroSource).toContain("xPercent: 72");
+    expect(heroSource).toContain("browserGlassLayers");
+    expect(heroSource).toContain("backgroundColor");
+    expect(heroSource).toContain("borderColor");
+    expect(heroSource).toContain("boxShadow");
+    expect(heroSource).toContain("0.18");
+    expect(heroSource).toContain("0.44");
+    expect(heroSource).toContain("[mockup, browserMask, browserBody, browserStage, browserViewport]");
+    expect(heroSource).toContain('"--hero-paper-opacity": 0');
+    expect(stylesSource).toContain(".about-mask-reveal {\n  margin-top: 0;");
+    expect(stylesSource).toContain(".about-mask-reveal.is-about-locked");
+    expect(aboutLockStyles).toContain("position: fixed;");
+    expect(aboutLockStyles).toContain("inset: 0;");
+    expect(aboutLockStyles).toContain("width: 100%;");
+    expect(aboutLockStyles).toContain("min-height: 100vh;");
+    expect(aboutLockStyles).not.toContain("position: sticky;");
+    expect(stylesSource).not.toContain("will-change: transform, opacity, filter;");
+    expect(stylesSource).not.toContain("margin-top: -100vh");
   });
 
   it("opens the selected template in an iframe modal and closes it with the X button", () => {
