@@ -225,7 +225,8 @@ export function HermesScrollHero() {
         return;
       }
 
-      const navElements = headerRef.current?.querySelectorAll("[data-nav-item]");
+      const navElements =
+        headerRef.current?.querySelectorAll("[data-nav-item]");
       let wingTween: gsap.core.Tween | null = null;
 
       const startWingFlap = () => {
@@ -322,11 +323,7 @@ export function HermesScrollHero() {
           },
           "-=0.34",
         )
-        .to(
-          headerRef.current,
-          { opacity: 1, y: 0, duration: 0.46 },
-          "-=0.18",
-        )
+        .to(headerRef.current, { opacity: 1, y: 0, duration: 0.46 }, "-=0.18")
         .to(
           navElements ?? [],
           { opacity: 1, y: 0, stagger: 0.045, duration: 0.32 },
@@ -344,28 +341,24 @@ export function HermesScrollHero() {
           },
           "-=0.32",
         )
-        .to(
-          heroCopyRef.current,
-          { opacity: 1, y: 0, duration: 0.52 },
-          "-=0.58",
-        )
+        .to(heroCopyRef.current, { opacity: 1, y: 0, duration: 0.52 }, "-=0.58")
         .to(
           subheadlineRef.current,
           { opacity: 1, y: 0, duration: 0.42 },
           "-=0.34",
         )
-        .to(
-          ctasRef.current,
-          { opacity: 1, y: 0, duration: 0.38 },
-          "-=0.24",
-        );
+        .to(ctasRef.current, { opacity: 1, y: 0, duration: 0.38 }, "-=0.24");
 
       return () => {
         wingTween?.kill();
         timeline.kill();
       };
     },
-    { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
+    {
+      scope: heroRef,
+      dependencies: [prefersReducedMotion],
+      revertOnUpdate: true,
+    },
   );
 
   useGSAP(
@@ -381,19 +374,33 @@ export function HermesScrollHero() {
         return;
       }
 
-      const browserMask = mockup.querySelector<HTMLElement>(".hero-browser-mask");
-      const browserChrome = mockup.querySelector<HTMLElement>(".hero-browser-chrome");
-      const browserBody = mockup.querySelector<HTMLElement>(".hero-browser-body");
-      const browserStage = mockup.querySelector<HTMLElement>(".hero-browser-stage");
-      const browserViewport =
-        mockup.querySelector<HTMLElement>(".hero-browser-viewport");
-      const browserDepth = mockup.querySelector<HTMLElement>(".hero-browser-depth");
-      const continuityLabel =
-        mockup.querySelector<HTMLElement>(".hero-browser-continuity");
-      const browserLeft = mockup.querySelector<HTMLElement>(".hero-browser-left");
-      const browserRight = mockup.querySelector<HTMLElement>(".hero-browser-right");
-      const browserFootnote =
-        mockup.querySelector<HTMLElement>(".hero-browser-footnote");
+      const browserMask =
+        mockup.querySelector<HTMLElement>(".hero-browser-mask");
+      const browserChrome = mockup.querySelector<HTMLElement>(
+        ".hero-browser-chrome",
+      );
+      const browserBody =
+        mockup.querySelector<HTMLElement>(".hero-browser-body");
+      const browserStage = mockup.querySelector<HTMLElement>(
+        ".hero-browser-stage",
+      );
+      const browserViewport = mockup.querySelector<HTMLElement>(
+        ".hero-browser-viewport",
+      );
+      const browserDepth = mockup.querySelector<HTMLElement>(
+        ".hero-browser-depth",
+      );
+      const continuityLabel = mockup.querySelector<HTMLElement>(
+        ".hero-browser-continuity",
+      );
+      const browserLeft =
+        mockup.querySelector<HTMLElement>(".hero-browser-left");
+      const browserRight = mockup.querySelector<HTMLElement>(
+        ".hero-browser-right",
+      );
+      const browserFootnote = mockup.querySelector<HTMLElement>(
+        ".hero-browser-footnote",
+      );
       const heroDecor = hero.querySelectorAll<HTMLElement>("[data-hero-decor]");
 
       if (
@@ -611,7 +618,11 @@ export function HermesScrollHero() {
         hero.classList.remove("is-hero-mask-active");
       };
     },
-    { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
+    {
+      scope: heroRef,
+      dependencies: [prefersReducedMotion],
+      revertOnUpdate: true,
+    },
   );
 
   useGSAP(
@@ -658,7 +669,9 @@ export function HermesScrollHero() {
 
       if (templateFrame) {
         gsap.set(templateFrame, {
-          borderColor: shouldReduceMotion ? "var(--ribbon-orange)" : "var(--border)",
+          borderColor: shouldReduceMotion
+            ? "var(--ribbon-orange)"
+            : "var(--border)",
           boxShadow: shouldReduceMotion
             ? "0 30px 78px rgba(200, 117, 0, 0.18)"
             : "0 24px 70px rgba(26,29,38,0.08)",
@@ -683,80 +696,115 @@ export function HermesScrollHero() {
         return;
       }
 
-      paintableElements.forEach((element) => element.classList.remove("is-painted"));
+      paintableElements.forEach((element) =>
+        element.classList.remove("is-painted"),
+      );
 
-      const ribbonCardsDrawnProgress = 0.8;
+      const ribbonCardsDrawnProgress = 0.88;
       const ribbonCardsCatchUpDuration = 0.44;
       const ribbonCardCatchUpOffset =
         pathLength * (1 - ribbonCardsDrawnProgress);
-      const ribbonTemplateTouchProgress = 0.96;
-      const ribbonTemplateTouchDuration = 0.18;
+      const ribbonTemplateTouchProgress = 0.985;
+      const ribbonTemplateTouchDuration = 0.14;
       const ribbonTemplateTouchOffset =
         pathLength * (1 - ribbonTemplateTouchProgress);
-      const templatePaintTiming = 0.82;
-      const workflowPaintInDuration = 0.08;
+      const ribbonScrollStart = "top 160%";
+      const ribbonScrollEnd = "bottom 62%";
+      const ribbonScrollScrub = 0.58;
+      const cardsScrollStart = "top 160%";
+      const cardsScrollEnd = "bottom 62%";
+      const cardsScrollScrub = 0.58;
+      const workflowPaintEnterTimings = [0.9, 0.95, 0.98, 1.03];
+      const workflowPaintExitTimings = [1.3, 1.4, 1.5, 1.6];
+      const templatePaintTiming = 0.9;
+      const workflowPaintInDuration = 0.06;
       const workflowPaintHoldDuration = 0.04;
       const workflowPaintOutDuration = 0.12;
       const templatePaintDuration = 0.18;
-      const workflowPaintTriggers = workflowPaintFills.map((paintFill, index) => {
-        const card = workflowCards[index];
 
-        return gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            start: "top 75%",
-            end: "center 52%",
-            scrub: 0.35,
-            invalidateOnRefresh: true,
-          },
-          onStart: () => card?.classList.add("is-painted"),
-          onReverseStart: () => card?.classList.add("is-painted"),
-          onComplete: () => card?.classList.remove("is-painted"),
-          onReverseComplete: () => card?.classList.remove("is-painted"),
-        })
-          .to(paintFill, {
-            scaleX: 1,
-            duration: workflowPaintInDuration,
-            ease: "power2.out",
-          })
-          .to(paintFill, {
-            scaleX: 1,
-            duration: workflowPaintHoldDuration,
-            ease: "none",
-          })
-          .to(paintFill, {
-            scaleX: 0,
-            duration: workflowPaintOutDuration,
-            ease: "power2.inOut",
-          });
-      });
-
-      const timeline = gsap.timeline({
+      const ribbonTimeline = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: stage,
-          start: "top bottom",
-          end: "bottom 62%",
-          scrub: 0.58,
+          start: ribbonScrollStart,
+          end: ribbonScrollEnd,
+          scrub: ribbonScrollScrub,
           invalidateOnRefresh: true,
         },
       });
 
+      const cardsTimeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: stage,
+          start: cardsScrollStart,
+          end: cardsScrollEnd,
+          scrub: cardsScrollScrub,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      workflowPaintFills.forEach((paintFill, index) => {
+        const card = workflowCards[index];
+        const enterTiming = workflowPaintEnterTimings[index];
+        const exitTiming = workflowPaintExitTimings[index];
+
+        cardsTimeline.to(
+          paintFill,
+          {
+            scaleX: 1,
+            duration: workflowPaintInDuration,
+            ease: "power2.out",
+            transformOrigin: "left center",
+            onStart: () => card?.classList.add("is-painted"),
+            onReverseComplete: () => card?.classList.remove("is-painted"),
+          },
+          enterTiming,
+        );
+
+        cardsTimeline.to(
+          paintFill,
+          {
+            scaleX: 1,
+            duration: workflowPaintHoldDuration,
+            ease: "none",
+          },
+          Math.max(
+            exitTiming - workflowPaintHoldDuration,
+            enterTiming + workflowPaintInDuration,
+          ),
+        );
+
+        cardsTimeline.to(
+          paintFill,
+          {
+            scaleX: 0,
+            duration: workflowPaintOutDuration,
+            ease: "power2.inOut",
+            transformOrigin: "right center",
+            onComplete: () => card?.classList.remove("is-painted"),
+            onReverseComplete: () => card?.classList.add("is-painted"),
+          },
+          exitTiming,
+        );
+      });
+
       if (templatePaintFill) {
-        timeline.to(
+        ribbonTimeline.to(
           templatePaintFill,
           {
             scaleX: 1,
             duration: templatePaintDuration,
             ease: "power2.out",
             onStart: () => templateFrame?.classList.add("is-painted"),
-            onReverseComplete: () => templateFrame?.classList.remove("is-painted"),
+            onReverseComplete: () =>
+              templateFrame?.classList.remove("is-painted"),
           },
           templatePaintTiming,
         );
       }
 
-      timeline
+      ribbonTimeline
         .to(ribbonPath, {
           strokeDashoffset: ribbonCardCatchUpOffset,
           duration: ribbonCardsCatchUpDuration,
@@ -768,7 +816,7 @@ export function HermesScrollHero() {
         .addLabel("templateTouch");
 
       if (templateFrame) {
-        timeline.to(
+        ribbonTimeline.to(
           templateFrame,
           {
             borderColor: "var(--ribbon-orange)",
@@ -780,7 +828,7 @@ export function HermesScrollHero() {
       }
 
       if (templateWave) {
-        timeline.to(
+        ribbonTimeline.to(
           templateWave,
           {
             autoAlpha: 1,
@@ -792,19 +840,19 @@ export function HermesScrollHero() {
         );
       }
 
-      timeline.to(ribbonPath, {
+      ribbonTimeline.to(ribbonPath, {
         strokeDashoffset: 0,
         duration: 1 - ribbonCardsCatchUpDuration - ribbonTemplateTouchDuration,
       });
 
       return () => {
-        workflowPaintTriggers.forEach((triggerTimeline) => {
-          triggerTimeline.scrollTrigger?.kill();
-          triggerTimeline.kill();
-        });
-        timeline.scrollTrigger?.kill();
-        timeline.kill();
-        paintableElements.forEach((element) => element.classList.remove("is-painted"));
+        cardsTimeline.scrollTrigger?.kill();
+        cardsTimeline.kill();
+        ribbonTimeline.scrollTrigger?.kill();
+        ribbonTimeline.kill();
+        paintableElements.forEach((element) =>
+          element.classList.remove("is-painted"),
+        );
       };
     },
     {
@@ -815,13 +863,22 @@ export function HermesScrollHero() {
   );
 
   const toggleTheme = () => {
-    setThemeMode((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+    setThemeMode((currentTheme) =>
+      currentTheme === "light" ? "dark" : "light",
+    );
   };
 
   return (
-    <div ref={pageRef} className="relative bg-[var(--mineral)] text-[var(--charcoal)]">
+    <div
+      ref={pageRef}
+      className="relative bg-[var(--mineral)] text-[var(--charcoal)]"
+    >
       <div ref={cursorRef} className="hermes-cursor" aria-hidden="true" />
-      <div ref={cursorDotRef} className="hermes-cursor-dot" aria-hidden="true" />
+      <div
+        ref={cursorDotRef}
+        className="hermes-cursor-dot"
+        aria-hidden="true"
+      />
 
       <HeroSection
         themeMode={themeMode}

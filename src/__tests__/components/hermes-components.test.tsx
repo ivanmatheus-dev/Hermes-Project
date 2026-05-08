@@ -296,14 +296,21 @@ describe("HermesScrollHero", () => {
     const globalsSource = readFileSync("src/styles/globals.css", "utf8");
 
     expect(heroSource).toContain("templatePaintTiming");
-    expect(heroSource).toContain('start: "top bottom"');
-    expect(heroSource).toContain('end: "bottom 62%"');
-    expect(heroSource).toContain('start: "top 75%"');
-    expect(heroSource).toContain('end: "center 52%"');
-    expect(heroSource).toContain("workflowPaintTriggers");
+    expect(heroSource).toContain("ribbonScrollStart");
+    expect(heroSource).toContain("ribbonScrollEnd");
+    expect(heroSource).toContain("ribbonScrollScrub");
+    expect(heroSource).toContain("cardsScrollStart");
+    expect(heroSource).toContain("cardsScrollEnd");
+    expect(heroSource).toContain("cardsScrollScrub");
+    expect(heroSource).toContain("ribbonTimeline");
+    expect(heroSource).toContain("cardsTimeline");
+    expect(heroSource).toContain("workflowPaintEnterTimings");
+    expect(heroSource).toContain("workflowPaintExitTimings");
     expect(heroSource).toContain("workflowPaintInDuration");
     expect(heroSource).toContain("workflowPaintHoldDuration");
     expect(heroSource).toContain("workflowPaintOutDuration");
+    expect(heroSource).toContain('transformOrigin: "left center"');
+    expect(heroSource).toContain('transformOrigin: "right center"');
     expect(heroSource).toContain("workflow-paint-fill");
     expect(heroSource).toContain("template-preview-paint-fill");
     expect(heroSource).toContain("scaleX");

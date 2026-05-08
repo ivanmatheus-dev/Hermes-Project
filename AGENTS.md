@@ -35,6 +35,7 @@ Aplicacao principal:
 - React 19.
 - TypeScript em modo `strict`.
 - Tailwind CSS v4 usando `@import "tailwindcss"` e tokens CSS em `src/styles/globals.css`.
+- O site pode ser exportado estaticamente com `output: "export"` em `next.config.ts` quando o destino for Render Static Site.
 - GSAP com `@gsap/react` para animacao de entrada do hero, movimento do logotipo, cursor customizado e zoom narrativo do mockup com `ScrollTrigger` pinado/scrubado.
 - Fontes via `next/font/google`: `Inter` para texto de interface e `Cormorant Garamond` para titulos editoriais.
 - Vitest, Testing Library, jsdom e jest-dom para testes de componentes.
@@ -131,6 +132,13 @@ npm run build
 npm run preview
 ```
 
+Deploy no Render quando o app estiver em static export:
+
+```text
+Build Command: npm ci && npm run build
+Publish Directory: out
+```
+
 ## Regras De Implementacao
 
 - Preserve a linguagem principal em portugues do Brasil.
@@ -145,6 +153,7 @@ npm run preview
 - Elementos com `data-reveal` dependem da logica em `HermesScrollHero`; se criar novas secoes animadas, use esse atributo e garanta fallback para reduced motion.
 - Ao mexer em iframes de templates, confirme que a URL continua funcionando a partir da aplicacao principal.
 - O link `https://wa.me/` em `ContactSection` e placeholder comercial; ao configurar producao, use o numero/caminho final validado.
+- Para Render Static Site, mantenha o projeto compatível com export estatico: sem `next start` em producao, sem `PORT` e com `images.unoptimized` quando necessario.
 
 ## Regras De Teste
 
@@ -240,13 +249,17 @@ Interacao:
 - Reveals de scroll devem ser discretos, com conteudo totalmente visivel quando reduced motion estiver ativo.
 - O mockup do hero funciona como mascara narrativa: ao scrollar, `ScrollTrigger` pina a hero com espacamento normal, amplia o browser, separa o conteudo interno para esquerda/direita e revela a secao `#sobre` real em tamanho normal por tras da hero. A secao `#sobre` usa `about-mask-reveal` para compensar visualmente o espacamento do pin; nao duplique `#sobre` dentro do mockup. Mantenha o fallback reduced motion sem pin nem transformacao.
 - As secoes `#como-funciona` e `#templates` ficam dentro de `ScrollRibbon`, que compartilha o fundo `mineral-paper` e desenha uma faixa SVG laranja atras do conteudo. A animacao usa `strokeDasharray`/`strokeDashoffset` em `HermesScrollHero`; preserve `aria-hidden`, `focusable="false"` e `pointer-events-none`, e mantenha fallback estatico em `prefers-reduced-motion`. Quando a faixa toca o frame do template em destaque, `template-featured-frame` e `template-featured-wave` recebem a onda laranja sincronizada; nao anime o iframe diretamente.
-- A contaminacao visual da faixa usa `.paintable-card`, `.paint-fill`, `.workflow-paint-fill`, `.template-preview-paint-fill` e a classe `.is-painted`. Em `#como-funciona`, os cards recebem um flash curto e retornam ao estado base, disparado por `ScrollTrigger` individual quando cada card cruza cerca de `25%` de visibilidade (`start: "top 75%"`, `end: "center 52%"`); o preview principal em `#templates` mantem o acento laranja. Ajustes de duracao ficam nas constantes `workflowPaintInDuration`, `workflowPaintHoldDuration`, `workflowPaintOutDuration`, `templatePaintTiming` e `templatePaintDuration` em `HermesScrollHero`; ajuste esses valores antes de mexer em duracoes espalhadas.
+- A contaminacao visual da faixa usa `.paintable-card`, `.paint-fill`, `.workflow-paint-fill`, `.template-preview-paint-fill` e a classe `.is-painted`. A faixa e os cards agora usam `ScrollTrigger`s separados em `HermesScrollHero`: `ribbonTimeline` controla apenas o `ribbonPath`, o preenchimento persistente do preview e a onda/borda do template; `cardsTimeline` controla apenas os quatro cards de `#como-funciona`. Os cards pintam em sequencia usando `workflowPaintEnterTimings` e `workflowPaintExitTimings`: primeiro entram um a um da esquerda para a direita, depois retornam um a um na mesma ordem, com a saida tambem comecando pela esquerda e retraindo ate a direita via `transformOrigin: "right center"`. Ajustes de timing da faixa devem ficar nas constantes `ribbonScrollStart`, `ribbonScrollEnd`, `ribbonScrollScrub`, `ribbonCardsDrawnProgress`, `ribbonCardsCatchUpDuration`, `ribbonTemplateTouchProgress` e `ribbonTemplateTouchDuration`; ajustes dos cards devem ficar em `cardsScrollStart`, `cardsScrollEnd`, `cardsScrollScrub`, `workflowPaintEnterTimings`, `workflowPaintExitTimings`, `workflowPaintInDuration`, `workflowPaintHoldDuration` e `workflowPaintOutDuration`.
 - A home atual e uma landing completa: hero, sobre, como funciona, projetos/templates, FAQ e contato. Preserve a narrativa comercial de venda de sites prontos, com sob medida e auditoria como caminhos secundarios.
 
 ## Registro Vivo
 
+- 2026-05-08, comparacao `HEAD..worktree`: `HermesScrollHero` separou a orquestracao da `ScrollRibbon` em dois `ScrollTrigger`s independentes, `ribbonTimeline` para a faixa/template e `cardsTimeline` para os quatro cards de `#como-funciona`, permitindo ajustar a faixa sem arrastar junto o timing dos cards.
+- 2026-05-08, comparacao `HEAD..worktree`: a faixa passou a iniciar ainda antes (`start: "top 144%"`), mas os cards de `#como-funciona` ficaram mais tarde dentro da timeline principal da `ScrollRibbon` para que a linha encontre os blocos no momento da mudanca de cor, mantendo a cascata de entrada e retorno via `workflowPaintEnterTimings` e `workflowPaintExitTimings`.
+- 2026-05-08, comparacao `HEAD..worktree`: o projeto foi preparado para Render Static Site com `output: "export"` e imagens sem otimizacao no build, permitindo publicar o Next como site estatico em `out`.
 - 2026-05-08, comparacao `HEAD..worktree`: a `ScrollRibbon` passou a iniciar mais cedo no viewport (`start: "top bottom"`), os quatro cards de `#como-funciona` agora recebem flash laranja temporario com ida/hold/volta, e o preview principal em `#templates` manteve o acento persistente no contato da faixa.
 - 2026-05-08, comparacao `HEAD..worktree`: o flash dos quatro cards de `#como-funciona` deixou de usar tempos fixos na timeline da faixa e passou a disparar por `ScrollTrigger` individual quando cada card atinge cerca de `1/4` de visibilidade, para alinhar a troca de cor com a passagem visual da linha.
+- 2026-05-08, comparacao `HEAD..worktree`: a `ScrollRibbon` passou a iniciar ainda antes (`start: "top 120%"`) e o flash dos cards foi refinado para entrar da esquerda para a direita e sair tambem começando pela esquerda, retraindo ate a direita.
 - 2026-05-08, comparacao `HEAD..worktree`: a faixa laranja agora tambem pinta gradualmente os quatro cards de `#como-funciona` e o preview principal em `#templates` via camadas `.paint-fill` sincronizadas na timeline de `ScrollRibbon`, com constantes nomeadas para timing e fallback estatico em reduced motion.
 - 2026-05-06, comparacao `HEAD..worktree`: a chegada da faixa ao template ganhou label `templateTouch`; o frame do preview agora tem refs/classes `template-featured-frame` e `template-featured-wave` para borda laranja e onda radial rapida sincronizadas ao `ScrollTrigger`, com fallback estatico em reduced motion.
 - 2026-05-06, comparacao `HEAD..worktree`: a timeline da faixa `ScrollRibbon` ganhou um primeiro trecho acelerado para acompanhar os cards de `#como-funciona` quando eles saem do viewport, mantendo o restante do desenho para a entrada de `#templates`.
