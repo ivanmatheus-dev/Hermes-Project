@@ -48,18 +48,22 @@ export function HowItWorksSection() {
           {workflowSteps.map((step, index) => (
             <div key={step.title} className="contents">
               <article
-                className="group relative min-h-[17.875rem] overflow-hidden rounded-[1.875rem] border border-[var(--border)] bg-[var(--bone)] p-6 text-[var(--charcoal)] shadow-[0_18px_52px_rgba(26,29,38,0.05)] transition-[background,color,border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--charcoal)] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] hover:shadow-[0_24px_66px_rgba(26,29,38,0.16)]"
+                className="paintable-card workflow-paintable-card group relative min-h-[17.875rem] overflow-hidden rounded-[1.875rem] border border-[var(--border)] bg-[var(--bone)] p-6 text-[var(--charcoal)] shadow-[0_18px_52px_rgba(26,29,38,0.05)] transition-[background,color,border-color,transform,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--charcoal)] hover:bg-[var(--charcoal)] hover:text-[var(--bone)] hover:shadow-[0_24px_66px_rgba(26,29,38,0.16)]"
               >
                 <span
                   aria-hidden="true"
-                  className="absolute bottom-[-1.4rem] left-2 font-serif text-[12.5rem] font-medium leading-none text-[var(--champagne)] opacity-15 transition-opacity duration-300 group-hover:opacity-25"
+                  className="paint-fill workflow-paint-fill pointer-events-none"
+                />
+                <span
+                  aria-hidden="true"
+                  className="paint-card-index absolute bottom-[-1.4rem] left-2 font-serif text-[12.5rem] font-medium leading-none text-[var(--champagne)] opacity-15 transition-opacity duration-300 group-hover:opacity-25"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="relative font-serif text-3xl font-medium leading-[1.02]">
+                <h3 className="paint-card-content relative z-10 font-serif text-3xl font-medium leading-[1.02]">
                   {step.title}
                 </h3>
-                <p className="relative mt-4 text-sm font-medium leading-[1.5] text-[var(--charcoal)] transition-colors duration-300 group-hover:text-[var(--bone)]">
+                <p className="paint-card-content relative z-10 mt-4 text-sm font-medium leading-[1.5] text-[var(--charcoal)] transition-colors duration-300 group-hover:text-[var(--bone)]">
                   {step.description}
                 </p>
               </article>

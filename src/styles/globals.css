@@ -152,6 +152,56 @@ a {
   opacity: 0.9;
 }
 
+.paintable-card {
+  isolation: isolate;
+}
+
+.paint-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(105deg, rgba(255, 193, 98, 0.16), transparent 34%),
+    radial-gradient(circle at 18% 28%, rgba(255, 219, 150, 0.2), transparent 22%),
+    var(--ribbon-orange);
+  opacity: 0.88;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.workflow-paint-fill {
+  opacity: 0.76;
+}
+
+.paint-card-content,
+.paint-card-index {
+  position: relative;
+  z-index: 1;
+}
+
+.paintable-card.is-painted {
+  border-color: rgba(255, 226, 178, 0.46);
+}
+
+.workflow-paintable-card.is-painted {
+  color: #FFF7EA;
+}
+
+.workflow-paintable-card.is-painted .paint-card-content {
+  color: #FFF7EA;
+}
+
+.workflow-paintable-card.is-painted .paint-card-index {
+  color: rgba(255, 247, 234, 0.52);
+  opacity: 1;
+}
+
+.template-preview-paint-fill {
+  opacity: 0.34;
+  transform-origin: 76% 60%;
+}
+
 [data-theme="dark"] .hero-scroll-stage::before {
   background:
     linear-gradient(rgba(231, 227, 216, 0.055) 1px, transparent 1px),
@@ -364,6 +414,25 @@ a {
   .template-featured-wave {
     clip-path: circle(150% at 88% 74%);
     opacity: 1;
+  }
+
+  .paint-fill {
+    transform: scaleX(0);
+  }
+
+  .template-preview-paint-fill {
+    transform: scaleX(1);
+  }
+
+  .template-featured-frame {
+    border-color: rgba(255, 226, 178, 0.46);
+  }
+
+  .workflow-paintable-card,
+  .workflow-paintable-card .paint-card-content,
+  .workflow-paintable-card .paint-card-index {
+    color: inherit;
+    opacity: inherit;
   }
 }
 

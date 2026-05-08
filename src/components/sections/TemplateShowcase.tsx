@@ -164,8 +164,12 @@ export function TemplateShowcase({
           >
             <div
               ref={templateFrameRef}
-              className="template-featured-frame relative overflow-hidden rounded-[2.625rem] border border-[var(--border)] bg-[var(--bone)] p-6 shadow-[0_24px_70px_rgba(26,29,38,0.08)]"
+              className="paintable-card template-featured-frame relative overflow-hidden rounded-[2.625rem] border border-[var(--border)] bg-[var(--bone)] p-6 shadow-[0_24px_70px_rgba(26,29,38,0.08)]"
             >
+              <span
+                aria-hidden="true"
+                className="paint-fill template-preview-paint-fill pointer-events-none"
+              />
               <div
                 ref={templateWaveRef}
                 aria-hidden="true"

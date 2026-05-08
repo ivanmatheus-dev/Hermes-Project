@@ -630,10 +630,30 @@ export function HermesScrollHero() {
       }
 
       const pathLength = ribbonPath.getTotalLength();
+      const workflowCards = Array.from(
+        stage.querySelectorAll<HTMLElement>(".workflow-paintable-card"),
+      );
+      const workflowPaintFills = Array.from(
+        stage.querySelectorAll<HTMLElement>(".workflow-paint-fill"),
+      );
+      const templatePaintFill = stage.querySelector<HTMLElement>(
+        ".template-preview-paint-fill",
+      );
+      const paintFills = [...workflowPaintFills, templatePaintFill].filter(
+        (element): element is HTMLElement => Boolean(element),
+      );
+      const paintableElements = [...workflowCards, templateFrame].filter(
+        (element): element is HTMLElement => Boolean(element),
+      );
 
       gsap.set(ribbonPath, {
         strokeDasharray: pathLength,
         strokeDashoffset: shouldReduceMotion ? 0 : pathLength,
+      });
+
+      gsap.set(paintFills, {
+        scaleX: 0,
+        transformOrigin: "left center",
       });
 
       if (templateFrame) {
@@ -655,28 +675,86 @@ export function HermesScrollHero() {
       }
 
       if (shouldReduceMotion) {
+        workflowCards.forEach((card) => card.classList.remove("is-painted"));
+        if (templatePaintFill) {
+          gsap.set(templatePaintFill, { scaleX: 1 });
+        }
+        templateFrame?.classList.add("is-painted");
         return;
       }
 
-      const ribbonCardsDrawnProgress = 0.68;
-      const ribbonCardsCatchUpDuration = 0.34;
+      paintableElements.forEach((element) => element.classList.remove("is-painted"));
+
+      const ribbonCardsDrawnProgress = 0.8;
+      const ribbonCardsCatchUpDuration = 0.44;
       const ribbonCardCatchUpOffset =
         pathLength * (1 - ribbonCardsDrawnProgress);
-      const ribbonTemplateTouchProgress = 0.9;
-      const ribbonTemplateTouchDuration = 0.22;
+      const ribbonTemplateTouchProgress = 0.96;
+      const ribbonTemplateTouchDuration = 0.18;
       const ribbonTemplateTouchOffset =
         pathLength * (1 - ribbonTemplateTouchProgress);
+      const templatePaintTiming = 0.82;
+      const workflowPaintInDuration = 0.08;
+      const workflowPaintHoldDuration = 0.04;
+      const workflowPaintOutDuration = 0.12;
+      const templatePaintDuration = 0.18;
+      const workflowPaintTriggers = workflowPaintFills.map((paintFill, index) => {
+        const card = workflowCards[index];
+
+        return gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: "top 75%",
+            end: "center 52%",
+            scrub: 0.35,
+            invalidateOnRefresh: true,
+          },
+          onStart: () => card?.classList.add("is-painted"),
+          onReverseStart: () => card?.classList.add("is-painted"),
+          onComplete: () => card?.classList.remove("is-painted"),
+          onReverseComplete: () => card?.classList.remove("is-painted"),
+        })
+          .to(paintFill, {
+            scaleX: 1,
+            duration: workflowPaintInDuration,
+            ease: "power2.out",
+          })
+          .to(paintFill, {
+            scaleX: 1,
+            duration: workflowPaintHoldDuration,
+            ease: "none",
+          })
+          .to(paintFill, {
+            scaleX: 0,
+            duration: workflowPaintOutDuration,
+            ease: "power2.inOut",
+          });
+      });
 
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: stage,
-          start: "top 76%",
-          end: "bottom 48%",
-          scrub: 0.72,
+          start: "top bottom",
+          end: "bottom 62%",
+          scrub: 0.58,
           invalidateOnRefresh: true,
         },
       });
+
+      if (templatePaintFill) {
+        timeline.to(
+          templatePaintFill,
+          {
+            scaleX: 1,
+            duration: templatePaintDuration,
+            ease: "power2.out",
+            onStart: () => templateFrame?.classList.add("is-painted"),
+            onReverseComplete: () => templateFrame?.classList.remove("is-painted"),
+          },
+          templatePaintTiming,
+        );
+      }
 
       timeline
         .to(ribbonPath, {
@@ -720,8 +798,13 @@ export function HermesScrollHero() {
       });
 
       return () => {
+        workflowPaintTriggers.forEach((triggerTimeline) => {
+          triggerTimeline.scrollTrigger?.kill();
+          triggerTimeline.kill();
+        });
         timeline.scrollTrigger?.kill();
         timeline.kill();
+        paintableElements.forEach((element) => element.classList.remove("is-painted"));
       };
     },
     {

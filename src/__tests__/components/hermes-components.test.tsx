@@ -161,12 +161,37 @@ describe("HermesScrollHero", () => {
     const templatesSection = document.querySelector("#templates") as HTMLElement;
     const templateFrame = templatesSection.querySelector(".template-featured-frame");
     const templateWave = templatesSection.querySelector(".template-featured-wave");
+    const templatePaintFill = templatesSection.querySelector(
+      ".template-preview-paint-fill",
+    );
 
     expect(templateFrame).toBeInTheDocument();
     expect(templateFrame?.className).toContain("overflow-hidden");
     expect(templateWave).toBeInTheDocument();
     expect(templateWave).toHaveAttribute("aria-hidden", "true");
     expect(templateWave?.className).toContain("pointer-events-none");
+    expect(templatePaintFill).toBeInTheDocument();
+    expect(templatePaintFill?.className).toContain("paint-fill");
+    expect(templatePaintFill?.className).toContain("pointer-events-none");
+  });
+
+  it("renders workflow cards with paint layers for the orange ribbon", () => {
+    render(<HermesScrollHero />);
+
+    const workflowSection = document.querySelector("#como-funciona") as HTMLElement;
+    const paintableCards = workflowSection.querySelectorAll(".workflow-paintable-card");
+    const paintFills = workflowSection.querySelectorAll(".workflow-paint-fill");
+
+    expect(paintableCards).toHaveLength(4);
+    expect(paintFills).toHaveLength(4);
+    paintableCards.forEach((card) => {
+      expect(card.className).toContain("paintable-card");
+      expect(card.className).toContain("overflow-hidden");
+    });
+    paintFills.forEach((fill) => {
+      expect(fill.className).toContain("paint-fill");
+      expect(fill.className).toContain("pointer-events-none");
+    });
   });
 
   it("keeps about and workflow cards theme-neutral until hover", () => {
@@ -261,6 +286,32 @@ describe("HermesScrollHero", () => {
     expect(heroSource).toContain("borderColor");
     expect(heroSource).toContain("clipPath");
     expect(heroSource).toContain("ribbonTemplateTouchProgress");
+  });
+
+  it("defines named paint timings for workflow cards and template preview", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+    const globalsSource = readFileSync("src/styles/globals.css", "utf8");
+
+    expect(heroSource).toContain("templatePaintTiming");
+    expect(heroSource).toContain('start: "top bottom"');
+    expect(heroSource).toContain('end: "bottom 62%"');
+    expect(heroSource).toContain('start: "top 75%"');
+    expect(heroSource).toContain('end: "center 52%"');
+    expect(heroSource).toContain("workflowPaintTriggers");
+    expect(heroSource).toContain("workflowPaintInDuration");
+    expect(heroSource).toContain("workflowPaintHoldDuration");
+    expect(heroSource).toContain("workflowPaintOutDuration");
+    expect(heroSource).toContain("workflow-paint-fill");
+    expect(heroSource).toContain("template-preview-paint-fill");
+    expect(heroSource).toContain("scaleX");
+    expect(heroSource).toContain("scaleX: 0");
+    expect(globalsSource).toContain(".paintable-card");
+    expect(globalsSource).toContain(".paint-fill");
+    expect(globalsSource).toContain(".is-painted");
+    expect(globalsSource).toContain("@media (prefers-reduced-motion: reduce)");
   });
 
   it("scrolls smoothly to the templates section from the primary CTA", () => {
