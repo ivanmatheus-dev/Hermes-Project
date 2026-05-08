@@ -403,6 +403,11 @@ export function HermesScrollHero() {
       const browserDepth = mockup.querySelector<HTMLElement>(".hero-browser-depth");
       const continuityLabel =
         mockup.querySelector<HTMLElement>(".hero-browser-continuity");
+      const browserGlow = mockup.querySelector<HTMLElement>(".hero-browser-glow");
+      const browserArc = mockup.querySelector<HTMLElement>(".hero-browser-arc");
+      const browserPreviewGrid = mockup.querySelector<HTMLElement>(
+        ".hero-browser-preview-grid",
+      );
       const browserLeft = mockup.querySelector<HTMLElement>(".hero-browser-left");
       const browserRight = mockup.querySelector<HTMLElement>(".hero-browser-right");
       const browserFootnote =
@@ -418,6 +423,9 @@ export function HermesScrollHero() {
         !browserBody ||
         !browserStage ||
         !browserViewport ||
+        !browserGlow ||
+        !browserArc ||
+        !browserPreviewGrid ||
         !browserLeft ||
         !browserRight ||
         !browserFootnote ||
@@ -432,6 +440,14 @@ export function HermesScrollHero() {
         subheadlineRef.current,
         ctasRef.current,
       ].filter(Boolean);
+      const browserGlassLayers = [
+        browserGlow,
+        browserArc,
+        browserPreviewGrid,
+        browserLeft,
+        browserRight,
+        browserFootnote,
+      ];
 
       gsap.set([browserLeft, browserRight, browserFootnote], {
         autoAlpha: 1,
@@ -439,7 +455,7 @@ export function HermesScrollHero() {
       });
       gsap.set(hero, { "--hero-paper-opacity": 1 });
       gsap.set(about, { autoAlpha: 0 });
-      gsap.set(aboutContent, { y: 14 });
+      gsap.set(aboutContent, { y: 10 });
       gsap.set(heroDecor, { autoAlpha: 1 });
       gsap.set([browserMask, browserBody, browserStage, browserViewport], {
         autoAlpha: 1,
@@ -536,7 +552,7 @@ export function HermesScrollHero() {
             x: () => getPortalTransform().x,
             y: () => getPortalTransform().y,
             scale: () => getPortalTransform().scale,
-            duration: 0.64,
+            duration: 0.56,
             ease: "power2.inOut",
           },
           0.02,
@@ -545,28 +561,28 @@ export function HermesScrollHero() {
           hero,
           {
             "--hero-paper-opacity": 0,
-            duration: 0.38,
+            duration: 0.3,
             ease: "power2.inOut",
           },
-          0.24,
+          0.18,
         )
         .to(
           about,
           {
             autoAlpha: 1,
-            duration: 0.36,
+            duration: 0.28,
             ease: "power2.out",
           },
-          0.5,
+          0.18,
         )
         .to(
           aboutContent,
           {
             y: 0,
-            duration: 0.36,
+            duration: 0.28,
             ease: "power2.out",
           },
-          0.5,
+          0.18,
         )
         .to(
           heroDecor,
@@ -576,6 +592,36 @@ export function HermesScrollHero() {
             ease: "power2.out",
           },
           0.14,
+        )
+        .to(
+          browserMask,
+          {
+            backgroundColor: "rgba(231, 227, 216, 0)",
+            borderColor: "rgba(201, 169, 110, 0.18)",
+            boxShadow: "0 32px 90px rgba(26, 29, 38, 0.08)",
+            duration: 0.26,
+            ease: "power2.inOut",
+          },
+          0.16,
+        )
+        .to(
+          [browserStage, browserViewport],
+          {
+            backgroundColor: "rgba(231, 227, 216, 0)",
+            borderColor: "rgba(201, 169, 110, 0.14)",
+            duration: 0.26,
+            ease: "power2.inOut",
+          },
+          0.16,
+        )
+        .to(
+          browserGlassLayers,
+          {
+            autoAlpha: 0,
+            duration: 0.2,
+            ease: "power2.out",
+          },
+          0.16,
         )
         .to(
           browserChrome,
@@ -627,20 +673,20 @@ export function HermesScrollHero() {
         .to(
           browserDepth,
           {
-            autoAlpha: 0.28,
-            duration: 0.32,
+            autoAlpha: 0.16,
+            duration: 0.2,
             ease: "power2.inOut",
           },
-          0.24,
+          0.18,
         )
         .to(
-          [browserMask, browserBody, browserStage, browserViewport],
+          [mockup, browserMask, browserBody, browserStage, browserViewport],
           {
             autoAlpha: 0,
-            duration: 0.22,
+            duration: 0.16,
             ease: "power2.out",
           },
-          0.78,
+          0.44,
         );
 
       return () => {

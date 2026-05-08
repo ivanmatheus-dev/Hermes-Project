@@ -109,7 +109,7 @@ html .hero-scroll-stage.mineral-paper {
 
 .hero-browser-mask {
   transform-origin: center center;
-  will-change: border-radius, box-shadow;
+  will-change: background-color, border-color, border-radius, box-shadow, opacity;
   transition:
     border-radius 220ms ease,
     box-shadow 220ms ease;
@@ -117,6 +117,17 @@ html .hero-scroll-stage.mineral-paper {
 
 .hero-browser-depth {
   opacity: 0;
+}
+
+.hero-browser-stage,
+.hero-browser-viewport {
+  will-change: background-color, border-color, border-radius, opacity;
+}
+
+.hero-browser-glow,
+.hero-browser-arc,
+.hero-browser-preview-grid {
+  will-change: opacity;
 }
 
 .hero-browser-left,
@@ -135,8 +146,9 @@ html .hero-scroll-stage.mineral-paper {
 }
 
 .about-mask-reveal.is-about-locked {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: 0;
+  width: 100%;
   min-height: 100vh;
   pointer-events: none;
   z-index: 1;

@@ -38,7 +38,7 @@ export function BrowserMockup({ className }: BrowserMockupProps) {
         <div className="hero-browser-stage relative min-h-[19.875rem] overflow-hidden rounded-[1.125rem] border border-[var(--border)] bg-[rgba(241,237,227,0.86)] p-[1.125rem]">
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-[radial-gradient(circle_at_88%_16%,rgba(201,169,110,0.22),transparent_18rem)]"
+            className="hero-browser-glow absolute inset-0 bg-[radial-gradient(circle_at_88%_16%,rgba(201,169,110,0.22),transparent_18rem)]"
           />
           <div className="hero-browser-viewport relative min-h-[17.625rem] overflow-hidden rounded-[0.875rem] border border-[rgba(201,194,180,0.45)] bg-[var(--mineral)]">
             <div
@@ -47,9 +47,9 @@ export function BrowserMockup({ className }: BrowserMockupProps) {
             />
             <div
               aria-hidden="true"
-              className="absolute left-1/2 top-6 h-[34rem] w-[18rem] -translate-x-[18%] rounded-[50%] border-l-[0.875rem] border-[rgba(201,169,110,0.14)]"
+              className="hero-browser-arc absolute left-1/2 top-6 h-[34rem] w-[18rem] -translate-x-[18%] rounded-[50%] border-l-[0.875rem] border-[rgba(201,169,110,0.14)]"
             />
-            <div className="relative grid min-h-[17.625rem] gap-5 p-7 pb-16 md:grid-cols-[1.05fr_0.95fr]">
+            <div className="hero-browser-preview-grid relative grid min-h-[17.625rem] gap-5 p-7 pb-16 md:grid-cols-[1.05fr_0.95fr]">
               <div className="hero-browser-left flex flex-col justify-center">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--champagne)]">
                   Próxima seção / sobre
