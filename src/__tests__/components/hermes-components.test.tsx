@@ -193,6 +193,38 @@ describe("HermesScrollHero", () => {
     expect(heroSource).toContain("visibleHeroElements");
   });
 
+  it("keeps the initial mockup entry light enough to avoid first-load jank", () => {
+    const heroSource = readFileSync(
+      "src/components/sections/HermesScrollHero.tsx",
+      "utf8",
+    );
+    const heroSectionSource = readFileSync(
+      "src/components/sections/HeroSection.tsx",
+      "utf8",
+    );
+    const stylesSource = readFileSync("src/styles/globals.css", "utf8");
+
+    expect(heroSectionSource).toContain("mockupEntryRef");
+    expect(heroSectionSource).toContain("hero-mockup-entry opacity-0");
+    expect(heroSource).toContain("gsap.set(mockupRef.current");
+    expect(heroSource).toContain("autoAlpha: 1");
+    expect(heroSource).toContain("gsap.set(mockupEntryRef.current");
+    expect(heroSource).toContain("autoAlpha: 0");
+    expect(heroSource).toContain("y: 18");
+    expect(heroSource).toContain("scale: 1");
+    expect(heroSource).not.toContain("scale: 0.985");
+    expect(heroSource).not.toContain("x: 120");
+    expect(heroSource).not.toContain("rotation: 4");
+    expect(heroSource).toContain(".to(\n          mockupEntryRef.current");
+    expect(heroSource).toContain('clearProps: "opacity,visibility,transform"');
+    expect(heroSource).toContain("const mockup = mockupRef.current");
+    expect(heroSource).toContain(".to(\n          mockup,");
+    expect(heroSource).toContain('ease: "power2.out"');
+    expect(stylesSource).toContain(".hero-mockup-entry");
+    expect(stylesSource).toContain("will-change: transform, opacity;");
+    expect(stylesSource).toContain("backface-visibility: hidden;");
+  });
+
   it("scrolls smoothly to the templates section from the primary CTA", () => {
     const scrollIntoView = vi.fn();
     window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
@@ -214,6 +246,7 @@ describe("HermesScrollHero", () => {
 
     expect(hero).toBeInTheDocument();
     expect(hero?.querySelector(".hero-mockup-shell")).toBeInTheDocument();
+    expect(hero?.querySelector(".hero-mockup-entry")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-mask")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-viewport")).toBeInTheDocument();
     expect(hero?.querySelector(".hero-browser-left")).toBeInTheDocument();
@@ -226,30 +259,65 @@ describe("HermesScrollHero", () => {
       "src/components/sections/HermesScrollHero.tsx",
       "utf8",
     );
+    const mainAboutSource = readFileSync(
+      "src/components/sections/AboutSection.tsx",
+      "utf8",
+    );
+    const templateAboutSource = readFileSync(
+      "public/templates/template 3/src/components/sections/AboutSection.jsx",
+      "utf8",
+    );
 
     render(<HermesScrollHero />);
 
     const hero = document.querySelector<HTMLElement>(".hero-scroll-stage");
     const aboutSection = document.querySelector("#sobre") as HTMLElement;
+    const workflowSection = document.querySelector("#como-funciona") as HTMLElement;
     const stylesSource = readFileSync("src/styles/globals.css", "utf8");
+    const aboutLockStyles =
+      stylesSource.match(/\.about-mask-reveal\.is-about-locked\s*{[^}]+}/)?.[0] ??
+      "";
 
     expect(hero?.querySelector(".hero-browser-next")).not.toBeInTheDocument();
     expect(aboutSection).toBeInTheDocument();
+    expect(workflowSection).toBeInTheDocument();
+    expect(
+      aboutSection.compareDocumentPosition(workflowSection) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
     expect(aboutSection.className).toContain("about-mask-reveal");
     expect(aboutSection.querySelector(".about-mask-reveal__content")).toBeInTheDocument();
+    expect(mainAboutSource).toContain('id="sobre"');
+    expect(mainAboutSource).toContain("about-mask-reveal");
+    expect(templateAboutSource).toContain('id="escuta"');
+    expect(heroSource).not.toContain("public/templates/template 3");
+    expect(heroSource).not.toContain('id="escuta"');
     expect(heroSource).toContain("getRevealDistance");
-    expect(heroSource).toContain("Math.max(window.innerHeight * 0.78, 520)");
+    expect(heroSource).toContain("Math.max(window.innerHeight, 1)");
+    expect(heroSource).not.toContain("window.innerHeight * 0.78");
     expect(heroSource).toContain("scrub: 0.55");
     expect(heroSource).toContain("pinSpacing: false");
+    expect(heroSource).toContain('classList.add("is-about-locked")');
+    expect(heroSource).toContain('classList.remove("is-about-locked")');
     expect(heroSource).toContain("const about = aboutRef.current");
     expect(heroSource).toContain("gsap.set(about, { autoAlpha: 0 })");
     expect(heroSource).not.toContain("gsap.set(about, { autoAlpha: 0, y:");
-    expect(heroSource).toContain("gsap.set(aboutContent, { y: 28 })");
-    expect(heroSource).toContain("duration: 0.56");
-    expect(heroSource).toContain("0.26");
-    expect(heroSource).toContain("0.34");
+    expect(heroSource).toContain("gsap.set(aboutContent, { y: 14 })");
+    expect(heroSource).not.toContain('filter: "blur(8px)"');
+    expect(heroSource).not.toContain('filter: "blur(0px)"');
+    expect(heroSource).toContain("xPercent: -72");
+    expect(heroSource).toContain("xPercent: 72");
+    expect(heroSource).toContain("duration: 0.64");
+    expect(heroSource).toContain("0.5");
+    expect(heroSource).toContain("0.78");
     expect(heroSource).toContain('"--hero-paper-opacity": 0');
     expect(stylesSource).toContain(".about-mask-reveal {\n  margin-top: 0;");
+    expect(stylesSource).toContain(".about-mask-reveal.is-about-locked");
+    expect(aboutLockStyles).toContain("position: sticky;");
+    expect(aboutLockStyles).toContain("top: 0;");
+    expect(aboutLockStyles).toContain("min-height: 100vh;");
+    expect(aboutLockStyles).not.toContain("position: fixed;");
+    expect(stylesSource).not.toContain("will-change: transform, opacity, filter;");
     expect(stylesSource).not.toContain("margin-top: -100vh");
   });
 

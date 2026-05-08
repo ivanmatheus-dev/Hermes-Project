@@ -98,7 +98,13 @@ html .hero-scroll-stage.mineral-paper {
   position: relative;
   z-index: 2;
   transform-origin: center center;
+  backface-visibility: hidden;
   will-change: transform;
+}
+
+.hero-mockup-entry {
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .hero-browser-mask {
@@ -116,7 +122,7 @@ html .hero-scroll-stage.mineral-paper {
 .hero-browser-left,
 .hero-browser-right,
 .hero-browser-footnote {
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .hero-scroll-stage.is-hero-mask-active .hero-browser-mask {
@@ -126,6 +132,14 @@ html .hero-scroll-stage.mineral-paper {
 .about-mask-reveal {
   margin-top: 0;
   will-change: opacity, transform;
+}
+
+.about-mask-reveal.is-about-locked {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  pointer-events: none;
+  z-index: 1;
 }
 
 [data-theme="dark"] .hero-scroll-stage::before {
@@ -290,6 +304,10 @@ html .hero-scroll-stage.mineral-paper {
   }
 
   .hero-mockup-shell {
+    transform: none;
+  }
+
+  .hero-mockup-entry {
     transform: none;
   }
 

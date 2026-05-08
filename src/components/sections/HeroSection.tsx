@@ -16,6 +16,7 @@ type HeroSectionProps = {
   subheadlineRef: RefObject<HTMLParagraphElement | null>;
   ctasRef: RefObject<HTMLDivElement | null>;
   mockupRef: RefObject<HTMLDivElement | null>;
+  mockupEntryRef: RefObject<HTMLDivElement | null>;
   onThemeToggle: () => void;
   onSectionLinkClick: (
     event: MouseEvent<HTMLAnchorElement>,
@@ -35,6 +36,7 @@ export function HeroSection({
   subheadlineRef,
   ctasRef,
   mockupRef,
+  mockupEntryRef,
   onThemeToggle,
   onSectionLinkClick,
 }: HeroSectionProps) {
@@ -142,9 +144,11 @@ export function HeroSection({
           <div className="order-3 md:order-none md:row-span-2 md:self-center">
             <div
               ref={mockupRef}
-              className="hero-mockup-shell ml-auto w-full max-w-[37.125rem] opacity-0"
+              className="hero-mockup-shell ml-auto w-full max-w-[37.125rem]"
             >
-              <BrowserMockup />
+              <div ref={mockupEntryRef} className="hero-mockup-entry opacity-0">
+                <BrowserMockup />
+              </div>
             </div>
           </div>
 

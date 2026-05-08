@@ -66,6 +66,7 @@ export function HermesScrollHero() {
   const subheadlineRef = useRef<HTMLParagraphElement | null>(null);
   const ctasRef = useRef<HTMLDivElement | null>(null);
   const mockupRef = useRef<HTMLDivElement | null>(null);
+  const mockupEntryRef = useRef<HTMLDivElement | null>(null);
   const cursorRef = useRef<HTMLDivElement | null>(null);
   const cursorDotRef = useRef<HTMLDivElement | null>(null);
   const [themeMode, setThemeMode] = useState<ThemeMode>("light");
@@ -215,9 +216,11 @@ export function HermesScrollHero() {
             subheadlineRef.current,
             ctasRef.current,
             mockupRef.current,
+            mockupEntryRef.current,
           ],
           { opacity: 1, y: 0, x: 0, scale: 1, rotation: 0 },
         );
+        mockupEntryRef.current?.classList.remove("opacity-0");
         return;
       }
 
@@ -253,11 +256,20 @@ export function HermesScrollHero() {
       gsap.set(subheadlineRef.current, { opacity: 0, y: 24 });
       gsap.set(ctasRef.current, { opacity: 0, y: 18 });
       gsap.set(mockupRef.current, {
-        opacity: 0,
-        x: 120,
-        y: 22,
-        rotation: 4,
-        scale: 0.96,
+        autoAlpha: 1,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        force3D: true,
+      });
+      gsap.set(mockupEntryRef.current, {
+        autoAlpha: 0,
+        x: 0,
+        y: 18,
+        rotation: 0,
+        scale: 1,
+        force3D: true,
       });
 
       const timeline = gsap.timeline({
@@ -272,6 +284,7 @@ export function HermesScrollHero() {
             mockupRef.current,
           ].filter(Boolean);
 
+          mockupEntryRef.current?.classList.remove("opacity-0");
           wingTween?.kill();
           if (wingRef.current) {
             gsap.set(wingRef.current, { rotation: 0 });
@@ -281,6 +294,10 @@ export function HermesScrollHero() {
             x: 0,
             y: 0,
             rotation: 0,
+            scale: 1,
+          });
+          gsap.set(mockupEntryRef.current, {
+            clearProps: "opacity,visibility,transform",
           });
           gsap.set(entryOverlayRef.current, { display: "none" });
           ScrollTrigger.refresh();
@@ -320,40 +337,39 @@ export function HermesScrollHero() {
         )
         .to(
           headerRef.current,
-          { opacity: 1, y: 0, duration: 0.46 },
-          "-=0.18",
+          { opacity: 1, y: 0, duration: 0.4 },
+          "-=0.22",
         )
         .to(
           navElements ?? [],
-          { opacity: 1, y: 0, stagger: 0.045, duration: 0.32 },
-          "-=0.28",
-        )
-        .to(
-          mockupRef.current,
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            rotation: 0,
-            scale: 1,
-            duration: 0.72,
-          },
-          "-=0.32",
-        )
-        .to(
-          heroCopyRef.current,
-          { opacity: 1, y: 0, duration: 0.52 },
-          "-=0.58",
-        )
-        .to(
-          subheadlineRef.current,
-          { opacity: 1, y: 0, duration: 0.42 },
+          { opacity: 1, y: 0, stagger: 0.04, duration: 0.28 },
           "-=0.34",
         )
         .to(
+          mockupEntryRef.current,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.56,
+            ease: "power2.out",
+            force3D: true,
+          },
+          "-=0.38",
+        )
+        .to(
+          heroCopyRef.current,
+          { opacity: 1, y: 0, duration: 0.48 },
+          "-=0.5",
+        )
+        .to(
+          subheadlineRef.current,
+          { opacity: 1, y: 0, duration: 0.36 },
+          "-=0.3",
+        )
+        .to(
           ctasRef.current,
-          { opacity: 1, y: 0, duration: 0.38 },
-          "-=0.24",
+          { opacity: 1, y: 0, duration: 0.34 },
+          "-=0.22",
         );
 
       return () => {
@@ -420,11 +436,10 @@ export function HermesScrollHero() {
       gsap.set([browserLeft, browserRight, browserFootnote], {
         autoAlpha: 1,
         xPercent: 0,
-        filter: "blur(0px)",
       });
       gsap.set(hero, { "--hero-paper-opacity": 1 });
       gsap.set(about, { autoAlpha: 0 });
-      gsap.set(aboutContent, { y: 28 });
+      gsap.set(aboutContent, { y: 14 });
       gsap.set(heroDecor, { autoAlpha: 1 });
       gsap.set([browserMask, browserBody, browserStage, browserViewport], {
         autoAlpha: 1,
@@ -447,7 +462,7 @@ export function HermesScrollHero() {
         };
       };
 
-      const getRevealDistance = () => Math.max(window.innerHeight * 0.78, 520);
+      const getRevealDistance = () => Math.max(window.innerHeight, 1);
 
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
@@ -460,6 +475,10 @@ export function HermesScrollHero() {
           pinSpacing: false,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onEnter: () => about.classList.add("is-about-locked"),
+          onEnterBack: () => about.classList.add("is-about-locked"),
+          onLeave: () => about.classList.remove("is-about-locked"),
+          onLeaveBack: () => about.classList.remove("is-about-locked"),
           toggleClass: {
             targets: hero,
             className: "is-hero-mask-active",
@@ -485,23 +504,21 @@ export function HermesScrollHero() {
           browserLeft,
           {
             autoAlpha: 0,
-            xPercent: -78,
-            filter: "blur(8px)",
-            duration: 0.34,
+            xPercent: -72,
+            duration: 0.28,
             ease: "power2.in",
           },
-          0.08,
+          0.06,
         )
         .to(
           browserRight,
           {
             autoAlpha: 0,
-            xPercent: 78,
-            filter: "blur(8px)",
-            duration: 0.34,
+            xPercent: 72,
+            duration: 0.28,
             ease: "power2.in",
           },
-          0.08,
+          0.06,
         )
         .to(
           browserFootnote,
@@ -511,7 +528,7 @@ export function HermesScrollHero() {
             duration: 0.22,
             ease: "power2.out",
           },
-          0.08,
+          0.06,
         )
         .to(
           mockup,
@@ -519,10 +536,10 @@ export function HermesScrollHero() {
             x: () => getPortalTransform().x,
             y: () => getPortalTransform().y,
             scale: () => getPortalTransform().scale,
-            duration: 0.56,
+            duration: 0.64,
             ease: "power2.inOut",
           },
-          0,
+          0.02,
         )
         .to(
           hero,
@@ -540,7 +557,7 @@ export function HermesScrollHero() {
             duration: 0.36,
             ease: "power2.out",
           },
-          0.26,
+          0.5,
         )
         .to(
           aboutContent,
@@ -549,7 +566,7 @@ export function HermesScrollHero() {
             duration: 0.36,
             ease: "power2.out",
           },
-          0.26,
+          0.5,
         )
         .to(
           heroDecor,
@@ -623,7 +640,7 @@ export function HermesScrollHero() {
             duration: 0.22,
             ease: "power2.out",
           },
-          0.34,
+          0.78,
         );
 
       return () => {
@@ -633,6 +650,7 @@ export function HermesScrollHero() {
         gsap.set(about, { clearProps: "opacity,visibility" });
         gsap.set(aboutContent, { clearProps: "transform" });
         hero.classList.remove("is-hero-mask-active");
+        about.classList.remove("is-about-locked");
       };
     },
     { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
@@ -659,6 +677,7 @@ export function HermesScrollHero() {
         subheadlineRef={subheadlineRef}
         ctasRef={ctasRef}
         mockupRef={mockupRef}
+        mockupEntryRef={mockupEntryRef}
         onThemeToggle={toggleTheme}
         onSectionLinkClick={scrollToSection}
       />
