@@ -35,6 +35,7 @@ Aplicacao principal:
 - React 19.
 - TypeScript em modo `strict`.
 - Tailwind CSS v4 usando `@import "tailwindcss"` e tokens CSS em `src/styles/globals.css`.
+- O site pode ser exportado estaticamente com `output: "export"` em `next.config.ts` quando o destino for Render Static Site.
 - GSAP com `@gsap/react` para animacao de entrada do hero, movimento do logotipo, cursor customizado e zoom narrativo do mockup com `ScrollTrigger` pinado/scrubado.
 - Fontes via `next/font/google`: `Inter` para texto de interface e `Cormorant Garamond` para titulos editoriais.
 - Vitest, Testing Library, jsdom e jest-dom para testes de componentes.
@@ -55,13 +56,14 @@ Estrutura principal:
 - `src/components/sections/HermesScrollHero.tsx`: orquestrador client-side da home; controla tema claro/escuro, scroll suave entre secoes, reveal por `IntersectionObserver`, cursor customizado, timeline GSAP de entrada e variaveis do zoom do mockup conforme progresso do scroll.
 - `src/components/sections/HeroSection.tsx`: primeiro viewport, navegacao, overlay de entrada, toggle de tema, CTAs e mockup principal usado como mascara visual para a proxima secao.
 - `src/components/sections/AboutSection.tsx`: secao `#sobre`; comunica valor comercial, confianca e metricas editoriais.
-- `src/components/sections/HowItWorksSection.tsx`: secao `#como-funciona`; explica fluxo de escolha, briefing, ajuste visual e publicacao.
-- `src/components/sections/TemplateShowcase.tsx`: secao `#templates`; destaque com iframe real do template principal, copy comercial do projeto e modal com preview em iframe.
+- `src/components/sections/HowItWorksSection.tsx`: secao `#como-funciona`; explica fluxo de escolha, briefing, ajuste visual e publicacao; seus cards usam camadas `.paint-fill` sincronizadas com a faixa laranja para um flash temporario.
+- `src/components/sections/ScrollRibbon.tsx`: camada decorativa compartilhada entre `#como-funciona` e `#templates`; renderiza a faixa SVG laranja que se forma no scroll via GSAP em `HermesScrollHero`.
+- `src/components/sections/TemplateShowcase.tsx`: secao `#templates`; destaque com iframe real do template principal, copy comercial do projeto, frame animavel do preview com onda/camada de tinta sincronizada a `ScrollRibbon` e modal com preview em iframe.
 - `src/components/sections/FAQSection.tsx`: secao `#faq`; perguntas em `details/summary`.
 - `src/components/sections/ContactSection.tsx`: secao `#contato`; CTA final para WhatsApp e retorno aos projetos.
 - `src/components/sections/hermesContent.ts`: conteudo estruturado compartilhado por navegacao, sobre, fluxo e FAQ.
 - `src/components/brand/AnimatedHermesLogo.tsx`: logotipo SVG animavel.
-- `src/components/ui/BrowserMockup.tsx`: mockup visual usado no hero; seu conteudo antecipa a secao `#sobre` para sustentar a transicao por zoom.
+- `src/components/ui/BrowserMockup.tsx`: mockup visual usado no hero; seu conteudo antecipa a secao `#sobre` com camadas esquerda/direita que se separam durante a transicao, sem duplicar a secao real.
 - `src/hooks/usePrefersReducedMotion.ts`: hook client-side para respeitar `prefers-reduced-motion`.
 - `src/styles/globals.css`: tokens de cor, tema escuro via `[data-theme="dark"]`, estilos globais, textura mineral, classes do zoom/mask do hero, reveal, cursor Hermes, escala de iframes e animacoes do modal.
 - `src/__tests__/components/hermes-components.test.tsx`: testes de comportamento dos componentes da home, tema, secoes comerciais, contraste dos cards, dimensao do CTA final, modal, iframe e bundle estatico do template.
@@ -130,6 +132,13 @@ npm run build
 npm run preview
 ```
 
+Deploy no Render quando o app estiver em static export:
+
+```text
+Build Command: npm ci && npm run build
+Publish Directory: out
+```
+
 ## Regras De Implementacao
 
 - Preserve a linguagem principal em portugues do Brasil.
@@ -144,6 +153,7 @@ npm run preview
 - Elementos com `data-reveal` dependem da logica em `HermesScrollHero`; se criar novas secoes animadas, use esse atributo e garanta fallback para reduced motion.
 - Ao mexer em iframes de templates, confirme que a URL continua funcionando a partir da aplicacao principal.
 - O link `https://wa.me/` em `ContactSection` e placeholder comercial; ao configurar producao, use o numero/caminho final validado.
+- Para Render Static Site, mantenha o projeto compatível com export estatico: sem `next start` em producao, sem `PORT` e com `images.unoptimized` quando necessario.
 
 ## Regras De Teste
 
@@ -200,6 +210,7 @@ Modo claro, identidade principal:
 - `--stone: #5C5C56`: texto secundario.
 - `--mist: #7E7E76`: labels, metadados e texto de baixa hierarquia.
 - `--champagne: #C9A96E`: acento premium, linhas e foco.
+- `--ribbon-orange: #C87500`: faixa editorial de scroll entre fluxo e vitrine.
 - `--border: rgba(26, 29, 38, 0.12)`: bordas sutis.
 
 Modo escuro, identidade noturna:
@@ -210,6 +221,7 @@ Modo escuro, identidade noturna:
 - `--stone: #C8C1B5`: texto secundario com contraste suave.
 - `--mist: #A9A195`: labels, metadados e baixa hierarquia em cinza quente.
 - `--champagne: #C9A96E`: acento constante da marca; preserva assinatura premium nos dois temas.
+- `--ribbon-orange: #D07A00`: faixa editorial de scroll com leitura quente no modo escuro.
 - `--border: rgba(231, 227, 216, 0.14)`: bordas claras discretas para separar superficies escuras.
 
 Uso da paleta:
@@ -235,13 +247,25 @@ Interacao:
 - O site atual tem modo claro/escuro. Novas superficies devem usar tokens CSS, nao cores fixas, salvo detalhes pontuais e justificados.
 - O cursor customizado so deve aparecer em ponteiro fino e fora de reduced motion; nao force cursor especial em mobile.
 - Reveals de scroll devem ser discretos, com conteudo totalmente visivel quando reduced motion estiver ativo.
-- O mockup do hero funciona como mascara narrativa: ao scrollar, `ScrollTrigger` pina a hero e amplia o browser como se o usuario entrasse na div ate liberar a secao `#sobre`. Mantenha o fallback reduced motion sem pin nem transformacao.
+- O mockup do hero funciona como mascara narrativa: ao scrollar, `ScrollTrigger` pina a hero com espacamento normal, amplia o browser, separa o conteudo interno para esquerda/direita e revela a secao `#sobre` real em tamanho normal por tras da hero. A secao `#sobre` usa `about-mask-reveal` para compensar visualmente o espacamento do pin; nao duplique `#sobre` dentro do mockup. Mantenha o fallback reduced motion sem pin nem transformacao.
+- As secoes `#como-funciona` e `#templates` ficam dentro de `ScrollRibbon`, que compartilha o fundo `mineral-paper` e desenha uma faixa SVG laranja atras do conteudo. A animacao usa `strokeDasharray`/`strokeDashoffset` em `HermesScrollHero`; preserve `aria-hidden`, `focusable="false"` e `pointer-events-none`, e mantenha fallback estatico em `prefers-reduced-motion`. Quando a faixa toca o frame do template em destaque, `template-featured-frame` e `template-featured-wave` recebem a onda laranja sincronizada; nao anime o iframe diretamente.
+- A contaminacao visual da faixa usa `.paintable-card`, `.paint-fill`, `.workflow-paint-fill`, `.template-preview-paint-fill` e a classe `.is-painted`. A faixa e os cards agora usam `ScrollTrigger`s separados em `HermesScrollHero`: `ribbonTimeline` controla apenas o `ribbonPath`, o preenchimento persistente do preview e a onda/borda do template; `cardsTimeline` controla apenas os quatro cards de `#como-funciona`. Os cards pintam em sequencia usando `workflowPaintEnterTimings` e `workflowPaintExitTimings`: primeiro entram um a um da esquerda para a direita, depois retornam um a um na mesma ordem, com a saida tambem comecando pela esquerda e retraindo ate a direita via `transformOrigin: "right center"`. Ajustes de timing da faixa devem ficar nas constantes `ribbonScrollStart`, `ribbonScrollEnd`, `ribbonScrollScrub`, `ribbonCardsDrawnProgress`, `ribbonCardsCatchUpDuration`, `ribbonTemplateTouchProgress` e `ribbonTemplateTouchDuration`; ajustes dos cards devem ficar em `cardsScrollStart`, `cardsScrollEnd`, `cardsScrollScrub`, `workflowPaintEnterTimings`, `workflowPaintExitTimings`, `workflowPaintInDuration`, `workflowPaintHoldDuration` e `workflowPaintOutDuration`.
 - A home atual e uma landing completa: hero, sobre, como funciona, projetos/templates, FAQ e contato. Preserve a narrativa comercial de venda de sites prontos, com sob medida e auditoria como caminhos secundarios.
 
 ## Registro Vivo
 
+- 2026-05-08, comparacao `HEAD..worktree`: `HermesScrollHero` separou a orquestracao da `ScrollRibbon` em dois `ScrollTrigger`s independentes, `ribbonTimeline` para a faixa/template e `cardsTimeline` para os quatro cards de `#como-funciona`, permitindo ajustar a faixa sem arrastar junto o timing dos cards.
+- 2026-05-08, comparacao `HEAD..worktree`: a faixa passou a iniciar ainda antes (`start: "top 144%"`), mas os cards de `#como-funciona` ficaram mais tarde dentro da timeline principal da `ScrollRibbon` para que a linha encontre os blocos no momento da mudanca de cor, mantendo a cascata de entrada e retorno via `workflowPaintEnterTimings` e `workflowPaintExitTimings`.
+- 2026-05-08, comparacao `HEAD..worktree`: o projeto foi preparado para Render Static Site com `output: "export"` e imagens sem otimizacao no build, permitindo publicar o Next como site estatico em `out`.
+- 2026-05-08, comparacao `HEAD..worktree`: a `ScrollRibbon` passou a iniciar mais cedo no viewport (`start: "top bottom"`), os quatro cards de `#como-funciona` agora recebem flash laranja temporario com ida/hold/volta, e o preview principal em `#templates` manteve o acento persistente no contato da faixa.
+- 2026-05-08, comparacao `HEAD..worktree`: o flash dos quatro cards de `#como-funciona` deixou de usar tempos fixos na timeline da faixa e passou a disparar por `ScrollTrigger` individual quando cada card atinge cerca de `1/4` de visibilidade, para alinhar a troca de cor com a passagem visual da linha.
+- 2026-05-08, comparacao `HEAD..worktree`: a `ScrollRibbon` passou a iniciar ainda antes (`start: "top 120%"`) e o flash dos cards foi refinado para entrar da esquerda para a direita e sair tambem começando pela esquerda, retraindo ate a direita.
+- 2026-05-08, comparacao `HEAD..worktree`: a faixa laranja agora tambem pinta gradualmente os quatro cards de `#como-funciona` e o preview principal em `#templates` via camadas `.paint-fill` sincronizadas na timeline de `ScrollRibbon`, com constantes nomeadas para timing e fallback estatico em reduced motion.
+- 2026-05-06, comparacao `HEAD..worktree`: a chegada da faixa ao template ganhou label `templateTouch`; o frame do preview agora tem refs/classes `template-featured-frame` e `template-featured-wave` para borda laranja e onda radial rapida sincronizadas ao `ScrollTrigger`, com fallback estatico em reduced motion.
+- 2026-05-06, comparacao `HEAD..worktree`: a timeline da faixa `ScrollRibbon` ganhou um primeiro trecho acelerado para acompanhar os cards de `#como-funciona` quando eles saem do viewport, mantendo o restante do desenho para a entrada de `#templates`.
+- 2026-05-06, comparacao `HEAD..worktree`: `#como-funciona` e `#templates` passaram a compartilhar a camada `ScrollRibbon`, com faixa SVG laranja animada por GSAP `ScrollTrigger` via `strokeDasharray`/`strokeDashoffset`, novo token `--ribbon-orange` e fallback estatico para reduced motion.
 - 2026-05-06, comparacao `HEAD..worktree`: cards das secoes `#sobre` e `#como-funciona` voltaram a seguir os tokens do tema no estado normal e so invertem cores no hover; textos internos ganharam contraste, o CTA final foi compactado para caber em um viewport, a vitrine removeu o carrossel secundario e a timeline do zoom agora usa `fromTo` com estado inicial explicito para restaurar textos ao scrollar para cima.
-- 2026-05-06, comparacao `HEAD..worktree`: o hero ganhou zoom narrativo do `BrowserMockup` com `ScrollTrigger` pinado/scrubado, fazendo o usuario entrar na div antes da secao `#sobre`; o browser agora esconde a barra, remove paddings/raios durante a entrada, e os testes cobrem a estrutura da mascara.
+- 2026-05-06, comparacao `HEAD..worktree`: o hero ganhou zoom narrativo do `BrowserMockup` com `ScrollTrigger` pinado/scrubado, fazendo o usuario entrar na div antes da secao `#sobre`; o browser agora esconde a barra, separa os paineis internos para esquerda/direita, remove paddings/raios durante a entrada, desvanece o papel da hero e revela a secao `#sobre` real por tras da mascara sem duplicar conteudo. O pin mantem espacamento normal e `about-mask-reveal` evita que a secao termine cortada.
 - 2026-05-05, comparacao `903dfe2..3472df5`: a home deixou de ser uma experiencia centrada apenas no hero com ScrollTrigger e virou uma landing completa. Entraram secoes `HeroSection`, `AboutSection`, `HowItWorksSection`, `FAQSection`, `ContactSection`, conteudo centralizado em `hermesContent`, tema claro/escuro persistido em `localStorage`, reveal por `IntersectionObserver`, cursor Hermes para ponteiro fino, metadata SEO/Open Graph mais completa, mockup visual refinado e vitrine de projetos com iframe destacado e modal.
 - Ao fazer a proxima entrega grande, acrescente uma linha acima desta com data, faixa de commits comparada e mudancas que afetam manutencao futura.
 

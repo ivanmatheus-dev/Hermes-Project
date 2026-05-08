@@ -64,14 +64,17 @@ export function HeroSection({
 
       <div
         aria-hidden="true"
+        data-hero-decor
         className="pointer-events-none absolute left-0 top-1/2 h-px w-full bg-[rgba(231,227,216,0.3)]"
       />
       <div
         aria-hidden="true"
+        data-hero-decor
         className="pointer-events-none absolute left-1/2 top-0 h-full w-px bg-[rgba(231,227,216,0.3)]"
       />
       <div
         aria-hidden="true"
+        data-hero-decor
         className="pointer-events-none absolute -left-24 top-[40%] h-[30rem] w-[30rem] rounded-full border border-[rgba(201,169,110,0.22)]"
       />
 

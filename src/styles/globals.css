@@ -12,6 +12,7 @@
   --stone: #5C5C56;
   --mist: #7E7E76;
   --champagne: #C9A96E;
+  --ribbon-orange: #C87500;
   --border: rgba(26, 29, 38, 0.12);
 }
 
@@ -22,6 +23,7 @@
   --stone: #C8C1B5;
   --mist: #A9A195;
   --champagne: #C9A96E;
+  --ribbon-orange: #D07A00;
   --border: rgba(231, 227, 216, 0.14);
 }
 
@@ -72,7 +74,25 @@ a {
 }
 
 .hero-scroll-stage {
+  --hero-paper-opacity: 1;
+  background: transparent;
   isolation: isolate;
+  z-index: 2;
+}
+
+.hero-scroll-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(231, 227, 216, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(231, 227, 216, 0.26) 1px, transparent 1px),
+    radial-gradient(circle at 50% 12%, rgba(231, 227, 216, 0.62), transparent 32rem),
+    var(--mineral);
+  background-size: 46px 46px, 46px 46px, auto, auto;
+  opacity: var(--hero-paper-opacity);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-mockup-shell {
@@ -94,8 +114,101 @@ a {
   opacity: 0;
 }
 
+.hero-browser-left,
+.hero-browser-right,
+.hero-browser-footnote {
+  will-change: transform, opacity, filter;
+}
+
 .hero-scroll-stage.is-hero-mask-active .hero-browser-mask {
   box-shadow: 0 44px 130px rgba(26, 29, 38, 0.24);
+}
+
+.about-mask-reveal {
+  margin-top: -100vh;
+}
+
+.scroll-ribbon-stage {
+  isolation: isolate;
+}
+
+.scroll-ribbon {
+  opacity: 0.92;
+}
+
+.scroll-ribbon-path {
+  fill: none;
+  stroke: var(--ribbon-orange);
+  stroke-width: clamp(0.75rem, 1.55vw, 1.45rem);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 18px 28px rgba(80, 42, 0, 0.1));
+  opacity: 0.96;
+  vector-effect: non-scaling-stroke;
+}
+
+[data-theme="dark"] .scroll-ribbon-path {
+  filter: drop-shadow(0 18px 34px rgba(201, 117, 0, 0.16));
+  opacity: 0.9;
+}
+
+.paintable-card {
+  isolation: isolate;
+}
+
+.paint-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(105deg, rgba(255, 193, 98, 0.16), transparent 34%),
+    radial-gradient(circle at 18% 28%, rgba(255, 219, 150, 0.2), transparent 22%),
+    var(--ribbon-orange);
+  opacity: 0.88;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.workflow-paint-fill {
+  opacity: 0.76;
+}
+
+.paint-card-content,
+.paint-card-index {
+  position: relative;
+  z-index: 1;
+}
+
+.paintable-card.is-painted {
+  border-color: rgba(255, 226, 178, 0.46);
+}
+
+.workflow-paintable-card.is-painted {
+  color: #FFF7EA;
+}
+
+.workflow-paintable-card.is-painted .paint-card-content {
+  color: #FFF7EA;
+}
+
+.workflow-paintable-card.is-painted .paint-card-index {
+  color: rgba(255, 247, 234, 0.52);
+  opacity: 1;
+}
+
+.template-preview-paint-fill {
+  opacity: 0.34;
+  transform-origin: 76% 60%;
+}
+
+[data-theme="dark"] .hero-scroll-stage::before {
+  background:
+    linear-gradient(rgba(231, 227, 216, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(231, 227, 216, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 50% 12%, rgba(201, 169, 110, 0.08), transparent 34rem),
+    var(--mineral);
+  background-size: 46px 46px, 46px 46px, auto, auto;
 }
 
 [data-theme="dark"] .mineral-paper {
@@ -210,6 +323,37 @@ a {
   transform-origin: top left;
 }
 
+.template-featured-frame {
+  isolation: isolate;
+  will-change: border-color, box-shadow;
+}
+
+.template-featured-wave {
+  z-index: 0;
+  background:
+    radial-gradient(
+      circle at 88% 74%,
+      rgba(200, 117, 0, 0.34) 0%,
+      rgba(200, 117, 0, 0.22) 32%,
+      rgba(201, 169, 110, 0.12) 58%,
+      transparent 74%
+    );
+  clip-path: circle(0% at 88% 74%);
+  opacity: 0;
+  will-change: clip-path, opacity;
+}
+
+[data-theme="dark"] .template-featured-wave {
+  background:
+    radial-gradient(
+      circle at 88% 74%,
+      rgba(208, 122, 0, 0.34) 0%,
+      rgba(208, 122, 0, 0.2) 34%,
+      rgba(201, 169, 110, 0.1) 58%,
+      transparent 74%
+    );
+}
+
 .template-modal-panel {
   animation: template-panel-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: center;
@@ -253,6 +397,43 @@ a {
   .hero-mockup-shell {
     transform: none;
   }
+
+  .about-mask-reveal {
+    margin-top: 0;
+  }
+
+  .scroll-ribbon {
+    opacity: 0.52;
+  }
+
+  .template-featured-frame {
+    border-color: var(--ribbon-orange);
+    box-shadow: 0 30px 78px rgba(200, 117, 0, 0.18);
+  }
+
+  .template-featured-wave {
+    clip-path: circle(150% at 88% 74%);
+    opacity: 1;
+  }
+
+  .paint-fill {
+    transform: scaleX(0);
+  }
+
+  .template-preview-paint-fill {
+    transform: scaleX(1);
+  }
+
+  .template-featured-frame {
+    border-color: rgba(255, 226, 178, 0.46);
+  }
+
+  .workflow-paintable-card,
+  .workflow-paintable-card .paint-card-content,
+  .workflow-paintable-card .paint-card-index {
+    color: inherit;
+    opacity: inherit;
+  }
 }
 
 @media (max-width: 767px) {
@@ -263,5 +444,15 @@ a {
 
   [data-reveal] {
     transform: translateY(18px);
+  }
+
+  .scroll-ribbon {
+    left: 46%;
+    width: 168vw;
+  }
+
+  .scroll-ribbon-path {
+    stroke-width: 0.8rem;
+    opacity: 0.58;
   }
 }

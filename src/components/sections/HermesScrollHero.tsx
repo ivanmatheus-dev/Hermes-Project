@@ -10,6 +10,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+import { ScrollRibbon } from "@/components/sections/ScrollRibbon";
 import { TemplateShowcase } from "@/components/sections/TemplateShowcase";
 import { type ThemeMode } from "@/components/sections/hermesContent";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -56,6 +57,10 @@ export function HermesScrollHero() {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const heroRef = useRef<HTMLElement | null>(null);
   const templatesRef = useRef<HTMLElement | null>(null);
+  const scrollRibbonStageRef = useRef<HTMLDivElement | null>(null);
+  const scrollRibbonPathRef = useRef<SVGPathElement | null>(null);
+  const templateFrameRef = useRef<HTMLDivElement | null>(null);
+  const templateWaveRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
   const wingRef = useRef<SVGGElement | null>(null);
   const entryOverlayRef = useRef<HTMLDivElement | null>(null);
@@ -220,7 +225,8 @@ export function HermesScrollHero() {
         return;
       }
 
-      const navElements = headerRef.current?.querySelectorAll("[data-nav-item]");
+      const navElements =
+        headerRef.current?.querySelectorAll("[data-nav-item]");
       let wingTween: gsap.core.Tween | null = null;
 
       const startWingFlap = () => {
@@ -263,10 +269,24 @@ export function HermesScrollHero() {
         defaults: { ease: "power3.out" },
         onStart: startWingFlap,
         onComplete: () => {
+          const visibleHeroElements = [
+            headerRef.current,
+            heroCopyRef.current,
+            subheadlineRef.current,
+            ctasRef.current,
+            mockupRef.current,
+          ].filter(Boolean);
+
           wingTween?.kill();
           if (wingRef.current) {
             gsap.set(wingRef.current, { rotation: 0 });
           }
+          gsap.set(visibleHeroElements, {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            rotation: 0,
+          });
           gsap.set(entryOverlayRef.current, { display: "none" });
           ScrollTrigger.refresh();
         },
@@ -303,11 +323,7 @@ export function HermesScrollHero() {
           },
           "-=0.34",
         )
-        .to(
-          headerRef.current,
-          { opacity: 1, y: 0, duration: 0.46 },
-          "-=0.18",
-        )
+        .to(headerRef.current, { opacity: 1, y: 0, duration: 0.46 }, "-=0.18")
         .to(
           navElements ?? [],
           { opacity: 1, y: 0, stagger: 0.045, duration: 0.32 },
@@ -325,28 +341,24 @@ export function HermesScrollHero() {
           },
           "-=0.32",
         )
-        .to(
-          heroCopyRef.current,
-          { opacity: 1, y: 0, duration: 0.52 },
-          "-=0.58",
-        )
+        .to(heroCopyRef.current, { opacity: 1, y: 0, duration: 0.52 }, "-=0.58")
         .to(
           subheadlineRef.current,
           { opacity: 1, y: 0, duration: 0.42 },
           "-=0.34",
         )
-        .to(
-          ctasRef.current,
-          { opacity: 1, y: 0, duration: 0.38 },
-          "-=0.24",
-        );
+        .to(ctasRef.current, { opacity: 1, y: 0, duration: 0.38 }, "-=0.24");
 
       return () => {
         wingTween?.kill();
         timeline.kill();
       };
     },
-    { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
+    {
+      scope: heroRef,
+      dependencies: [prefersReducedMotion],
+      revertOnUpdate: true,
+    },
   );
 
   useGSAP(
@@ -362,22 +374,44 @@ export function HermesScrollHero() {
         return;
       }
 
-      const browserMask = mockup.querySelector<HTMLElement>(".hero-browser-mask");
-      const browserChrome = mockup.querySelector<HTMLElement>(".hero-browser-chrome");
-      const browserBody = mockup.querySelector<HTMLElement>(".hero-browser-body");
-      const browserStage = mockup.querySelector<HTMLElement>(".hero-browser-stage");
-      const browserViewport =
-        mockup.querySelector<HTMLElement>(".hero-browser-viewport");
-      const browserDepth = mockup.querySelector<HTMLElement>(".hero-browser-depth");
-      const continuityLabel =
-        mockup.querySelector<HTMLElement>(".hero-browser-continuity");
+      const browserMask =
+        mockup.querySelector<HTMLElement>(".hero-browser-mask");
+      const browserChrome = mockup.querySelector<HTMLElement>(
+        ".hero-browser-chrome",
+      );
+      const browserBody =
+        mockup.querySelector<HTMLElement>(".hero-browser-body");
+      const browserStage = mockup.querySelector<HTMLElement>(
+        ".hero-browser-stage",
+      );
+      const browserViewport = mockup.querySelector<HTMLElement>(
+        ".hero-browser-viewport",
+      );
+      const browserDepth = mockup.querySelector<HTMLElement>(
+        ".hero-browser-depth",
+      );
+      const continuityLabel = mockup.querySelector<HTMLElement>(
+        ".hero-browser-continuity",
+      );
+      const browserLeft =
+        mockup.querySelector<HTMLElement>(".hero-browser-left");
+      const browserRight = mockup.querySelector<HTMLElement>(
+        ".hero-browser-right",
+      );
+      const browserFootnote = mockup.querySelector<HTMLElement>(
+        ".hero-browser-footnote",
+      );
+      const heroDecor = hero.querySelectorAll<HTMLElement>("[data-hero-decor]");
 
       if (
         !browserMask ||
         !browserChrome ||
         !browserBody ||
         !browserStage ||
-        !browserViewport
+        !browserViewport ||
+        !browserLeft ||
+        !browserRight ||
+        !browserFootnote
       ) {
         return;
       }
@@ -388,6 +422,17 @@ export function HermesScrollHero() {
         subheadlineRef.current,
         ctasRef.current,
       ].filter(Boolean);
+
+      gsap.set([browserLeft, browserRight, browserFootnote], {
+        autoAlpha: 1,
+        xPercent: 0,
+        filter: "blur(0px)",
+      });
+      gsap.set(hero, { "--hero-paper-opacity": 1 });
+      gsap.set(heroDecor, { autoAlpha: 1 });
+      gsap.set([browserMask, browserBody, browserStage, browserViewport], {
+        autoAlpha: 1,
+      });
 
       const getPortalTransform = () => {
         const rect = mockup.getBoundingClientRect();
@@ -406,13 +451,15 @@ export function HermesScrollHero() {
         };
       };
 
+      const getRevealDistance = () => Math.max(window.innerHeight, 1);
+
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: hero,
           start: "top top",
-          end: () => `+=${Math.max(window.innerHeight * 1.35, 820)}`,
-          scrub: 0.85,
+          end: () => `+=${getRevealDistance()}`,
+          scrub: 0.9,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -438,6 +485,38 @@ export function HermesScrollHero() {
           0,
         )
         .to(
+          browserLeft,
+          {
+            autoAlpha: 0,
+            xPercent: -78,
+            filter: "blur(8px)",
+            duration: 0.34,
+            ease: "power2.in",
+          },
+          0.08,
+        )
+        .to(
+          browserRight,
+          {
+            autoAlpha: 0,
+            xPercent: 78,
+            filter: "blur(8px)",
+            duration: 0.34,
+            ease: "power2.in",
+          },
+          0.08,
+        )
+        .to(
+          browserFootnote,
+          {
+            autoAlpha: 0,
+            y: 22,
+            duration: 0.22,
+            ease: "power2.out",
+          },
+          0.08,
+        )
+        .to(
           mockup,
           {
             x: () => getPortalTransform().x,
@@ -447,6 +526,24 @@ export function HermesScrollHero() {
             ease: "power2.inOut",
           },
           0,
+        )
+        .to(
+          hero,
+          {
+            "--hero-paper-opacity": 0,
+            duration: 0.38,
+            ease: "power2.inOut",
+          },
+          0.24,
+        )
+        .to(
+          heroDecor,
+          {
+            autoAlpha: 0,
+            duration: 0.22,
+            ease: "power2.out",
+          },
+          0.14,
         )
         .to(
           browserChrome,
@@ -498,30 +595,290 @@ export function HermesScrollHero() {
         .to(
           browserDepth,
           {
-            autoAlpha: 0.22,
+            autoAlpha: 0.28,
             duration: 0.32,
             ease: "power2.inOut",
           },
-          0.4,
+          0.24,
+        )
+        .to(
+          [browserMask, browserBody, browserStage, browserViewport],
+          {
+            autoAlpha: 0,
+            duration: 0.28,
+            ease: "power2.out",
+          },
+          0.56,
         );
 
       return () => {
         timeline.scrollTrigger?.kill();
         timeline.kill();
+        gsap.set(hero, { "--hero-paper-opacity": 1 });
         hero.classList.remove("is-hero-mask-active");
       };
     },
-    { scope: heroRef, dependencies: [prefersReducedMotion], revertOnUpdate: true },
+    {
+      scope: heroRef,
+      dependencies: [prefersReducedMotion],
+      revertOnUpdate: true,
+    },
+  );
+
+  useGSAP(
+    () => {
+      const shouldReduceMotion =
+        prefersReducedMotion ||
+        (typeof window !== "undefined" &&
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      const stage = scrollRibbonStageRef.current;
+      const ribbonPath = scrollRibbonPathRef.current;
+      const templateFrame = templateFrameRef.current;
+      const templateWave = templateWaveRef.current;
+
+      if (!stage || !ribbonPath) {
+        return;
+      }
+
+      const pathLength = ribbonPath.getTotalLength();
+      const workflowCards = Array.from(
+        stage.querySelectorAll<HTMLElement>(".workflow-paintable-card"),
+      );
+      const workflowPaintFills = Array.from(
+        stage.querySelectorAll<HTMLElement>(".workflow-paint-fill"),
+      );
+      const templatePaintFill = stage.querySelector<HTMLElement>(
+        ".template-preview-paint-fill",
+      );
+      const paintFills = [...workflowPaintFills, templatePaintFill].filter(
+        (element): element is HTMLElement => Boolean(element),
+      );
+      const paintableElements = [...workflowCards, templateFrame].filter(
+        (element): element is HTMLElement => Boolean(element),
+      );
+
+      gsap.set(ribbonPath, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: shouldReduceMotion ? 0 : pathLength,
+      });
+
+      gsap.set(paintFills, {
+        scaleX: 0,
+        transformOrigin: "left center",
+      });
+
+      if (templateFrame) {
+        gsap.set(templateFrame, {
+          borderColor: shouldReduceMotion
+            ? "var(--ribbon-orange)"
+            : "var(--border)",
+          boxShadow: shouldReduceMotion
+            ? "0 30px 78px rgba(200, 117, 0, 0.18)"
+            : "0 24px 70px rgba(26,29,38,0.08)",
+        });
+      }
+
+      if (templateWave) {
+        gsap.set(templateWave, {
+          autoAlpha: shouldReduceMotion ? 1 : 0,
+          clipPath: shouldReduceMotion
+            ? "circle(150% at 88% 74%)"
+            : "circle(0% at 88% 74%)",
+        });
+      }
+
+      if (shouldReduceMotion) {
+        workflowCards.forEach((card) => card.classList.remove("is-painted"));
+        if (templatePaintFill) {
+          gsap.set(templatePaintFill, { scaleX: 1 });
+        }
+        templateFrame?.classList.add("is-painted");
+        return;
+      }
+
+      paintableElements.forEach((element) =>
+        element.classList.remove("is-painted"),
+      );
+
+      const ribbonCardsDrawnProgress = 0.88;
+      const ribbonCardsCatchUpDuration = 0.44;
+      const ribbonCardCatchUpOffset =
+        pathLength * (1 - ribbonCardsDrawnProgress);
+      const ribbonTemplateTouchProgress = 0.985;
+      const ribbonTemplateTouchDuration = 0.14;
+      const ribbonTemplateTouchOffset =
+        pathLength * (1 - ribbonTemplateTouchProgress);
+      const ribbonScrollStart = "top 160%";
+      const ribbonScrollEnd = "bottom 62%";
+      const ribbonScrollScrub = 0.58;
+      const cardsScrollStart = "top 160%";
+      const cardsScrollEnd = "bottom 62%";
+      const cardsScrollScrub = 0.58;
+      const workflowPaintEnterTimings = [0.9, 0.95, 0.98, 1.03];
+      const workflowPaintExitTimings = [1.3, 1.4, 1.5, 1.6];
+      const templatePaintTiming = 0.9;
+      const workflowPaintInDuration = 0.06;
+      const workflowPaintHoldDuration = 0.04;
+      const workflowPaintOutDuration = 0.12;
+      const templatePaintDuration = 0.18;
+
+      const ribbonTimeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: stage,
+          start: ribbonScrollStart,
+          end: ribbonScrollEnd,
+          scrub: ribbonScrollScrub,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      const cardsTimeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: stage,
+          start: cardsScrollStart,
+          end: cardsScrollEnd,
+          scrub: cardsScrollScrub,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      workflowPaintFills.forEach((paintFill, index) => {
+        const card = workflowCards[index];
+        const enterTiming = workflowPaintEnterTimings[index];
+        const exitTiming = workflowPaintExitTimings[index];
+
+        cardsTimeline.to(
+          paintFill,
+          {
+            scaleX: 1,
+            duration: workflowPaintInDuration,
+            ease: "power2.out",
+            transformOrigin: "left center",
+            onStart: () => card?.classList.add("is-painted"),
+            onReverseComplete: () => card?.classList.remove("is-painted"),
+          },
+          enterTiming,
+        );
+
+        cardsTimeline.to(
+          paintFill,
+          {
+            scaleX: 1,
+            duration: workflowPaintHoldDuration,
+            ease: "none",
+          },
+          Math.max(
+            exitTiming - workflowPaintHoldDuration,
+            enterTiming + workflowPaintInDuration,
+          ),
+        );
+
+        cardsTimeline.to(
+          paintFill,
+          {
+            scaleX: 0,
+            duration: workflowPaintOutDuration,
+            ease: "power2.inOut",
+            transformOrigin: "right center",
+            onComplete: () => card?.classList.remove("is-painted"),
+            onReverseComplete: () => card?.classList.add("is-painted"),
+          },
+          exitTiming,
+        );
+      });
+
+      if (templatePaintFill) {
+        ribbonTimeline.to(
+          templatePaintFill,
+          {
+            scaleX: 1,
+            duration: templatePaintDuration,
+            ease: "power2.out",
+            onStart: () => templateFrame?.classList.add("is-painted"),
+            onReverseComplete: () =>
+              templateFrame?.classList.remove("is-painted"),
+          },
+          templatePaintTiming,
+        );
+      }
+
+      ribbonTimeline
+        .to(ribbonPath, {
+          strokeDashoffset: ribbonCardCatchUpOffset,
+          duration: ribbonCardsCatchUpDuration,
+        })
+        .to(ribbonPath, {
+          strokeDashoffset: ribbonTemplateTouchOffset,
+          duration: ribbonTemplateTouchDuration,
+        })
+        .addLabel("templateTouch");
+
+      if (templateFrame) {
+        ribbonTimeline.to(
+          templateFrame,
+          {
+            borderColor: "var(--ribbon-orange)",
+            boxShadow: "0 30px 84px rgba(200, 117, 0, 0.2)",
+            duration: 0.06,
+          },
+          "templateTouch",
+        );
+      }
+
+      if (templateWave) {
+        ribbonTimeline.to(
+          templateWave,
+          {
+            autoAlpha: 1,
+            clipPath: "circle(150% at 88% 74%)",
+            duration: 0.16,
+            ease: "power2.out",
+          },
+          "templateTouch",
+        );
+      }
+
+      ribbonTimeline.to(ribbonPath, {
+        strokeDashoffset: 0,
+        duration: 1 - ribbonCardsCatchUpDuration - ribbonTemplateTouchDuration,
+      });
+
+      return () => {
+        cardsTimeline.scrollTrigger?.kill();
+        cardsTimeline.kill();
+        ribbonTimeline.scrollTrigger?.kill();
+        ribbonTimeline.kill();
+        paintableElements.forEach((element) =>
+          element.classList.remove("is-painted"),
+        );
+      };
+    },
+    {
+      scope: scrollRibbonStageRef,
+      dependencies: [prefersReducedMotion],
+      revertOnUpdate: true,
+    },
   );
 
   const toggleTheme = () => {
-    setThemeMode((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+    setThemeMode((currentTheme) =>
+      currentTheme === "light" ? "dark" : "light",
+    );
   };
 
   return (
-    <div ref={pageRef} className="relative bg-[var(--mineral)] text-[var(--charcoal)]">
+    <div
+      ref={pageRef}
+      className="relative bg-[var(--mineral)] text-[var(--charcoal)]"
+    >
       <div ref={cursorRef} className="hermes-cursor" aria-hidden="true" />
-      <div ref={cursorDotRef} className="hermes-cursor-dot" aria-hidden="true" />
+      <div
+        ref={cursorDotRef}
+        className="hermes-cursor-dot"
+        aria-hidden="true"
+      />
 
       <HeroSection
         themeMode={themeMode}
@@ -539,11 +896,18 @@ export function HermesScrollHero() {
         onSectionLinkClick={scrollToSection}
       />
       <AboutSection />
-      <HowItWorksSection />
-      <TemplateShowcase
-        sectionRef={templatesRef}
-        prefersReducedMotion={prefersReducedMotion}
-      />
+      <ScrollRibbon
+        stageRef={scrollRibbonStageRef}
+        pathRef={scrollRibbonPathRef}
+      >
+        <HowItWorksSection />
+        <TemplateShowcase
+          sectionRef={templatesRef}
+          templateFrameRef={templateFrameRef}
+          templateWaveRef={templateWaveRef}
+          prefersReducedMotion={prefersReducedMotion}
+        />
+      </ScrollRibbon>
       <FAQSection />
       <ContactSection onSectionLinkClick={scrollToSection} />
     </div>
